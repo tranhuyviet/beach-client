@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         paddingLeft: 16,
         display: 'flex',
         alignItems: 'center',
+        // backgroundColor: theme.palette.primary.main,
     },
     searchInputContainer: {
         width: '100%',
@@ -14,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: '100%',
         height: 30,
-        paddingLeft: 8,
+        paddingLeft: 12,
         borderColor: theme.palette.grey['600'],
         border: '1px solid',
         outline: 'none',
@@ -22,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     searchIcon: {
         position: 'absolute',
-        right: 5,
+        right: 8,
         top: 3,
         color: theme.palette.grey['600'],
     },
