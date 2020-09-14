@@ -1,11 +1,15 @@
 import React from 'react';
 import { useStyles } from './NavBar.style';
 import { Paper, Grid, Typography, IconButton } from '@material-ui/core';
+
 import PoolIcon from '@material-ui/icons/Pool';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import SearchBar from './SearchBar';
+
 const NavBar = () => {
     const classes = useStyles();
+
     return (
         <Paper className={classes.navbar} elevation={0} square>
             <Grid container alignItems="center">
@@ -19,6 +23,7 @@ const NavBar = () => {
                     </IconButton>
                 </Grid>
             </Grid>
+            <SearchBar />
         </Paper>
     );
 };
