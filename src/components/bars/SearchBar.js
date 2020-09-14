@@ -9,7 +9,7 @@ import SearchForm from '../forms/SearchForm';
 
 const SearchBar = () => {
     const classes = useStyles();
-    const [searchFormOpen, setSearchFormOpen] = useState(true);
+    const [searchFormOpen, setSearchFormOpen] = useState(false);
 
     const handleSearchFormClose = () => {
         setSearchFormOpen(false);
