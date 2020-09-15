@@ -23,6 +23,10 @@ import AccessibleIcon from '@material-ui/icons/Accessible';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import WcIcon from '@material-ui/icons/Wc';
 import LocalParkingIcon from '@material-ui/icons/LocalParking';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+
+import UimarantaImg from '../../assets/images/uimaranta.jpg';
+import GraphImg from '../../assets/images/graph.png';
 
 import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
 import HSLLogo from '../../assets/images/hsl-logo.svg';
@@ -68,7 +72,7 @@ const DetailPage = (props) => {
     }, [data, name]);
 
     console.log('datadetail', dataDetail);
-    if (dataDetail) console.log('data', dataDetail.data[dataDetail.data.length - 1].temp_air);
+    // if (dataDetail) console.log('data', dataDetail.data[dataDetail.data.length - 1].temp_air);
     return (
         <Paper elevation={0} square className={classes.detailPage}>
             <Grid container direction="column">
@@ -98,6 +102,7 @@ const DetailPage = (props) => {
                 </Tabs>
                 {dataDetail && (
                     <>
+                        {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0}>
                             <Grid container direction="column" component="span" alignItems="center">
                                 <Typography component="span" className={classes.name}>
@@ -116,6 +121,7 @@ const DetailPage = (props) => {
                                     direction="column"
                                     alignItems="flex-start"
                                     style={{ width: 'auto' }}
+                                    component="span"
                                 >
                                     <Box className={classes.groupContainer} component="span">
                                         <WbSunnyIcon className={classes.tempIcon} />
@@ -157,12 +163,13 @@ const DetailPage = (props) => {
                                     </Box>
                                 </Grid>
                                 <Box className={`${classes.groupContainer}`} component="span">
-                                    <div className={classes.serviceContainer}>
-                                        <AccessibleIcon className={classes.serviceIcon} />
-                                        <FastfoodIcon className={classes.serviceIcon} />
-                                        <WcIcon className={classes.serviceIcon} />
-                                        <LocalParkingIcon className={classes.serviceIcon} />
-                                    </div>
+                                    <AccessibleIcon className={classes.serviceIcon} />
+                                    <FastfoodIcon className={classes.serviceIcon} />
+                                    <WcIcon className={classes.serviceIcon} />
+                                    <LocalParkingIcon className={classes.serviceIcon} />
+                                </Box>
+                                <Box className={classes.groupContainer} component="span">
+                                    <img src={GraphImg} alt="graph" className={classes.graphImg} />
                                 </Box>
                                 <Box className={`${classes.groupContainer}`} component="span">
                                     <Button
@@ -192,8 +199,89 @@ const DetailPage = (props) => {
                                 </Box> */}
                             </Grid>
                         </TabPanel>
+
+                        {/* INFOMATION  TAB*/}
                         <TabPanel value={tabValue} index={1}>
-                            Infomation
+                            <Grid container direction="column" component="span">
+                                <Grid item xs={12} component="span">
+                                    <img
+                                        src={UimarantaImg}
+                                        alt="uimaranta"
+                                        className={classes.infoImage}
+                                    />
+                                </Grid>
+                                <Grid
+                                    item
+                                    xs={12}
+                                    container
+                                    style={{ marginTop: 16 }}
+                                    component="span"
+                                >
+                                    <Grid
+                                        item
+                                        xs={3}
+                                        container
+                                        justify="center"
+                                        alignItems="center"
+                                        component="span"
+                                    >
+                                        <AccessTimeIcon className={classes.infoIcon} />
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        xs={9}
+                                        className={classes.infoTextContainer}
+                                        component="span"
+                                    >
+                                        <Typography
+                                            component="span"
+                                            style={{ fontWeight: 'bold', fontSize: '20px' }}
+                                        >
+                                            Aukioloajat:
+                                        </Typography>
+                                        <br />
+                                        <Typography component="span">
+                                            Kausi 1.6. - 9.8.2020{' '}
+                                        </Typography>
+                                        <br />
+                                        <Typography component="span">klo 10.00 - 18.00</Typography>
+                                        <br />
+                                        <Typography component="span">
+                                            Uimarantakausi alkaa normaalisti 1.6
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid
+                                    item
+                                    xs={12}
+                                    container
+                                    style={{ marginTop: 24 }}
+                                    component="span"
+                                >
+                                    <Grid
+                                        item
+                                        xs={3}
+                                        container
+                                        justify="center"
+                                        alignItems="center"
+                                        component="span"
+                                    >
+                                        <LocalParkingIcon className={classes.infoIcon} />
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        xs={9}
+                                        className={classes.infoTextContainer}
+                                        component="span"
+                                    >
+                                        <Typography component="span">
+                                            Uimarannan lähettyvillä ei ole esteettömiä autopaikkoja.
+                                            Lähin pysäköintialue sijaitsee yli 100 m etäisyydellä.
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </TabPanel>
                         <TabPanel value={tabValue} index={2}>
                             Reviews

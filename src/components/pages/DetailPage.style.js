@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     detailPage: {
         height: 'calc(100vh - 50px)',
-        padding: 8,
+        padding: '16px 0',
     },
     name: {
         fontWeight: 'bold',
@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     groupContainer: {
         display: 'flex',
         alignItems: 'center',
-        marginBottom: 24,
+        marginBottom: 16,
         justifyContent: 'center',
     },
     tempIcon: {
@@ -35,5 +35,23 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: '30px',
         color: theme.palette.grey['600'],
         marginRight: 16,
+    },
+    // INFOMATION TAB
+    infoImage: {
+        width: '100%',
+        maxHeight: 300,
+    },
+    infoIcon: {
+        fontSize: '50px',
+        color: theme.palette.primary.main,
+    },
+    infoTextContainer: {
+        paddingLeft: 16,
+        borderLeft: '1px solid',
+        borderColor: theme.palette.primary.main,
+    },
+    graphImg: {
+        width: '100%',
+        height: 200,
     },
 }));
