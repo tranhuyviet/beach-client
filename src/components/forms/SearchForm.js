@@ -22,6 +22,7 @@ const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
                 <div className={classes.dialogTitle}>
                     Filter Advance
                     <IconButton
+                        color="inherit"
                         onClick={handleSearchFormClose}
                         style={{ marginLeft: 'auto!important' }}
                     >
@@ -43,7 +44,7 @@ const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
                     <FormControlLabel control={<Checkbox />} label="No algae" />
                     <Button
                         variant="outlined"
-                        color="secondary"
+                        color="primary"
                         style={{ marginTop: 16 }}
                         onClick={handleSearchFormClose}
                     >

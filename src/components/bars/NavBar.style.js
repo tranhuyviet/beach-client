@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     navbar: {
         height: 50,
         backgroundColor: `${theme.palette.primary.main}!important`,
+        color: `${theme.palette.common.white}!important`,
     },
     logoContainer: {
         paddingLeft: 16,

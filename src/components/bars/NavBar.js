@@ -23,7 +23,7 @@ const NavBar = () => {
                 </Grid>
                 <Grid item xs={6} container justify="flex-end">
                     {!isBack ? (
-                        <IconButton>
+                        <IconButton color="inherit">
                             <MenuIcon />
                         </IconButton>
                     ) : (
@@ -32,6 +32,7 @@ const NavBar = () => {
                                 history.push('/');
                                 setIsBack(false);
                             }}
+                            color="inherit"
                         >
                             <ArrowBackIcon />
                         </IconButton>

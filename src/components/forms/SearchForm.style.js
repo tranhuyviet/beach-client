@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: '16px',
         fontWeight: 'bold',
         letterSpacing: 1,
+        color: theme.palette.common.white,
     },
     titleOfFilter: {
         borderLeft: '3px solid',
