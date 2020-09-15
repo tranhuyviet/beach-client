@@ -1,18 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../context/dataContext';
-import {
-    Grid,
-    Tab,
-    Tabs,
-    Paper,
-    Typography,
-    Box,
-    IconButton,
-    Avatar,
-    Button,
-    Tooltip,
-    CardHeader,
-} from '@material-ui/core';
+import { Grid, Tab, Tabs, Paper, Typography, Box, Button } from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
@@ -30,8 +18,8 @@ import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
 import UimarantaImg from '../../assets/images/uimaranta.jpg';
 import GraphImg from '../../assets/images/graph.png';
 
-import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
-import HSLLogo from '../../assets/images/hsl-logo.svg';
+// import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
+// import HSLLogo from '../../assets/images/hsl-logo.svg';
 import moment from 'moment';
 import ReviewCard from '../shared/ReviewCard';
 
@@ -62,7 +50,7 @@ const DetailPage = (props) => {
     const { data } = useContext(DataContext);
     const [dataDetail, setDataDetail] = useState(null);
     const [tabValue, setTabValue] = useState(0);
-    const [reviewFormOpen, setReviewFormOpen] = useState(true);
+    const [reviewFormOpen, setReviewFormOpen] = useState(false);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);

@@ -7,7 +7,6 @@ import {
     Typography,
     IconButton,
     Grid,
-    FormControlLabel,
     Button,
     TextField,
 } from '@material-ui/core';

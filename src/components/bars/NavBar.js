@@ -13,7 +13,7 @@ const NavBar = () => {
     const classes = useStyles();
     const history = useHistory();
     const { isBack, setIsBack } = useContext(UIContext);
-    console.log('ISBACK', isBack);
+    // console.log('ISBACK', isBack);
     return (
         <Paper className={classes.navbar} elevation={0} square>
             <Grid container alignItems="center">

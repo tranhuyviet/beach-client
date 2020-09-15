@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
+import React, { useContext } from 'react';
+import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps';
+// import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
-import axios from 'axios';
-import PoolIcon from '@material-ui/icons/Pool';
+// import PoolIcon from '@material-ui/icons/Pool';
 
 import { DataContext } from '../../context/dataContext';
 import { UIContext } from '../../context/uiContext';
