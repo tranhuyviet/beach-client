@@ -52,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     graphImg: {
         width: '100%',
-        height: 200,
+        height: 140,
     },
 
     // REVIEW TAB

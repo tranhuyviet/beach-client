@@ -35,6 +35,8 @@ import HSLLogo from '../../assets/images/hsl-logo.svg';
 import moment from 'moment';
 import ReviewCard from '../shared/ReviewCard';
 
+import ReviewForm from '../forms/ReviewForm';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -59,10 +61,15 @@ const DetailPage = (props) => {
     const classes = useStyles();
     const { data } = useContext(DataContext);
     const [dataDetail, setDataDetail] = useState(null);
-    const [tabValue, setTabValue] = useState(2);
+    const [tabValue, setTabValue] = useState(0);
+    const [reviewFormOpen, setReviewFormOpen] = useState(true);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
+    };
+
+    const handleReviewFormClose = () => {
+        setReviewFormOpen(false);
     };
 
     const name = props.match.params.name;
@@ -342,6 +349,7 @@ const DetailPage = (props) => {
                                     startIcon={<AddCommentOutlinedIcon />}
                                     variant="outlined"
                                     color="primary"
+                                    onClick={() => setReviewFormOpen(true)}
                                 >
                                     Add Review
                                 </Button>
@@ -350,6 +358,10 @@ const DetailPage = (props) => {
                     </>
                 )}
             </Grid>
+            <ReviewForm
+                reviewFormOpen={reviewFormOpen}
+                handleReviewFormClose={handleReviewFormClose}
+            />
         </Paper>
     );
 };
