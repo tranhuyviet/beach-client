@@ -11,6 +11,7 @@ import {
     Avatar,
     Button,
     Tooltip,
+    CardHeader,
 } from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
@@ -24,6 +25,7 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import WcIcon from '@material-ui/icons/Wc';
 import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
 
 import UimarantaImg from '../../assets/images/uimaranta.jpg';
 import GraphImg from '../../assets/images/graph.png';
@@ -31,6 +33,7 @@ import GraphImg from '../../assets/images/graph.png';
 import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
 import HSLLogo from '../../assets/images/hsl-logo.svg';
 import moment from 'moment';
+import ReviewCard from '../shared/ReviewCard';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -56,7 +59,7 @@ const DetailPage = (props) => {
     const classes = useStyles();
     const { data } = useContext(DataContext);
     const [dataDetail, setDataDetail] = useState(null);
-    const [tabValue, setTabValue] = useState(0);
+    const [tabValue, setTabValue] = useState(2);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
@@ -283,8 +286,66 @@ const DetailPage = (props) => {
                                 </Grid>
                             </Grid>
                         </TabPanel>
-                        <TabPanel value={tabValue} index={2}>
-                            Reviews
+                        <TabPanel value={tabValue} index={2} className={classes.reviewContainer}>
+                            <Paper
+                                className={classes.reviewCardContainer}
+                                component="span"
+                                elevation={0}
+                                square
+                            >
+                                <ReviewCard
+                                    component="span"
+                                    name="Viet Tran"
+                                    content="Nice place"
+                                    time="13 minutes"
+                                    avatar="https://res.cloudinary.com/dzaxf70c4/image/upload/v1592381151/jqoyecsjkjtxxshaxhqt.jpg"
+                                />
+                                <ReviewCard
+                                    component="span"
+                                    name="Heli Korhonen"
+                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                                    time="1 hour"
+                                />
+                                <ReviewCard
+                                    component="span"
+                                    name="Mikko Romo"
+                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                                    time="2 hours"
+                                />
+                                <ReviewCard
+                                    component="span"
+                                    name="Juho Huhtanen"
+                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+                                    time="3 hours"
+                                />
+                                <ReviewCard
+                                    component="span"
+                                    name="Ville Tuomi"
+                                    content="When an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                                    time="4 hours"
+                                />
+                                <ReviewCard
+                                    component="span"
+                                    name="Viet Tran"
+                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                                    time="5 hours"
+                                    avatar="https://res.cloudinary.com/dzaxf70c4/image/upload/v1592381151/jqoyecsjkjtxxshaxhqt.jpg"
+                                />
+                            </Paper>
+                            <Grid
+                                container
+                                justify="center"
+                                component="span"
+                                className={classes.actionContainer}
+                            >
+                                <Button
+                                    startIcon={<AddCommentOutlinedIcon />}
+                                    variant="outlined"
+                                    color="primary"
+                                >
+                                    Add Review
+                                </Button>
+                            </Grid>
                         </TabPanel>
                     </>
                 )}
