@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     textInput: {
         width: '100%',
-        marginBottom: '16px',
+        marginBottom: '16px!important',
     },
     ratingContainer: {
         display: 'flex',

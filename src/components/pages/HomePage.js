@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps';
+import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 // import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
 // import PoolIcon from '@material-ui/icons/Pool';
