@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         // backgroundColor: theme.palette.primary.main,
+        position: 'absolute',
+        zIndex: 1001,
+        width: '100%',
     },
     searchInputContainer: {
         width: '100%',

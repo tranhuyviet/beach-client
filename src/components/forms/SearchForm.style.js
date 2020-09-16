@@ -17,10 +17,28 @@ export const useStyles = makeStyles((theme) => ({
         letterSpacing: 1,
         color: theme.palette.common.white,
     },
+    title: {
+        margin: '8px 0 16px 0',
+        fontWeight: 'bold',
+        borderBottom: '2px solid',
+        borderColor: `${theme.palette.primary.main}!important`,
+        letterSpacing: 1,
+    },
+    city: {
+        borderRadius: 30,
+    },
     titleOfFilter: {
         borderLeft: '3px solid',
         paddingLeft: 5,
         fontWeight: 'bold',
         borderColor: `${theme.palette.secondary.main}!important`,
+    },
+    serviceIcon: {
+        color: theme.palette.primary.main,
+        border: '1px solid',
+        fontSize: 40,
+        borderRadius: 10,
+        margin: '0 4px',
+        padding: 4,
     },
 }));
