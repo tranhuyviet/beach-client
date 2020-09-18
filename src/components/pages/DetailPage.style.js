@@ -57,10 +57,6 @@ export const useStyles = makeStyles((theme) => ({
         borderLeft: '1px solid',
         borderColor: theme.palette.primary.main,
     },
-    graphImg: {
-        width: '100%',
-        height: 140,
-    },
 
     // REVIEW TAB
     reviewContainer: {

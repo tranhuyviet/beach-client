@@ -29,6 +29,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Overview from '../tabs/Overview';
 import Info from '../tabs/Info';
 import Review from '../tabs/Review';
+import Graph from '../tabs/Graph';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -98,7 +99,7 @@ const DetailPage = (props) => {
     const classes = useStyles();
     const { data } = useContext(DataContext);
     const [dataDetail, setDataDetail] = useState(null);
-    const [tabValue, setTabValue] = useState(0);
+    const [tabValue, setTabValue] = useState(3);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
@@ -167,9 +168,14 @@ const DetailPage = (props) => {
                             <Info />
                         </TabPanel>
 
-                        {/* REVIEW TAB */}
+                        {/* REVIEWS TAB */}
                         <TabPanel value={tabValue} index={2} className={classes.reviewContainer}>
                             <Review />
+                        </TabPanel>
+
+                        {/* GRAPH TAB */}
+                        <TabPanel value={tabValue} index={3}>
+                            <Graph />
                         </TabPanel>
                     </>
                 )}
