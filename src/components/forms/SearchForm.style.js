@@ -35,11 +35,12 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: `${theme.palette.secondary.main}!important`,
     },
     serviceIcon: {
+        ...theme.share.serviceIcon,
         color: theme.palette.primary.main,
-        border: '1px solid',
-        fontSize: 35,
-        borderRadius: 10,
-        margin: '8px 4px',
-        padding: 4,
+        // border: '1px solid',
+        // fontSize: 35,
+        // borderRadius: 10,
+        // margin: '8px 4px',
+        // padding: 4,
     },
 }));
