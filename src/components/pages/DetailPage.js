@@ -28,6 +28,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Overview from '../tabs/Overview';
 import Info from '../tabs/Info';
+import Review from '../tabs/Review';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -98,14 +99,9 @@ const DetailPage = (props) => {
     const { data } = useContext(DataContext);
     const [dataDetail, setDataDetail] = useState(null);
     const [tabValue, setTabValue] = useState(0);
-    const [reviewFormOpen, setReviewFormOpen] = useState(false);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
-    };
-
-    const handleReviewFormClose = () => {
-        setReviewFormOpen(false);
     };
 
     const name = props.match.params.name;
@@ -128,7 +124,7 @@ const DetailPage = (props) => {
                     textColor="primary"
                     value={tabValue}
                     onChange={handleTabValueChange}
-                    variant="fullWidth"
+                    // variant="fullWidth"
                     // classes={{ indicator: classes.indicator }}
                     // className={classes.tabs}
                 >
@@ -162,7 +158,7 @@ const DetailPage = (props) => {
                 {dataDetail && (
                     <>
                         {/* OVERVIEW TAB */}
-                        <TabPanel value={tabValue} index={0}>
+                        <TabPanel value={tabValue} index={0} style={{ backgroundColor: 'white' }}>
                             <Overview dataDetail={dataDetail} />
                         </TabPanel>
 
@@ -170,75 +166,14 @@ const DetailPage = (props) => {
                         <TabPanel value={tabValue} index={1}>
                             <Info />
                         </TabPanel>
+
+                        {/* REVIEW TAB */}
                         <TabPanel value={tabValue} index={2} className={classes.reviewContainer}>
-                            <Paper
-                                className={classes.reviewCardContainer}
-                                component="span"
-                                elevation={0}
-                                square
-                            >
-                                <ReviewCard
-                                    component="span"
-                                    name="Viet Tran"
-                                    content="Nice place"
-                                    time="13 minutes"
-                                    avatar="https://res.cloudinary.com/dzaxf70c4/image/upload/v1592381151/jqoyecsjkjtxxshaxhqt.jpg"
-                                />
-                                <ReviewCard
-                                    component="span"
-                                    name="Heli Korhonen"
-                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                                    time="1 hour"
-                                />
-                                <ReviewCard
-                                    component="span"
-                                    name="Mikko Romo"
-                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                                    time="2 hours"
-                                />
-                                <ReviewCard
-                                    component="span"
-                                    name="Juho Huhtanen"
-                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-                                    time="3 hours"
-                                />
-                                <ReviewCard
-                                    component="span"
-                                    name="Ville Tuomi"
-                                    content="When an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                                    time="4 hours"
-                                />
-                                <ReviewCard
-                                    component="span"
-                                    name="Viet Tran"
-                                    content="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                                    time="5 hours"
-                                    avatar="https://res.cloudinary.com/dzaxf70c4/image/upload/v1592381151/jqoyecsjkjtxxshaxhqt.jpg"
-                                />
-                            </Paper>
-                            <Grid
-                                container
-                                justify="center"
-                                component="span"
-                                className={classes.actionContainer}
-                            >
-                                <Button
-                                    startIcon={<AddCommentOutlinedIcon />}
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => setReviewFormOpen(true)}
-                                >
-                                    Add Review
-                                </Button>
-                            </Grid>
+                            <Review />
                         </TabPanel>
                     </>
                 )}
             </Grid>
-            <ReviewForm
-                reviewFormOpen={reviewFormOpen}
-                handleReviewFormClose={handleReviewFormClose}
-            />
         </Paper>
     );
 };

@@ -16,6 +16,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SendIcon from '@material-ui/icons/Send';
 
+import Rating from '@material-ui/lab/Rating';
+
 const ReviewForm = ({ reviewFormOpen, handleReviewFormClose }) => {
     const classes = useStyles();
     return (
@@ -54,13 +56,14 @@ const ReviewForm = ({ reviewFormOpen, handleReviewFormClose }) => {
                 />
                 <div className={classes.ratingContainer}>
                     <Typography style={{ marginRight: 8 }}>Rating:</Typography>
-                    <>
+                    {/* <>
                         <StarBorderIcon />
                         <StarBorderIcon />
                         <StarBorderIcon />
                         <StarBorderIcon />
                         <StarBorderIcon />
-                    </>
+                    </> */}
+                    <Rating value={0} precision={0.5} size="large" name="reviews" />
                 </div>
                 <Grid container justify="flex-end" className={classes.buttonContainer}>
                     <Button

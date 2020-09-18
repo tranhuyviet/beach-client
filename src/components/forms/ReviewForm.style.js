@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     ratingContainer: {
         display: 'flex',
+        alignItems: 'center',
     },
     buttonContainer: {
         marginTop: 16,
