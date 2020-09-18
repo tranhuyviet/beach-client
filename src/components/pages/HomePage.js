@@ -10,7 +10,7 @@ import { UIContext } from '../../context/uiContext';
 import SearchBar from '../bars/SearchBar';
 import { useHistory } from 'react-router-dom';
 import { Fab, Avatar } from '@material-ui/core';
-import FilterIcon from '../../assets/images/filter_alt-24px.svg';
+import FilterIcon from '../../assets/images/filter.svg';
 
 import SearchForm from '../forms/SearchForm';
 
@@ -89,8 +89,13 @@ const HomePage = () => {
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
             />
-            <Fab size="large" className={classes.fab} onClick={() => setSearchFormOpen(true)}>
-                <Avatar src={FilterIcon} style={{ fill: 'white' }} />
+            <Fab
+                color="primary"
+                size="large"
+                className={classes.fab}
+                onClick={() => setSearchFormOpen(true)}
+            >
+                <Avatar variant="square" src={FilterIcon} style={{ width: 25, height: 25 }} />
             </Fab>
             <SearchForm
                 searchFormOpen={searchFormOpen}

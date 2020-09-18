@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.common.white,
     },
     title: {
-        margin: '8px 0 16px 0',
+        margin: '16px 0 ',
         fontWeight: 'bold',
         borderBottom: '2px solid',
         borderColor: `${theme.palette.primary.main}!important`,
@@ -26,6 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     city: {
         borderRadius: 30,
+        margin: '8px 4px ',
     },
     titleOfFilter: {
         borderLeft: '3px solid',
@@ -36,9 +37,9 @@ export const useStyles = makeStyles((theme) => ({
     serviceIcon: {
         color: theme.palette.primary.main,
         border: '1px solid',
-        fontSize: 40,
+        fontSize: 35,
         borderRadius: 10,
-        margin: '0 4px',
+        margin: '8px 4px',
         padding: 4,
     },
 }));

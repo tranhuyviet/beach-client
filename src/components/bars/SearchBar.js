@@ -6,6 +6,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import SearchIcon from '@material-ui/icons/Search';
 
 import SearchForm from '../forms/SearchForm';
+import Fade from 'react-reveal/Fade';
 
 const SearchBar = ({ handleSearchFormClose }) => {
     const classes = useStyles();
@@ -20,7 +21,7 @@ const SearchBar = ({ handleSearchFormClose }) => {
                 />
                 <SearchIcon className={classes.searchIcon} />
             </div>
-            <Tooltip title="Filter More...">
+            <Tooltip title="Hide Search Name">
                 <IconButton onClick={() => handleSearchFormClose()}>
                     <ExpandLessIcon />
                 </IconButton>

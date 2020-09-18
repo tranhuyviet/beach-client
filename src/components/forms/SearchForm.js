@@ -27,7 +27,7 @@ const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
         <Dialog open={searchFormOpen} onClose={handleSearchFormClose} className={classes.dialog}>
             <DialogTitle className={classes.dialogTitleContainer}>
                 <div className={classes.dialogTitle}>
-                    Filter Advance
+                    Filter results by...
                     <IconButton
                         color="inherit"
                         onClick={handleSearchFormClose}
@@ -49,12 +49,7 @@ const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
                         <Button variant="outlined" color="primary" className={classes.city}>
                             Helsinki
                         </Button>
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            style={{ margin: '0 8px' }}
-                            className={classes.city}
-                        >
+                        <Button variant="outlined" color="primary" className={classes.city}>
                             Espoo
                         </Button>
                         <Button variant="outlined" color="primary" className={classes.city}>
@@ -78,9 +73,7 @@ const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
                             labelPlacement="bottom"
                         />
                     </Grid> */}
-                    <Typography className={classes.title} style={{ marginTop: 16 }}>
-                        AMENITIES
-                    </Typography>
+                    <Typography className={classes.title}>AMENITIES</Typography>
                     <Grid item xs={12} container justify="center">
                         <WcIcon className={classes.serviceIcon} />
                         <AccessibleForwardIcon className={classes.serviceIcon} />

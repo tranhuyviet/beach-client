@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../context/dataContext';
-import { Grid, Tab, Tabs, Paper, Typography, Box, Button } from '@material-ui/core';
+import { Grid, Tab, Tabs, Paper, Typography, Box, Button, Divider } from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
@@ -24,6 +24,7 @@ import moment from 'moment';
 import ReviewCard from '../shared/ReviewCard';
 
 import ReviewForm from '../forms/ReviewForm';
+import { withStyles } from '@material-ui/core/styles';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -44,6 +45,50 @@ function TabPanel(props) {
         </div>
     );
 }
+
+const AntTabs = withStyles((theme) => ({
+    root: {
+        // borderBottom: '1px solid',
+        // borderBottomColor: theme.palette.grey['400'],
+    },
+    indicator: {
+        backgroundColor: theme.palette.primary.main,
+        // display: 'none',
+    },
+}))(Tabs);
+
+const AntTab = withStyles((theme) => ({
+    root: {
+        textTransform: 'none',
+        // minWidth: 24,
+        fontWeight: theme.typography.fontWeightRegular,
+        padding: '0px 4px',
+        // marginRight: theme.spacing(1),
+        // borderRight: '1px solid',
+        // borderBottom: '1px solid',
+        // borderRightColor: theme.palette.grey['400'],
+        // borderBottomLeftRadius: 10,
+        // borderBottomRightRadius: 10,
+        '&:last-child': {
+            borderRight: 'none',
+        },
+        '&:hover': {
+            color: theme.palette.primary.main,
+
+            // opacity: 1,
+        },
+        '&$selected': {
+            color: theme.palette.primary.main,
+            // color: theme.palette.common.white,
+            fontWeight: 'bold',
+            //  backgroundColor: theme.palette.primary.main,
+        },
+        // '&:focus': {
+        //     color: '#40a9ff',
+        // },
+    },
+    selected: {},
+}))((props) => <Tab disableRipple {...props} />);
 
 const DetailPage = (props) => {
     const classes = useStyles();
@@ -74,30 +119,43 @@ const DetailPage = (props) => {
     return (
         <Paper elevation={0} square className={classes.detailPage}>
             <Grid container direction="column">
-                <Tabs
+                <AntTabs
                     indicatorColor="primary"
                     centered
                     textColor="primary"
                     value={tabValue}
                     onChange={handleTabValueChange}
-                    classes={{ indicator: classes.indicator }}
+                    variant="fullWidth"
+                    // classes={{ indicator: classes.indicator }}
+                    // className={classes.tabs}
                 >
-                    <Tab
+                    <AntTab
                         label="Overview"
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
-                    <Tab
-                        label="Infomation"
+
+                    <AntTab
+                        label="Info"
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
-                    <Tab
+                    <AntTab
                         label="Reviews"
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
-                </Tabs>
+                    <AntTab
+                        label="Graph"
+                        classes={{ selected: classes.tabSelected }}
+                        className={classes.tab}
+                    />
+                    <AntTab
+                        label="Area"
+                        classes={{ selected: classes.tabSelected }}
+                        className={classes.tab}
+                    />
+                </AntTabs>
                 {dataDetail && (
                     <>
                         {/* OVERVIEW TAB */}
