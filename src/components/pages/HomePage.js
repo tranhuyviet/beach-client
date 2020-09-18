@@ -18,7 +18,7 @@ const HomePage = () => {
     const classes = useStyles();
     const { data } = useContext(DataContext);
     const { setIsBack } = useContext(UIContext);
-
+    const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
 
     const handleSearchFormClose = () => {
@@ -41,7 +41,6 @@ const HomePage = () => {
     // }, []);
 
     function Map() {
-        const history = useHistory();
         return (
             <GoogleMap
                 defaultZoom={12}
