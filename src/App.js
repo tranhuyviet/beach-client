@@ -24,6 +24,13 @@ function App() {
                 margin: '0 auto',
                 padding: '16px',
             },
+            serviceIcon: {
+                border: '1px solid',
+                fontSize: 35,
+                borderRadius: 10,
+                margin: '8px 4px',
+                padding: 4,
+            },
         },
     });
     return (

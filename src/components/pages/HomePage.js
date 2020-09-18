@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 // import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
@@ -9,11 +9,21 @@ import { UIContext } from '../../context/uiContext';
 
 import SearchBar from '../bars/SearchBar';
 import { useHistory } from 'react-router-dom';
+import { Fab, Avatar } from '@material-ui/core';
+import FilterIcon from '../../assets/images/filter.svg';
+
+import SearchForm from '../forms/SearchForm';
 
 const HomePage = () => {
     const classes = useStyles();
     const { data } = useContext(DataContext);
     const { setIsBack } = useContext(UIContext);
+
+    const [searchFormOpen, setSearchFormOpen] = useState(false);
+
+    const handleSearchFormClose = () => {
+        setSearchFormOpen(false);
+    };
     // const [data, setData] = useState([]);
 
     // useEffect(() => {
@@ -33,7 +43,15 @@ const HomePage = () => {
     function Map() {
         const history = useHistory();
         return (
-            <GoogleMap defaultZoom={12} defaultCenter={{ lat: 60.1715, lng: 24.8983 }}>
+            <GoogleMap
+                defaultZoom={12}
+                defaultCenter={{ lat: 60.1715, lng: 24.8983 }}
+                options={{
+                    fullscreenControl: false,
+                    zoomControl: false,
+                    streetViewControl: false,
+                }}
+            >
                 {data &&
                     data.map((place) => (
                         <Marker
@@ -61,14 +79,27 @@ const HomePage = () => {
     const WrappedMap = withScriptjs(withGoogleMap(Map));
 
     console.log('DATA STATE', data);
+
     return (
         <div className={classes.homepage}>
-            <SearchBar />
+            {/* <SearchBar /> */}
             <WrappedMap
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_KEY}&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
+            />
+            <Fab
+                color="primary"
+                size="large"
+                className={classes.fab}
+                onClick={() => setSearchFormOpen(true)}
+            >
+                <Avatar variant="square" src={FilterIcon} style={{ width: 25, height: 25 }} />
+            </Fab>
+            <SearchForm
+                searchFormOpen={searchFormOpen}
+                handleSearchFormClose={handleSearchFormClose}
             />
         </div>
     );

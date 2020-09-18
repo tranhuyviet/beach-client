@@ -2,11 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     searchbar: {
-        height: 50,
+        height: 60,
         paddingLeft: 16,
         display: 'flex',
         alignItems: 'center',
         // backgroundColor: theme.palette.primary.main,
+        position: 'absolute',
+
+        zIndex: 10001,
+        width: '100%',
     },
     searchInputContainer: {
         width: '100%',
@@ -14,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     searchInput: {
         width: '100%',
-        height: 30,
+        height: 36,
         paddingLeft: 12,
         borderColor: theme.palette.grey['600'],
         border: '1px solid',
@@ -23,8 +27,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     searchIcon: {
         position: 'absolute',
-        right: 8,
-        top: 3,
+        right: 10,
+        top: 6,
         color: theme.palette.grey['600'],
     },
 }));

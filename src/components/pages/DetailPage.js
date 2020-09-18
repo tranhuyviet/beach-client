@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../context/dataContext';
-import { Grid, Tab, Tabs, Paper, Typography, Box, Button } from '@material-ui/core';
+import { Grid, Tab, Tabs, Paper, Typography, Box, Button, Divider } from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
@@ -24,6 +24,8 @@ import moment from 'moment';
 import ReviewCard from '../shared/ReviewCard';
 
 import ReviewForm from '../forms/ReviewForm';
+import { withStyles } from '@material-ui/core/styles';
+import Overview from '../tabs/Overview';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -44,6 +46,50 @@ function TabPanel(props) {
         </div>
     );
 }
+
+const AntTabs = withStyles((theme) => ({
+    root: {
+        // borderBottom: '1px solid',
+        // borderBottomColor: theme.palette.grey['400'],
+    },
+    indicator: {
+        backgroundColor: theme.palette.primary.main,
+        // display: 'none',
+    },
+}))(Tabs);
+
+const AntTab = withStyles((theme) => ({
+    root: {
+        textTransform: 'none',
+        // minWidth: 24,
+        fontWeight: theme.typography.fontWeightRegular,
+        padding: '0px 4px',
+        // marginRight: theme.spacing(1),
+        // borderRight: '1px solid',
+        // borderBottom: '1px solid',
+        // borderRightColor: theme.palette.grey['400'],
+        // borderBottomLeftRadius: 10,
+        // borderBottomRightRadius: 10,
+        '&:last-child': {
+            borderRight: 'none',
+        },
+        '&:hover': {
+            color: theme.palette.primary.main,
+
+            // opacity: 1,
+        },
+        '&$selected': {
+            color: theme.palette.primary.main,
+            // color: theme.palette.common.white,
+            fontWeight: 'bold',
+            //  backgroundColor: theme.palette.primary.main,
+        },
+        // '&:focus': {
+        //     color: '#40a9ff',
+        // },
+    },
+    selected: {},
+}))((props) => <Tab disableRipple {...props} />);
 
 const DetailPage = (props) => {
     const classes = useStyles();
@@ -74,128 +120,48 @@ const DetailPage = (props) => {
     return (
         <Paper elevation={0} square className={classes.detailPage}>
             <Grid container direction="column">
-                <Tabs
+                <AntTabs
                     indicatorColor="primary"
                     centered
                     textColor="primary"
                     value={tabValue}
                     onChange={handleTabValueChange}
-                    classes={{ indicator: classes.indicator }}
+                    variant="fullWidth"
+                    // classes={{ indicator: classes.indicator }}
+                    // className={classes.tabs}
                 >
-                    <Tab
+                    <AntTab
                         label="Overview"
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
-                    <Tab
-                        label="Infomation"
+
+                    <AntTab
+                        label="Info"
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
-                    <Tab
+                    <AntTab
                         label="Reviews"
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
-                </Tabs>
+                    <AntTab
+                        label="Graph"
+                        classes={{ selected: classes.tabSelected }}
+                        className={classes.tab}
+                    />
+                    <AntTab
+                        label="Area"
+                        classes={{ selected: classes.tabSelected }}
+                        className={classes.tab}
+                    />
+                </AntTabs>
                 {dataDetail && (
                     <>
                         {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0}>
-                            <Grid container direction="column" component="span" alignItems="center">
-                                <Typography component="span" className={classes.name}>
-                                    {dataDetail.meta.name}
-                                </Typography>
-                                <Box className={classes.groupContainer} component="span">
-                                    <StarIcon className={classes.starIcon} />
-                                    <StarIcon className={classes.starIcon} />
-                                    <StarIcon className={classes.starIcon} />
-                                    <StarIcon className={classes.starIcon} />
-                                    <StarHalfIcon className={classes.starIcon} />
-                                </Box>
-                                <Grid
-                                    item
-                                    container
-                                    direction="column"
-                                    alignItems="flex-start"
-                                    style={{ width: 'auto' }}
-                                    component="span"
-                                >
-                                    <Box className={classes.groupContainer} component="span">
-                                        <WbSunnyIcon className={classes.tempIcon} />
-                                        <Typography component="span">
-                                            <span className={classes.tempText}>
-                                                {
-                                                    dataDetail.data[dataDetail.data.length - 1]
-                                                        .temp_air
-                                                }{' '}
-                                                &#8451;{' '}
-                                            </span>{' '}
-                                        </Typography>
-                                    </Box>
-
-                                    <Box className={classes.groupContainer} component="span">
-                                        <WavesIcon className={classes.tempIcon} />
-                                        <Typography component="span">
-                                            <span className={classes.tempText}>
-                                                {
-                                                    dataDetail.data[dataDetail.data.length - 1]
-                                                        .temp_water
-                                                }{' '}
-                                                &#8451;
-                                            </span>{' '}
-                                        </Typography>
-                                    </Box>
-                                    <Box className={classes.groupContainer} component="span">
-                                        <UpdateIcon className={classes.tempIcon} />
-                                        <Typography
-                                            component="span"
-                                            style={{
-                                                marginLeft: 5,
-
-                                                fontStyle: 'italic',
-                                            }}
-                                        >
-                                            {moment(dataDetail.meta.file_created).fromNow(true)} ago
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                                <Box className={`${classes.groupContainer}`} component="span">
-                                    <AccessibleIcon className={classes.serviceIcon} />
-                                    <FastfoodIcon className={classes.serviceIcon} />
-                                    <WcIcon className={classes.serviceIcon} />
-                                    <LocalParkingIcon className={classes.serviceIcon} />
-                                </Box>
-                                <Box className={classes.groupContainer} component="span">
-                                    <img src={GraphImg} alt="graph" className={classes.graphImg} />
-                                </Box>
-                                <Box className={`${classes.groupContainer}`} component="span">
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        style={{ marginRight: 16 }}
-                                    >
-                                        Google Map
-                                    </Button>
-                                    <Button variant="outlined" color="primary">
-                                        HSL Routes
-                                    </Button>
-                                </Box>
-                                {/* <Box className={classes.groupContainer}>
-                                    <Tooltip title="Open Google Map">
-                                        <Avatar src={GoogleMapLogo} variant="square" />
-                                    </Tooltip>
-                                    <Tooltip title="Open HSL">
-                                        <Avatar
-                                            src={
-                                                'https://upload.wikimedia.org/wikipedia/fi/c/cc/HSL_logo.svg'
-                                            }
-                                            variant="square"
-                                            style={{ height: '40px', width: '80px' }}
-                                        />
-                                    </Tooltip>
-                                </Box> */}
-                            </Grid>
+                            <Overview dataDetail={dataDetail} />
                         </TabPanel>
 
                         {/* INFOMATION  TAB*/}
