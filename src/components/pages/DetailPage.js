@@ -25,7 +25,9 @@ import ReviewCard from '../shared/ReviewCard';
 
 import ReviewForm from '../forms/ReviewForm';
 import { withStyles } from '@material-ui/core/styles';
+
 import Overview from '../tabs/Overview';
+import Info from '../tabs/Info';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -166,86 +168,7 @@ const DetailPage = (props) => {
 
                         {/* INFOMATION  TAB*/}
                         <TabPanel value={tabValue} index={1}>
-                            <Grid container direction="column" component="span">
-                                <Grid item xs={12} component="span">
-                                    <img
-                                        src={UimarantaImg}
-                                        alt="uimaranta"
-                                        className={classes.infoImage}
-                                    />
-                                </Grid>
-                                <Grid
-                                    item
-                                    xs={12}
-                                    container
-                                    style={{ marginTop: 16 }}
-                                    component="span"
-                                >
-                                    <Grid
-                                        item
-                                        xs={3}
-                                        container
-                                        justify="center"
-                                        alignItems="center"
-                                        component="span"
-                                    >
-                                        <AccessTimeIcon className={classes.infoIcon} />
-                                    </Grid>
-                                    <Grid
-                                        item
-                                        xs={9}
-                                        className={classes.infoTextContainer}
-                                        component="span"
-                                    >
-                                        <Typography
-                                            component="span"
-                                            style={{ fontWeight: 'bold', fontSize: '20px' }}
-                                        >
-                                            Aukioloajat:
-                                        </Typography>
-                                        <br />
-                                        <Typography component="span">
-                                            Kausi 1.6. - 9.8.2020{' '}
-                                        </Typography>
-                                        <br />
-                                        <Typography component="span">klo 10.00 - 18.00</Typography>
-                                        <br />
-                                        <Typography component="span">
-                                            Uimarantakausi alkaa normaalisti 1.6
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid
-                                    item
-                                    xs={12}
-                                    container
-                                    style={{ marginTop: 24 }}
-                                    component="span"
-                                >
-                                    <Grid
-                                        item
-                                        xs={3}
-                                        container
-                                        justify="center"
-                                        alignItems="center"
-                                        component="span"
-                                    >
-                                        <LocalParkingIcon className={classes.infoIcon} />
-                                    </Grid>
-                                    <Grid
-                                        item
-                                        xs={9}
-                                        className={classes.infoTextContainer}
-                                        component="span"
-                                    >
-                                        <Typography component="span">
-                                            Uimarannan lähettyvillä ei ole esteettömiä autopaikkoja.
-                                            Lähin pysäköintialue sijaitsee yli 100 m etäisyydellä.
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
+                            <Info />
                         </TabPanel>
                         <TabPanel value={tabValue} index={2} className={classes.reviewContainer}>
                             <Paper
