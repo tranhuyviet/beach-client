@@ -11,8 +11,10 @@ import SearchBar from '../bars/SearchBar';
 import { useHistory } from 'react-router-dom';
 import { Fab, Avatar } from '@material-ui/core';
 import FilterIcon from '../../assets/images/filter.svg';
-
+import Footer from '../bars/Footer';
 import SearchForm from '../forms/SearchForm';
+
+// import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
 const HomePage = () => {
     const classes = useStyles();
@@ -96,6 +98,7 @@ const HomePage = () => {
             >
                 <Avatar variant="square" src={FilterIcon} style={{ width: 25, height: 25 }} />
             </Fab>
+            <Footer />
             <SearchForm
                 searchFormOpen={searchFormOpen}
                 handleSearchFormClose={handleSearchFormClose}

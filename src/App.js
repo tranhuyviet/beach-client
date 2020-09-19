@@ -5,6 +5,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import NavBar from './components/bars/NavBar';
 import HomePage from './components/pages/HomePage';
 import DetailPage from './components/pages/DetailPage';
+import Footer from './components/bars/Footer';
 import { DataProvider } from './context/dataContext';
 import { UIProvider } from './context/uiContext';
 
