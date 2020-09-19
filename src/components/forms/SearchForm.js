@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStyles } from './SearchForm.style';
 import {
     Dialog,
@@ -21,8 +21,21 @@ import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
 import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import PetsIcon from '@material-ui/icons/Pets';
 
-const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
+const SearchForm = ({
+    searchFormOpen,
+    handleSearchFormClose,
+    isHelsinkiSelected,
+    setIsHelsinkiSelected,
+    isEspooSelected,
+    setIsEspooSelected,
+    isVantaaSelected,
+    setIsVantaaSelected,
+}) => {
     const classes = useStyles();
+    // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
+    // const [isEspooSelected, setIsEspooSelected] = useState(false);
+    // const [isVantaaSelected, setIsVantaaSelected] = useState(false);
+
     return (
         <Dialog open={searchFormOpen} onClose={handleSearchFormClose} className={classes.dialog}>
             <DialogTitle className={classes.dialogTitleContainer}>
@@ -37,22 +50,37 @@ const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
                     </IconButton>
                 </div>
             </DialogTitle>
-            <DialogContent>
+            <DialogContent style={{ padding: 0 }}>
                 <Grid
                     container
                     direction="column"
-                    style={{ padding: '0 0 8px 0' }}
+                    style={{ padding: '0 0 16px 0' }}
                     alignItems="center"
                 >
                     <Typography className={classes.title}>LOCATION</Typography>
                     <Grid item xs={12} container justify="center">
-                        <Button variant="outlined" color="primary" className={classes.city}>
+                        <Button
+                            variant={isHelsinkiSelected ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.city}
+                            onClick={() => setIsHelsinkiSelected((prev) => !prev)}
+                        >
                             Helsinki
                         </Button>
-                        <Button variant="outlined" color="primary" className={classes.city}>
+                        <Button
+                            variant={isEspooSelected ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.city}
+                            onClick={() => setIsEspooSelected((prev) => !prev)}
+                        >
                             Espoo
                         </Button>
-                        <Button variant="outlined" color="primary" className={classes.city}>
+                        <Button
+                            variant={isVantaaSelected ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.city}
+                            onClick={() => setIsVantaaSelected((prev) => !prev)}
+                        >
                             Vantaa
                         </Button>
                     </Grid>
@@ -87,16 +115,17 @@ const SearchForm = ({ searchFormOpen, handleSearchFormClose }) => {
                         <FormControlLabel control={<Checkbox />} label="Suitable for dogs" />
                         <FormControlLabel control={<Checkbox />} label="Water temperature > 23" />
                         <FormControlLabel control={<Checkbox />} label="No algae" />
+                        <FormControlLabel control={<Checkbox />} label="Show closest to me" />
                     </Grid>
                     <Grid
                         item
                         xs={12}
                         container
-                        justify="space-between"
+                        justify="flex-end"
                         alignItems="center"
-                        style={{ marginTop: 16 }}
+                        style={{ marginTop: 8, paddingRight: 24 }}
                     >
-                        <FormControlLabel control={<Checkbox />} label="Show closest to me" />
+                        {/* <FormControlLabel control={<Checkbox />} label="Show closest to me" /> */}
                         <Button
                             variant="contained"
                             color="primary"

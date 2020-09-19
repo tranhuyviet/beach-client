@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
         letterSpacing: 1,
     },
     city: {
-        borderRadius: 30,
+        borderRadius: '30px!important',
         margin: '8px 4px ',
     },
     titleOfFilter: {

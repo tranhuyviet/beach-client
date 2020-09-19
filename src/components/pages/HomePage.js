@@ -13,6 +13,7 @@ import { Fab, Avatar } from '@material-ui/core';
 import FilterIcon from '../../assets/images/filter.svg';
 import Footer from '../bars/Footer';
 import SearchForm from '../forms/SearchForm';
+import { FilterDrama } from '@material-ui/icons';
 
 // import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
@@ -23,26 +24,73 @@ const HomePage = () => {
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
 
+    // FILTER
+    const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
+    const [isEspooSelected, setIsEspooSelected] = useState(false);
+    const [isVantaaSelected, setIsVantaaSelected] = useState(false);
+
     const handleSearchFormClose = () => {
         setSearchFormOpen(false);
     };
-    // const [data, setData] = useState([]);
-
-    // useEffect(() => {
-    //     axios
-    //         .get('https://iot.fvh.fi/opendata/uiras/uiras2_v1.json')
-    //         .then((res) => {
-    //             // console.log(res.data.sensors);
-    //             //setData(res.data.sensors.meta);
-    //             return res.data.sensors;
-    //         })
-    //         .then((data) => {
-    //             setData(Object.values(data));
-    //         })
-    //         .catch((error) => console.log('ERROR LOADING DATA FROM SERVER', error));
-    // }, []);
 
     function Map() {
+        let filtered = [];
+        data.forEach((place) => {
+            if (isEspooSelected) {
+                if (place.meta.name === 'Hanikan uimaranta (Espoo)') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Kattilajärvi (Espoo)') {
+                    filtered.push(place);
+                }
+            }
+            if (isVantaaSelected) {
+                if (place.meta.name === 'Vetokannas (Vantaa)') {
+                    filtered.push(place);
+                }
+            }
+            if (isHelsinkiSelected) {
+                if (place.meta.name === 'Uunisaari') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Pikkukosken uimaranta') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Lauttasaari (Vaskiniemi)') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Rastilan uimaranta') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Sompasauna') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Pihlajasaari') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Vasikkasaari') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Marjaniemen uimaranta') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Hietaniemi (Ourit)') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Herttoniemi (Tuorinniemen uimalaituri)') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Vartiosaari (Reposalmen laituri)') {
+                    filtered.push(place);
+                }
+                if (place.meta.name === 'Eiranranta (Löyly)') {
+                    filtered.push(place);
+                }
+            } else if (!isVantaaSelected && !isEspooSelected && !isHelsinkiSelected) {
+                filtered.push(place);
+            }
+        });
+
         return (
             <GoogleMap
                 defaultZoom={10}
@@ -53,8 +101,8 @@ const HomePage = () => {
                     streetViewControl: false,
                 }}
             >
-                {data &&
-                    data.map((place) => (
+                {filtered &&
+                    filtered.map((place) => (
                         <Marker
                             key={place.meta.name}
                             position={{ lat: place.meta.lat, lng: place.meta.lon }}
@@ -102,6 +150,12 @@ const HomePage = () => {
             <SearchForm
                 searchFormOpen={searchFormOpen}
                 handleSearchFormClose={handleSearchFormClose}
+                isHelsinkiSelected={isHelsinkiSelected}
+                setIsHelsinkiSelected={setIsHelsinkiSelected}
+                isEspooSelected={isEspooSelected}
+                setIsEspooSelected={setIsEspooSelected}
+                isVantaaSelected={isVantaaSelected}
+                setIsVantaaSelected={setIsVantaaSelected}
             />
         </div>
     );
