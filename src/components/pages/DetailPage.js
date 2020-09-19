@@ -1,6 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../context/dataContext';
-import { Grid, Tab, Tabs, Paper, Typography, Box, Button, Divider } from '@material-ui/core';
+import {
+    Grid,
+    Tab,
+    Tabs,
+    Paper,
+    Typography,
+    Box,
+    Button,
+    Divider,
+    Tooltip,
+} from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
@@ -32,6 +42,12 @@ import Review from '../tabs/Review';
 import Graph from '../tabs/Graph';
 import Area from '../tabs/Area';
 
+import PageviewOutlinedIcon from '@material-ui/icons/PageviewOutlined';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
+import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -54,19 +70,17 @@ function TabPanel(props) {
 
 const AntTabs = withStyles((theme) => ({
     root: {
-        // borderBottom: '1px solid',
-        // borderBottomColor: theme.palette.grey['400'],
+        padding: 5,
+        borderBottom: '1px solid',
+        borderBottomColor: theme.palette.grey['200'],
     },
-    indicator: {
-        backgroundColor: theme.palette.primary.main,
-        // display: 'none',
-    },
+    indicator: {},
 }))(Tabs);
 
 const AntTab = withStyles((theme) => ({
     root: {
         textTransform: 'none',
-        // minWidth: 24,
+        minWidth: 60,
         fontWeight: theme.typography.fontWeightRegular,
         padding: '0px 4px',
         // marginRight: theme.spacing(1),
@@ -127,32 +141,36 @@ const DetailPage = (props) => {
                     value={tabValue}
                     onChange={handleTabValueChange}
                     // variant="fullWidth"
-                    // classes={{ indicator: classes.indicator }}
+                    classes={{ indicator: classes.indicator }}
                     // className={classes.tabs}
                 >
                     <AntTab
-                        label="Overview"
-                        classes={{ selected: classes.tabSelected }}
-                        className={classes.tab}
-                    />
-
-                    <AntTab
-                        label="Info"
+                        // label="Overview"
+                        icon={<PageviewOutlinedIcon className={classes.tabIcon} />}
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
                     <AntTab
-                        label="Reviews"
+                        // label="Info"
+                        icon={<InfoOutlinedIcon className={classes.tabIcon} />}
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
                     <AntTab
-                        label="Graph"
+                        // label="Reviews"
+                        icon={<CommentOutlinedIcon className={classes.tabIcon} />}
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />
                     <AntTab
-                        label="Area"
+                        // label="Graph"
+                        icon={<AssessmentOutlinedIcon className={classes.tabIcon} />}
+                        classes={{ selected: classes.tabSelected }}
+                        className={classes.tab}
+                    />
+                    <AntTab
+                        // label="Area"
+                        icon={<RoomOutlinedIcon className={classes.tabIcon} />}
                         classes={{ selected: classes.tabSelected }}
                         className={classes.tab}
                     />

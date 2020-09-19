@@ -45,8 +45,8 @@ const HomePage = () => {
     function Map() {
         return (
             <GoogleMap
-                defaultZoom={12}
-                defaultCenter={{ lat: 60.1715, lng: 24.8983 }}
+                defaultZoom={10}
+                defaultCenter={{ lat: 60.219014, lng: 24.857463 }}
                 options={{
                     fullscreenControl: false,
                     zoomControl: false,
@@ -64,7 +64,7 @@ const HomePage = () => {
                                 setIsBack(true);
                             }}
                             icon={{
-                                url: '/marker.svg',
+                                url: '/markerRed.svg',
                                 scaledSize: new window.google.maps.Size(35, 35),
                             }}
                         >
@@ -98,7 +98,7 @@ const HomePage = () => {
             >
                 <Avatar variant="square" src={FilterIcon} style={{ width: 25, height: 25 }} />
             </Fab>
-            <Footer />
+            {/* <Footer /> */}
             <SearchForm
                 searchFormOpen={searchFormOpen}
                 handleSearchFormClose={handleSearchFormClose}

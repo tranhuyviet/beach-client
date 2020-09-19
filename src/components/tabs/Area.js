@@ -27,7 +27,7 @@ const Area = ({ meta }) => {
                         key={meta.name}
                         position={{ lat: meta.lat, lng: meta.lon }}
                         icon={{
-                            url: '/marker.svg',
+                            url: '/markerRed.svg',
                             scaledSize: new window.google.maps.Size(35, 35),
                         }}
                     >
