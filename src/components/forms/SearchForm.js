@@ -32,6 +32,7 @@ const SearchForm = ({
     setIsVantaaSelected,
     isForDogs,
     setIsForDogs,
+    filterSubmit,
 }) => {
     const classes = useStyles();
     // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
@@ -140,7 +141,10 @@ const SearchForm = ({
                             variant="contained"
                             color="primary"
                             // style={{ marginTop: 16 }}
-                            onClick={handleSearchFormClose}
+                            onClick={() => {
+                                handleSearchFormClose();
+                                filterSubmit();
+                            }}
                         >
                             Apply
                         </Button>

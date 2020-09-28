@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 // import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
@@ -16,32 +16,61 @@ import SearchForm from '../forms/SearchForm';
 import { FilterDrama } from '@material-ui/icons';
 
 import { GET_BEACHES_QUERY } from '../../utils/graphql';
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
+import _ from 'lodash';
 
 const HomePage = () => {
     const classes = useStyles();
-    // const { data } = useContext(DataContext);
+    const { data: apiData } = useContext(DataContext);
     const { setIsBack } = useContext(UIContext);
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
 
     // FILTER
-    const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
-    const [isEspooSelected, setIsEspooSelected] = useState(false);
-    const [isVantaaSelected, setIsVantaaSelected] = useState(false);
+    const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(true);
+    const [isEspooSelected, setIsEspooSelected] = useState(true);
+    const [isVantaaSelected, setIsVantaaSelected] = useState(true);
     const [isForDogs, setIsForDogs] = useState(false);
+
+    const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
+        onError(error) {
+            console.log('ERROR', error);
+        },
+    });
 
     const handleSearchFormClose = () => {
         setSearchFormOpen(false);
     };
 
-    const { data, loading } = useQuery(GET_BEACHES_QUERY, {
-        onError(error) {
-            console.log(error);
-        },
-    });
+    const filterSubmit = () => {
+        const variables = {
+            city: [],
+            forDogs: '',
+        };
+        if (isHelsinkiSelected) {
+            variables.city.push('Helsinki');
+        }
+        if (isEspooSelected) {
+            variables.city.push('Espoo');
+        }
+        if (isVantaaSelected) {
+            variables.city.push('Vantaa');
+        }
+        if (isForDogs) {
+            variables.forDogs = 'true';
+        } else {
+            variables.forDogs = '';
+        }
+
+        getBeachesQuery({ variables });
+    };
+
+    useEffect(() => {
+        getBeachesQuery();
+    }, []);
 
     console.log('DATA LOAD FROM SERVER', data);
+    // console.log('DATA LOAD FROM API', apiData);
 
     function Map() {
         return (
@@ -110,6 +139,7 @@ const HomePage = () => {
                 setIsVantaaSelected={setIsVantaaSelected}
                 isForDogs={isForDogs}
                 setIsForDogs={setIsForDogs}
+                filterSubmit={filterSubmit}
             />
         </div>
     );
