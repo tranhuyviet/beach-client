@@ -15,11 +15,12 @@ import Footer from '../bars/Footer';
 import SearchForm from '../forms/SearchForm';
 import { FilterDrama } from '@material-ui/icons';
 
-// import { FullScreen, useFullScreenHandle } from 'react-full-screen';
+import { GET_BEACHES_QUERY } from '../../utils/graphql';
+import { useQuery } from '@apollo/client';
 
 const HomePage = () => {
     const classes = useStyles();
-    const { data } = useContext(DataContext);
+    // const { data } = useContext(DataContext);
     const { setIsBack } = useContext(UIContext);
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
@@ -28,69 +29,21 @@ const HomePage = () => {
     const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
     const [isEspooSelected, setIsEspooSelected] = useState(false);
     const [isVantaaSelected, setIsVantaaSelected] = useState(false);
+    const [isForDogs, setIsForDogs] = useState(false);
 
     const handleSearchFormClose = () => {
         setSearchFormOpen(false);
     };
 
-    function Map() {
-        let filtered = [];
-        data.forEach((place) => {
-            if (isEspooSelected) {
-                if (place.meta.name === 'Hanikan uimaranta (Espoo)') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Kattilajärvi (Espoo)') {
-                    filtered.push(place);
-                }
-            }
-            if (isVantaaSelected) {
-                if (place.meta.name === 'Vetokannas (Vantaa)') {
-                    filtered.push(place);
-                }
-            }
-            if (isHelsinkiSelected) {
-                if (place.meta.name === 'Uunisaari') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Pikkukosken uimaranta') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Lauttasaari (Vaskiniemi)') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Rastilan uimaranta') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Sompasauna') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Pihlajasaari') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Vasikkasaari') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Marjaniemen uimaranta') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Hietaniemi (Ourit)') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Herttoniemi (Tuorinniemen uimalaituri)') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Vartiosaari (Reposalmen laituri)') {
-                    filtered.push(place);
-                }
-                if (place.meta.name === 'Eiranranta (Löyly)') {
-                    filtered.push(place);
-                }
-            } else if (!isVantaaSelected && !isEspooSelected && !isHelsinkiSelected) {
-                filtered.push(place);
-            }
-        });
+    const { data, loading } = useQuery(GET_BEACHES_QUERY, {
+        onError(error) {
+            console.log(error);
+        },
+    });
 
+    console.log('DATA LOAD FROM SERVER', data);
+
+    function Map() {
         return (
             <GoogleMap
                 defaultZoom={10}
@@ -101,14 +54,15 @@ const HomePage = () => {
                     streetViewControl: false,
                 }}
             >
-                {filtered &&
-                    filtered.map((place) => (
+                {data &&
+                    data.getBeaches &&
+                    data.getBeaches.map((place) => (
                         <Marker
-                            key={place.meta.name}
-                            position={{ lat: place.meta.lat, lng: place.meta.lon }}
+                            key={place.name}
+                            position={{ lat: place.lat, lng: place.lon }}
                             onClick={() => {
-                                console.log(place.meta.name);
-                                history.push(`/${place.meta.name}`);
+                                console.log(place.name);
+                                history.push(`/${place.name}`);
                                 setIsBack(true);
                             }}
                             icon={{
@@ -126,8 +80,6 @@ const HomePage = () => {
     }
 
     const WrappedMap = withScriptjs(withGoogleMap(Map));
-
-    console.log('DATA STATE', data);
 
     return (
         <div className={classes.homepage}>
@@ -156,6 +108,8 @@ const HomePage = () => {
                 setIsEspooSelected={setIsEspooSelected}
                 isVantaaSelected={isVantaaSelected}
                 setIsVantaaSelected={setIsVantaaSelected}
+                isForDogs={isForDogs}
+                setIsForDogs={setIsForDogs}
             />
         </div>
     );

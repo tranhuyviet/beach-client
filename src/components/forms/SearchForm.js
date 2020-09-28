@@ -30,6 +30,8 @@ const SearchForm = ({
     setIsEspooSelected,
     isVantaaSelected,
     setIsVantaaSelected,
+    isForDogs,
+    setIsForDogs,
 }) => {
     const classes = useStyles();
     // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
@@ -112,7 +114,15 @@ const SearchForm = ({
                     </Grid>
                     <Grid item xs={12} container style={{ marginTop: 16, paddingLeft: 24 }}>
                         <FormControlLabel control={<Checkbox />} label="Suitable for children" />
-                        <FormControlLabel control={<Checkbox />} label="Suitable for dogs" />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isForDogs}
+                                    onChange={(event) => setIsForDogs(event.target.checked)}
+                                />
+                            }
+                            label="Suitable for dogs"
+                        />
                         <FormControlLabel control={<Checkbox />} label="Water temperature > 23" />
                         <FormControlLabel control={<Checkbox />} label="No algae" />
                         <FormControlLabel control={<Checkbox />} label="Show closest to me" />
