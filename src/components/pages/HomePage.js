@@ -21,7 +21,7 @@ import _ from 'lodash';
 
 const HomePage = () => {
     const classes = useStyles();
-    const { data: apiData } = useContext(DataContext);
+    const { data: apiData, setBeaches, beach } = useContext(DataContext);
     const { setIsBack } = useContext(UIContext);
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
@@ -33,6 +33,10 @@ const HomePage = () => {
     const [isForDogs, setIsForDogs] = useState(false);
 
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
+        onCompleted(data) {
+            console.log('COMPLETED', data);
+            setBeaches(data.getBeaches);
+        },
         onError(error) {
             console.log('ERROR', error);
         },
@@ -69,41 +73,65 @@ const HomePage = () => {
         getBeachesQuery();
     }, []);
 
-    console.log('DATA LOAD FROM SERVER', data);
+    console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
 
     function Map() {
+        const defaultCenter = {
+            lat: beach ? beach.lat : 60.219014,
+            lng: beach ? beach.lon : 24.857463,
+        };
+        console.log(defaultCenter);
         return (
             <GoogleMap
                 defaultZoom={10}
-                defaultCenter={{ lat: 60.219014, lng: 24.857463 }}
+                // defaultCenter={{ lat: 60.219014, lng: 24.857463 }}
+                defaultCenter={defaultCenter}
                 options={{
                     fullscreenControl: false,
                     zoomControl: false,
                     streetViewControl: false,
                 }}
             >
-                {data &&
-                    data.getBeaches &&
-                    data.getBeaches.map((place) => (
-                        <Marker
-                            key={place.name}
-                            position={{ lat: place.lat, lng: place.lon }}
-                            onClick={() => {
-                                console.log(place.name);
-                                history.push(`/${place.name}`);
-                                setIsBack(true);
-                            }}
-                            icon={{
-                                url: '/markerRed.svg',
-                                scaledSize: new window.google.maps.Size(35, 35),
-                            }}
-                        >
-                            {/* <InfoWindow>
+                {beach ? (
+                    <Marker
+                        key={beach.name}
+                        position={{ lat: beach.lat, lng: beach.lon }}
+                        onClick={() => {
+                            console.log(beach.name);
+                            history.push(`/${beach.name}`);
+                            setIsBack(true);
+                        }}
+                        icon={{
+                            url: '/markerRed.svg',
+                            scaledSize: new window.google.maps.Size(35, 35),
+                        }}
+                    ></Marker>
+                ) : (
+                    <>
+                        {data &&
+                            data.getBeaches &&
+                            data.getBeaches.map((place) => (
+                                <Marker
+                                    key={place.name}
+                                    position={{ lat: place.lat, lng: place.lon }}
+                                    onClick={() => {
+                                        console.log(place.name);
+                                        history.push(`/${place.name}`);
+                                        setIsBack(true);
+                                    }}
+                                    icon={{
+                                        url: '/markerRed.svg',
+                                        scaledSize: new window.google.maps.Size(35, 35),
+                                    }}
+                                >
+                                    {/* <InfoWindow>
                                 <p>{place.meta.name}</p>
                             </InfoWindow> */}
-                        </Marker>
-                    ))}
+                                </Marker>
+                            ))}
+                    </>
+                )}
             </GoogleMap>
         );
     }

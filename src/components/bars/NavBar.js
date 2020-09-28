@@ -10,15 +10,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import { UIContext } from '../../context/uiContext';
 import { useHistory } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import { DataContext } from '../../context/dataContext';
 
 const NavBar = () => {
     const classes = useStyles();
     const history = useHistory();
     const { isBack, setIsBack } = useContext(UIContext);
+    const { setBeach } = useContext(DataContext);
     const [searchBarOpen, setSearchBarOpen] = useState(false);
     // console.log('ISBACK', isBack);
     const handleSearchFormClose = () => {
         setSearchBarOpen(false);
+        setBeach(null);
     };
     return (
         <Paper className={classes.navbar} elevation={0} square>
