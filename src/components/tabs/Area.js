@@ -7,14 +7,14 @@ import WcIcon from '@material-ui/icons/Wc';
 import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 
-const Area = ({ meta }) => {
+const Area = ({ dataDetail }) => {
     const classes = useStyles();
-    console.log(meta);
+
     function Map() {
         return (
             <GoogleMap
                 defaultZoom={12}
-                defaultCenter={{ lat: meta.lat, lng: meta.lon }}
+                defaultCenter={{ lat: dataDetail.lat, lng: dataDetail.lon }}
                 options={{
                     fullscreenControl: false,
                     zoomControl: false,
@@ -22,10 +22,10 @@ const Area = ({ meta }) => {
                     mapTypeControl: false,
                 }}
             >
-                {meta && (
+                {dataDetail && (
                     <Marker
-                        key={meta.name}
-                        position={{ lat: meta.lat, lng: meta.lon }}
+                        key={dataDetail.name}
+                        position={{ lat: dataDetail.lat, lng: dataDetail.lon }}
                         icon={{
                             url: '/markerRed.svg',
                             scaledSize: new window.google.maps.Size(35, 35),
@@ -33,11 +33,11 @@ const Area = ({ meta }) => {
                     >
                         <InfoWindow>
                             <div className={classes.infoContainer}>
-                                <p className={classes.nameInfo}>{meta.name}</p>
+                                <p className={classes.nameInfo}>{dataDetail.name}</p>
                                 <Rating
                                     name="read-only"
-                                    defaultValue={4.5}
-                                    precision={0.5}
+                                    value={dataDetail.ratingAverage}
+                                    precision={0.1}
                                     readOnly
                                     size="small"
                                 />

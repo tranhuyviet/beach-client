@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         padding: 0,
         margin: 0,
         width: 'calc(100vw - 48px)',
-        height: 'calc(100vh - 50px - 48px - 48px)',
+        height: 'calc(100vh - 50px - 48px - 48px - 16px)',
         // marginTop: 50,
         // position: 'relative',
         border: '2px solid',

@@ -45,6 +45,7 @@ const NavBar = () => {
                             onClick={() => {
                                 history.push('/');
                                 setIsBack(false);
+                                setBeach(null);
                             }}
                             color="inherit"
                         >

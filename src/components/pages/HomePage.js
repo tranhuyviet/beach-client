@@ -24,7 +24,7 @@ const HomePage = () => {
     const { data: apiData, setBeaches, beach, setBeachSelected, setBeach } = useContext(
         DataContext
     );
-    const { setIsBack, setSearchBarOpen } = useContext(UIContext);
+    const { setIsBack, setSearchBarOpen, isBack } = useContext(UIContext);
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
 
@@ -72,8 +72,9 @@ const HomePage = () => {
     };
 
     useEffect(() => {
+        console.log('isback', isBack);
         getBeachesQuery();
-    }, []);
+    }, [isBack]);
 
     console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
@@ -83,7 +84,7 @@ const HomePage = () => {
             lat: beach ? beach.lat : 60.219014,
             lng: beach ? beach.lon : 24.857463,
         };
-        console.log(defaultCenter);
+
         return (
             <GoogleMap
                 defaultZoom={10}

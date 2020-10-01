@@ -212,7 +212,7 @@ const DetailPage = (props) => {
 
                         {/* AREA TAB */}
                         <TabPanel value={tabValue} index={4}>
-                            <Area meta={dataDetail.meta} />
+                            <Area dataDetail={dataDetail} />
                         </TabPanel>
                     </>
                 )}
