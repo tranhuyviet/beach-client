@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { DataContext } from '../../context/dataContext';
+
 import {
     Grid,
     Tab,
@@ -47,6 +47,9 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
+import { GET_BEACHE_BY_NAME_QUERY } from '../../utils/graphql';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { DataContext } from '../../context/dataContext';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -112,25 +115,30 @@ const AntTab = withStyles((theme) => ({
 
 const DetailPage = (props) => {
     const classes = useStyles();
-    const { data } = useContext(DataContext);
+
     const [dataDetail, setDataDetail] = useState(null);
+    // const { dataDetail, setDataDetail } = useContext(DataContext);
     const [tabValue, setTabValue] = useState(0);
+    let findedData;
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
     };
 
     const name = props.match.params.name;
-    useEffect(() => {
-        const findedData = data.find((item) => item.meta.name === name);
 
-        if (findedData) {
-            setDataDetail(findedData);
-        }
-    }, [data, name]);
+    const { loading } = useQuery(GET_BEACHE_BY_NAME_QUERY, {
+        variables: { name },
+        onCompleted(data) {
+            setDataDetail(data.getBeach);
+        },
+        onError(error) {
+            console.log('GET BEACH BY NAME QUERY ERROR', error);
+        },
+    });
 
-    console.log('datadetail', dataDetail);
-    // if (dataDetail) console.log('data', dataDetail.data[dataDetail.data.length - 1].temp_air);
+    console.log(dataDetail);
+
     return (
         <Paper elevation={0} square className={classes.detailPage}>
             <Grid container direction="column">
@@ -189,7 +197,12 @@ const DetailPage = (props) => {
 
                         {/* REVIEWS TAB */}
                         <TabPanel value={tabValue} index={2} className={classes.reviewContainer}>
-                            <Review />
+                            <Review
+                                reviews={dataDetail.reviews}
+                                beachName={dataDetail.name}
+                                setDataDetail={setDataDetail}
+                                dataDetail={dataDetail}
+                            />
                         </TabPanel>
 
                         {/* GRAPH TAB */}

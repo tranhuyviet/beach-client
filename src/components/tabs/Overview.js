@@ -25,11 +25,22 @@ const Overview = ({ dataDetail }) => {
                 <img src={UimarantaImg} alt="uimaranta" className={classes.mainImage} />
             </Grid>
             <Typography component="span" className={classes.name}>
-                {dataDetail.meta.name}
+                {dataDetail.name}
             </Typography>
-            <Rating name="read-only" defaultValue={4.5} precision={0.5} readOnly />
+            <Grid item component="span" container justify="center" alignItems="center">
+                <Rating
+                    name="read-only"
+                    value={dataDetail.ratingAverage}
+                    precision={0.1}
+                    readOnly
+                />
+                <Typography
+                    component="span"
+                    style={{ marginLeft: 4 }}
+                >{`(${dataDetail.reviews.length})`}</Typography>
+            </Grid>
             <Typography component="span" style={{ marginTop: 8 }}>
-                Ritokalliontie 18, 00330 Helsinki
+                {`${dataDetail.address}, ${dataDetail.city}`}
             </Typography>
             <Grid
                 item

@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     textInput: {
         width: '100%',
-        marginBottom: '16px!important',
+        marginBottom: '24px!important',
     },
     ratingContainer: {
         display: 'flex',
@@ -27,5 +27,11 @@ export const useStyles = makeStyles((theme) => ({
     buttonContainer: {
         marginTop: 16,
         marginBottom: 8,
+    },
+    errorMessage: {
+        color: theme.palette.error.main,
+        fontSize: 12,
+        marginLeft: 14,
+        marginTop: 4,
     },
 }));

@@ -4,8 +4,10 @@ import { Avatar, Typography, Paper, Grid } from '@material-ui/core';
 
 import StarIcon from '@material-ui/icons/Star';
 // import StarHalfIcon from '@material-ui/icons/StarHalf';
+import moment from 'moment';
+import Rating from '@material-ui/lab/Rating';
 
-const ReviewCard = ({ avatar, name, content, time }) => {
+const ReviewCard = ({ avatar, name, comment, rating, createdAt }) => {
     const classes = useStyles();
     return (
         <Paper
@@ -31,7 +33,7 @@ const ReviewCard = ({ avatar, name, content, time }) => {
                     </Typography>
                     <br />
                     <Typography component="span" className={classes.content}>
-                        {content}
+                        {comment}
                     </Typography>
                     <br />
                     <Paper
@@ -40,16 +42,12 @@ const ReviewCard = ({ avatar, name, content, time }) => {
                         component="span"
                         className={classes.iconTimeContainer}
                     >
-                        <Grid container component="span" className={classes.starContainer}>
-                            <StarIcon className={classes.starIcon} />
-                            <StarIcon className={classes.starIcon} />
-                            <StarIcon className={classes.starIcon} />
-                            <StarIcon className={classes.starIcon} />
-                            <StarIcon className={classes.starIcon} />
+                        <Grid container component="span" justify="space-between">
+                            <Rating value={rating} precision={0.5} readOnly />
+                            <Typography component="span" className={classes.time}>
+                                {moment(createdAt).fromNow()}
+                            </Typography>
                         </Grid>
-                        <Typography component="span" className={classes.time}>
-                            {time}
-                        </Typography>
                     </Paper>
                 </Grid>
             </Grid>

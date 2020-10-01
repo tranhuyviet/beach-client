@@ -21,15 +21,17 @@ import _ from 'lodash';
 
 const HomePage = () => {
     const classes = useStyles();
-    const { data: apiData, setBeaches, beach } = useContext(DataContext);
-    const { setIsBack } = useContext(UIContext);
+    const { data: apiData, setBeaches, beach, setBeachSelected, setBeach } = useContext(
+        DataContext
+    );
+    const { setIsBack, setSearchBarOpen } = useContext(UIContext);
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
 
     // FILTER
-    const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(true);
-    const [isEspooSelected, setIsEspooSelected] = useState(true);
-    const [isVantaaSelected, setIsVantaaSelected] = useState(true);
+    const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
+    const [isEspooSelected, setIsEspooSelected] = useState(false);
+    const [isVantaaSelected, setIsVantaaSelected] = useState(false);
     const [isForDogs, setIsForDogs] = useState(false);
 
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
@@ -100,7 +102,10 @@ const HomePage = () => {
                         onClick={() => {
                             console.log(beach.name);
                             history.push(`/${beach.name}`);
+                            // setBeachSelected(beach.name);
+                            setBeach(beach);
                             setIsBack(true);
+                            setSearchBarOpen(false);
                         }}
                         icon={{
                             url: '/markerRed.svg',
@@ -118,7 +123,10 @@ const HomePage = () => {
                                     onClick={() => {
                                         console.log(place.name);
                                         history.push(`/${place.name}`);
+                                        // setBeachSelected(place.name);
+                                        setBeach(place);
                                         setIsBack(true);
+                                        setSearchBarOpen(false);
                                     }}
                                     icon={{
                                         url: '/markerRed.svg',

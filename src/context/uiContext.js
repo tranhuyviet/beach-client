@@ -4,6 +4,8 @@ const UIContext = createContext();
 
 const UIProvider = (props) => {
     const [isBack, setIsBack] = useState(false);
+    const [searchBarOpen, setSearchBarOpen] = useState(false);
+
     const pathname = window.location.pathname;
     useEffect(() => {
         setIsBack(pathname !== '/' ? true : false);
@@ -14,6 +16,8 @@ const UIProvider = (props) => {
             value={{
                 isBack,
                 setIsBack,
+                searchBarOpen,
+                setSearchBarOpen,
             }}
         >
             {props.children}

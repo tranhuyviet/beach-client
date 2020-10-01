@@ -5,6 +5,7 @@ const DataContext = createContext();
 const initialState = {
     beaches: [],
     beach: null,
+    dataDetail: {},
 };
 
 const beachReducer = (state, action) => {
@@ -21,28 +22,33 @@ const beachReducer = (state, action) => {
                 beach: action.payload,
             };
         }
+        case 'SET_DATA_DETAIL': {
+            return {
+                ...state,
+                dataDetail: action.payload,
+            };
+        }
+
         default:
             return state;
     }
 };
 
 const DataProvider = (props) => {
-    const [data, setData] = useState([]);
     const [state, dispatch] = useReducer(beachReducer, initialState);
 
-    useEffect(() => {
-        axios
-            .get('https://iot.fvh.fi/opendata/uiras/uiras2_v1.json')
-            .then((res) => {
-                // console.log(res.data.sensors);
-                //setData(res.data.sensors.meta);
-                return res.data.sensors;
-            })
-            .then((data) => {
-                setData(Object.values(data));
-            })
-            .catch((error) => console.log('ERROR LOADING DATA FROM SERVER', error));
-    }, []);
+    // const [dataAPI, setDataAPI] = useState([]);
+    // useEffect(() => {
+    //     axios
+    //         .get('https://iot.fvh.fi/opendata/uiras/uiras2_v1.json')
+    //         .then((res) => {
+    //             return res.data.sensors;
+    //         })
+    //         .then((data) => {
+    //             setDataAPI(Object.values(data));
+    //         })
+    //         .catch((error) => console.log('ERROR LOADING DATA FROM SERVER', error));
+    // }, []);
 
     const setBeaches = (beaches) => {
         console.log('SET_BEACHES', beaches);
@@ -59,14 +65,24 @@ const DataProvider = (props) => {
         });
     };
 
+    const setDataDetail = (beach) => {
+        console.log(beach);
+        dispatch({
+            type: 'SET_DATA_DETAIL',
+            payload: beach,
+        });
+    };
+
     return (
         <DataContext.Provider
             value={{
-                data,
+                // dataAPI,
                 beaches: state.beaches,
                 setBeaches,
                 beach: state.beach,
                 setBeach,
+                dataDetail: state.dataDetail,
+                setDataDetail,
             }}
         >
             {props.children}

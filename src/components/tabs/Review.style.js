@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
         paddingLeft: 24,
         paddingRight: 24,
         height: 'calc(100vh - 114px - 50px - 32px )',
+        width: '100%',
         overflowY: 'scroll',
         '&::-webkit-scrollbar': {
             display: 'none',

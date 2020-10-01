@@ -17,11 +17,11 @@ const SearchBar = ({ handleSearchFormClose }) => {
 
     function onSubmit(event) {
         event.preventDefault();
-        console.log('submit', value);
+        // console.log('submit', value);
         setBeach(value);
     }
 
-    console.log('SEARCH BAR DATA SERVER', beaches);
+    // console.log('SEARCH BAR DATA SERVER', beaches);
     return (
         <Paper className={classes.searchbar} elevation={0} square>
             <div className={classes.searchInputContainer}>

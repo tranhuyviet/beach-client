@@ -13,12 +13,4 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.grey['600'],
         fontSize: 14,
     },
-    starContainer: {
-        marginTop: 8,
-        marginBottom: 8,
-        maxWidth: 120,
-    },
-    starIcon: {
-        color: theme.palette.warning.main,
-    },
 }));

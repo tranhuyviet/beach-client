@@ -15,9 +15,9 @@ import { DataContext } from '../../context/dataContext';
 const NavBar = () => {
     const classes = useStyles();
     const history = useHistory();
-    const { isBack, setIsBack } = useContext(UIContext);
+    const { isBack, setIsBack, searchBarOpen, setSearchBarOpen } = useContext(UIContext);
     const { setBeach } = useContext(DataContext);
-    const [searchBarOpen, setSearchBarOpen] = useState(false);
+    // const [searchBarOpen, setSearchBarOpen] = useState(false);
     // console.log('ISBACK', isBack);
     const handleSearchFormClose = () => {
         setSearchBarOpen(false);
