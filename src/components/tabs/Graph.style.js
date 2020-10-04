@@ -14,4 +14,16 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: 180,
     },
+    chartContainer: {
+        maxHeight: 300,
+        position: 'relative',
+    },
+    hideTrial: {
+        backgroundColor: theme.palette.common.white,
+        height: 20,
+        width: '100%',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+    },
 }));

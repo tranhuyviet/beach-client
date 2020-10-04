@@ -160,11 +160,14 @@ const HomePage = () => {
                 color="primary"
                 size="large"
                 className={classes.fab}
-                onClick={() => setSearchFormOpen(true)}
+                onClick={() => {
+                    setSearchFormOpen(true);
+                    setSearchBarOpen(false);
+                }}
             >
                 <Avatar variant="square" src={FilterIcon} style={{ width: 25, height: 25 }} />
             </Fab>
-            {/* <Footer /> */}
+            <Footer />
             <SearchForm
                 searchFormOpen={searchFormOpen}
                 handleSearchFormClose={handleSearchFormClose}

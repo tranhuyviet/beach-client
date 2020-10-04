@@ -10,6 +10,7 @@ import {
     Button,
     Divider,
     Tooltip,
+    CircularProgress,
 } from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
@@ -141,7 +142,7 @@ const DetailPage = (props) => {
 
     return (
         <Paper elevation={0} square className={classes.detailPage}>
-            <Grid container direction="column">
+            <Grid container direction="column" style={{ backgroundColor: 'white' }}>
                 <AntTabs
                     indicatorColor="primary"
                     centered
@@ -183,6 +184,11 @@ const DetailPage = (props) => {
                         className={classes.tab}
                     />
                 </AntTabs>
+                {loading && (
+                    <Grid container justify="center" alignItems="center" style={{ paddingTop: 24 }}>
+                        <CircularProgress />
+                    </Grid>
+                )}
                 {dataDetail && (
                     <>
                         {/* OVERVIEW TAB */}
@@ -207,7 +213,7 @@ const DetailPage = (props) => {
 
                         {/* GRAPH TAB */}
                         <TabPanel value={tabValue} index={3}>
-                            <Graph />
+                            <Graph data={dataDetail.data} />
                         </TabPanel>
 
                         {/* AREA TAB */}

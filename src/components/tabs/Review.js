@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useStyles } from './Review.style';
-import { Paper, Grid, Button } from '@material-ui/core';
+import { Paper, Grid, Button, Typography } from '@material-ui/core';
 
 import ReviewCard from '../shared/ReviewCard';
 import ReviewForm from '../forms/ReviewForm';
@@ -22,6 +22,13 @@ const Review = ({ beachName, reviews, setDataDetail, dataDetail }) => {
     return (
         <>
             <Paper className={classes.reviewCardContainer} component="span" elevation={0} square>
+                {reviews.length === 0 && (
+                    <Grid container component="span" justify="center">
+                        <Typography component="span">
+                            No reviews yet. Leave the first one!
+                        </Typography>
+                    </Grid>
+                )}
                 {reviews &&
                     reviews.map((review, index) => (
                         <ReviewCard
