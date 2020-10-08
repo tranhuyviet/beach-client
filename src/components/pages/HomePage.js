@@ -18,10 +18,11 @@ import { FilterDrama } from '@material-ui/icons';
 import { GET_BEACHES_QUERY } from '../../utils/graphql';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
+import { getAlgaeData } from '../../utils/algaeService';
 
 const HomePage = () => {
     const classes = useStyles();
-    const { data: apiData, setBeaches, beach, setBeachSelected, setBeach } = useContext(
+    const { data: apiData, setBeaches, beach, setBeachSelected, setBeach, algaeData, setAlgaeData } = useContext(
         DataContext
     );
     const { setIsBack, setSearchBarOpen, isBack } = useContext(UIContext);
@@ -37,12 +38,21 @@ const HomePage = () => {
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
             console.log('COMPLETED', data);
+            if(!algaeData) {
+                getAlgaeSightings(data.getBeaches)
+            }
             setBeaches(data.getBeaches);
         },
         onError(error) {
             console.log('ERROR', error);
         },
     });
+
+    const getAlgaeSightings = async (beaches) => {
+        const data = await getAlgaeData(beaches)
+        setAlgaeData(data)
+    }
+
 
     const handleSearchFormClose = () => {
         setSearchFormOpen(false);

@@ -13,11 +13,14 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import WavesIcon from '@material-ui/icons/Waves';
 import FlagIcon from '@material-ui/icons/Flag';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import NearMeIcon from '@material-ui/icons/NearMe';
+import InfoIcon from '@material-ui/icons/Info';
 
 import HSLLogo from '../../assets/images/HSL_logo1.png';
 import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
 
-const Overview = ({ dataDetail }) => {
+const Overview = ({ dataDetail, algaeSighting }) => {
     const classes = useStyles();
     return (
         <Grid container direction="column" component="span" alignItems="center">
@@ -99,6 +102,32 @@ const Overview = ({ dataDetail }) => {
                     </Typography>
                 </Box>
             </Grid>
+            {algaeSighting.sighting && (
+                <Grid item xs={12} container component="span" justify="center" className={classes.algaeContainer}>
+                    <Grid item xs={12} container component="span" justify="center">
+                        <Typography component="span" className={classes.algaePadding}>
+                        <InfoIcon className={classes.tempIcon} />
+                            <span className={classes.tempText}>
+                                {algaeSighting.sighting.printouts['Display fi']}
+                            </span>{' '}
+                        </Typography>
+                        <Typography component="span" className={classes.algaePadding}>
+                        <CalendarTodayIcon className={classes.tempIcon} />
+                            <span className={classes.tempText}>
+                                {algaeSighting.date} päivää sitten
+                            </span>{' '}
+                        </Typography>
+                    </Grid>
+
+                    <Typography component="span">
+                        <NearMeIcon className={classes.tempIcon} />
+                        <span className={classes.tempText}>
+                            {algaeSighting.distance} metriä rannasta
+                        </span>{' '}
+                    </Typography>
+                </Grid>
+            )}
+
             <Grid
                 item
                 xs={12}
