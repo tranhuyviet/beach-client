@@ -13,7 +13,7 @@ const Area = ({ dataDetail }) => {
     function Map() {
         return (
             <GoogleMap
-                defaultZoom={12}
+                defaultZoom={16}
                 defaultCenter={{ lat: dataDetail.lat, lng: dataDetail.lon }}
                 options={{
                     fullscreenControl: false,

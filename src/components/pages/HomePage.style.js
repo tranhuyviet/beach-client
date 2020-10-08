@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     fab: {
         position: 'absolute',
-        bottom: 30,
+        bottom: 20,
         right: 20,
         color: theme.palette.common.white,
     },

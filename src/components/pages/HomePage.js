@@ -80,6 +80,14 @@ const HomePage = () => {
     // console.log('DATA LOAD FROM API', apiData);
 
     function Map() {
+        let latAverage;
+        let lonAverage;
+        if (data && data.getBeaches) {
+            latAverage = _.meanBy(data.getBeaches, 'lat');
+            lonAverage = _.meanBy(data.getBeaches, 'lon');
+        }
+
+        console.log('LOCATION AVERAGE', latAverage, lonAverage);
         const defaultCenter = {
             lat: beach ? beach.lat : 60.219014,
             lng: beach ? beach.lon : 24.857463,
@@ -87,13 +95,14 @@ const HomePage = () => {
 
         return (
             <GoogleMap
-                defaultZoom={10}
+                defaultZoom={beach ? 14 : 10}
                 // defaultCenter={{ lat: 60.219014, lng: 24.857463 }}
                 defaultCenter={defaultCenter}
                 options={{
                     fullscreenControl: false,
                     zoomControl: false,
                     streetViewControl: false,
+                    mapTypeControl: false,
                 }}
             >
                 {beach ? (

@@ -10,6 +10,7 @@ import {
     Grid,
     FormControlLabel,
     Button,
+    Tooltip,
 } from '@material-ui/core';
 
 import CloseIcon from '@material-ui/icons/Close';
@@ -110,22 +111,38 @@ const SearchForm = ({
                         <AccessibleForwardIcon className={classes.serviceIcon} />
                         <FastfoodIcon className={classes.serviceIcon} />
                         <SportsVolleyballIcon className={classes.serviceIcon} />
-                        <PetsIcon className={classes.serviceIcon} />
+                        <Tooltip title="Suitable for dogs">
+                            <PetsIcon
+                                className={`${classes.serviceIcon} ${
+                                    isForDogs ? classes.iconSelected : ''
+                                }`}
+                                onClick={() => {
+                                    setIsForDogs((prev) => !prev);
+                                }}
+                            />
+                        </Tooltip>
                         <LocalParkingIcon className={classes.serviceIcon} />
                     </Grid>
-                    <Grid item xs={12} container style={{ marginTop: 16, paddingLeft: 24 }}>
+                    <Grid
+                        item
+                        xs={12}
+                        container
+                        style={{ marginTop: 16, paddingLeft: 24 }}
+                        direction="column"
+                    >
                         <FormControlLabel control={<Checkbox />} label="Suitable for children" />
+
+                        <FormControlLabel control={<Checkbox />} label="Water temperature > 23" />
+                        <FormControlLabel control={<Checkbox />} label="No algae" />
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={isForDogs}
-                                    onChange={(event) => setIsForDogs(event.target.checked)}
+                                // checked={isForDogs}
+                                // onChange={(event) => setIsForDogs(event.target.checked)}
                                 />
                             }
-                            label="Suitable for dogs"
+                            label="Winter swimming"
                         />
-                        <FormControlLabel control={<Checkbox />} label="Water temperature > 23" />
-                        <FormControlLabel control={<Checkbox />} label="No algae" />
                         <FormControlLabel control={<Checkbox />} label="Show closest to me" />
                     </Grid>
                     <Grid
