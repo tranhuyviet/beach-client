@@ -125,8 +125,6 @@ const DetailPage = (props) => {
     const [algaeSighting, setAlgaeSighting] = useState('')
     useEffect(() => setAlgaeSighting(''),[])
 
-    let findedData;
-
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
     };
@@ -158,7 +156,6 @@ const DetailPage = (props) => {
     const findAlgae = () => {
         return algaeData.find((match) => match.beach.name === name);
     };
-
 
     console.log(dataDetail);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './Overview.style';
-import { Grid, Typography, Box } from '@material-ui/core';
+import { Grid, Typography, Box, Button } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import UimarantaImg from '../../assets/images/uimaranta.jpg';
 
@@ -17,11 +17,13 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import InfoIcon from '@material-ui/icons/Info';
 
-import HSLLogo from '../../assets/images/HSL_logo1.png';
-import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
-
 const Overview = ({ dataDetail, algaeSighting }) => {
     const classes = useStyles();
+
+    function redirect(url) {
+        window.open(url);
+    }
+
     return (
         <Grid container direction="column" component="span" alignItems="center">
             <Grid item xs={12} component="span">
@@ -103,16 +105,23 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                 </Box>
             </Grid>
             {algaeSighting.sighting && (
-                <Grid item xs={12} container component="span" justify="center" className={classes.algaeContainer}>
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    component="span"
+                    justify="center"
+                    className={classes.algaeContainer}
+                >
                     <Grid item xs={12} container component="span" justify="center">
                         <Typography component="span" className={classes.algaePadding}>
-                        <InfoIcon className={classes.tempIcon} />
+                            <InfoIcon className={classes.tempIcon} />
                             <span className={classes.tempText}>
                                 {algaeSighting.sighting.printouts['Display fi']}
                             </span>{' '}
                         </Typography>
                         <Typography component="span" className={classes.algaePadding}>
-                        <CalendarTodayIcon className={classes.tempIcon} />
+                            <CalendarTodayIcon className={classes.tempIcon} />
                             <span className={classes.tempText}>
                                 {algaeSighting.date} päivää sitten
                             </span>{' '}
@@ -127,7 +136,6 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                     </Typography>
                 </Grid>
             )}
-
             <Grid
                 item
                 xs={12}
@@ -136,8 +144,17 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                 justify="center"
                 className={classes.buttonGroup}
             >
-                <img src={HSLLogo} alt="hsl" className={classes.logoButton} />
-                <img src={GoogleMapLogo} alt="hsl" className={classes.logoButton} />
+                
+                <Button variant="contained" color="primary" className={classes.routingButton} onClick={() => {
+                        redirect(algaeSighting.hslUrl);
+                    }}>
+                    Avaa reittioppaassa
+                </Button>
+                <Button variant="contained" color="primary" className={classes.routingButton} onClick={() => {
+                        redirect(algaeSighting.mapsUrl);
+                    }}>
+                    Avaa Google Mapsissa
+                </Button>
             </Grid>
         </Grid>
     );

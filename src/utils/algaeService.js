@@ -15,11 +15,14 @@ const formatDates = () => {
     console.log(matches);
 }
 
+const setUrls = () => {
+    matches.map(match => match.hslUrl = `https://reittiopas.hsl.fi/::undefined,undefined/${match.beach.address}::${match.beach.lat},${match.beach.lon}`)
+    matches.map(match => match.mapsUrl = `https://www.google.com/maps/search/?api=1&query=${match.beach.lat},${match.beach.lon}`)
+}
+
 const getDate = (date) => {
     const currentDate = Date.now()
     const datetest = currentDate - new Date(date*1000)
-    console.log('sighting date: ', new Date(date*1000));
-    console.log('datetest', datetest/(1000*60*60*24));
     return Math.round(datetest/(1000*60*60*24))
 }
 
@@ -64,6 +67,7 @@ function getMatchingBeaches(beachArray, algaeArray) {
     });
 
     formatDates()
+    setUrls()
 
     return matches
 } 

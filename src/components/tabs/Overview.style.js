@@ -59,5 +59,8 @@ export const useStyles = makeStyles((theme) => ({
     algaeContainer: {
         outline: '1px solid',
         outlineColor: theme.palette.primary.main,
+    },
+    routingButton: {
+        margin: '8px'
     }
 }));
