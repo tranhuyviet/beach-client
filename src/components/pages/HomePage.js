@@ -18,12 +18,19 @@ import { FilterDrama } from '@material-ui/icons';
 import { GET_BEACHES_QUERY } from '../../utils/graphql';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
+import { getAlgaeData } from '../../utils/algaeService';
 
 const HomePage = () => {
     const classes = useStyles();
-    const { data: apiData, setBeaches, beach, setBeachSelected, setBeach } = useContext(
-        DataContext
-    );
+    const {
+        data: apiData,
+        setBeaches,
+        beach,
+        setBeachSelected,
+        setBeach,
+        algaeData,
+        setAlgaeData,
+    } = useContext(DataContext);
     const { setIsBack, setSearchBarOpen, isBack } = useContext(UIContext);
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
@@ -34,15 +41,35 @@ const HomePage = () => {
     const [isVantaaSelected, setIsVantaaSelected] = useState(false);
     const [isForDogs, setIsForDogs] = useState(false);
 
+    const [userPosition, setUserPosition] = useState(false);
+
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
             console.log('COMPLETED', data);
+            if (!algaeData) {
+                getAlgaeSightings(data.getBeaches);
+            }
             setBeaches(data.getBeaches);
         },
         onError(error) {
             console.log('ERROR', error);
         },
     });
+
+    const getAlgaeSightings = async (beaches) => {
+        const data = await getAlgaeData(beaches);
+        setAlgaeData(data);
+    };
+
+    const getUserLocation = () => {
+        if (navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                if (position) {
+                    setUserPosition(position.coords);
+                }
+            });
+        }
+    };
 
     const handleSearchFormClose = () => {
         setSearchFormOpen(false);
@@ -74,6 +101,7 @@ const HomePage = () => {
     useEffect(() => {
         console.log('isback', isBack);
         getBeachesQuery();
+        getUserLocation();
     }, [isBack]);
 
     console.log('DATA LOAD FROM SERVER', data, beach);
@@ -149,6 +177,11 @@ const HomePage = () => {
                                 </Marker>
                             ))}
                     </>
+                )}
+                {userPosition && (
+                    <Marker
+                        position={{ lat: userPosition.latitude, lng: userPosition.longitude }}
+                    ></Marker>
                 )}
             </GoogleMap>
         );
