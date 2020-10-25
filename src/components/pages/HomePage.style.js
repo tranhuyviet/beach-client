@@ -15,4 +15,15 @@ export const useStyles = makeStyles((theme) => ({
         right: 20,
         color: theme.palette.common.white,
     },
+    markerIcon: {
+        margin: 0,
+        padding: 0,
+        width: 35,
+        height: 35,
+        cursor: 'pointer',
+        '&:hover': {
+            width: 40,
+            height: 40,
+        },
+    },
 }));
