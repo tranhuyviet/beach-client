@@ -33,6 +33,8 @@ const SearchForm = ({
     setIsVantaaSelected,
     isForDogs,
     setIsForDogs,
+    isWinterSwimming,
+    setIsWinterSwimming,
     filterSubmit,
 }) => {
     const classes = useStyles();
@@ -137,8 +139,8 @@ const SearchForm = ({
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                // checked={isForDogs}
-                                // onChange={(event) => setIsForDogs(event.target.checked)}
+                                    checked={isWinterSwimming}
+                                    onChange={(event) => setIsWinterSwimming(event.target.checked)}
                                 />
                             }
                             label="Winter swimming"

@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-// import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import ReactMapGL, { Marker } from 'react-map-gl';
 // import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
@@ -41,15 +40,16 @@ const HomePage = () => {
     const [isEspooSelected, setIsEspooSelected] = useState(false);
     const [isVantaaSelected, setIsVantaaSelected] = useState(false);
     const [isForDogs, setIsForDogs] = useState(false);
+    const [isWinterSwimming, setIsWinterSwimming] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
 
     const [viewport, setViewport] = useState({
-        longitude: 24.857463,
+        longitude: 24.888463,
         latitude: 60.219014,
         width: '100vw',
         height: 'calc(100vh - 50px)',
-        zoom: 9.4,
+        zoom: 8.8,
     });
 
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
@@ -88,6 +88,7 @@ const HomePage = () => {
         const variables = {
             city: [],
             forDogs: '',
+            winterSwimming: '',
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -100,6 +101,9 @@ const HomePage = () => {
         }
         if (isForDogs) {
             variables.forDogs = 'true';
+        }
+        if (isWinterSwimming) {
+            variables.winterSwimming = 'true';
         } else {
             variables.forDogs = '';
         }
@@ -115,119 +119,33 @@ const HomePage = () => {
 
     useEffect(() => {
         if (beach) {
-            setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
+            setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon, zoom: 14 });
         }
     }, [beach]);
 
     console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
 
-    // function Map() {
-    //     let latAverage;
-    //     let lonAverage;
-    //     if (data && data.getBeaches) {
-    //         latAverage = _.meanBy(data.getBeaches, 'lat');
-    //         lonAverage = _.meanBy(data.getBeaches, 'lon');
-    //     }
-
-    //     console.log('LOCATION AVERAGE', latAverage, lonAverage);
-    //     const defaultCenter = {
-    //         lat: beach ? beach.lat : 60.219014,
-    //         lng: beach ? beach.lon : 24.857463,
-    //     };
-
-    //     return (
-    //         <GoogleMap
-    //             defaultZoom={beach ? 14 : 10}
-    //             // defaultCenter={{ lat: 60.219014, lng: 24.857463 }}
-    //             defaultCenter={defaultCenter}
-    //             options={{
-    //                 fullscreenControl: false,
-    //                 zoomControl: false,
-    //                 streetViewControl: false,
-    //                 mapTypeControl: false,
-    //             }}
-    //         >
-    //             {beach ? (
-    //                 <Marker
-    //                     key={beach.name}
-    //                     position={{ lat: beach.lat, lng: beach.lon }}
-    //                     onClick={() => {
-    //                         console.log(beach.name);
-    //                         history.push(`/${beach.name}`);
-    //                         // setBeachSelected(beach.name);
-    //                         setBeach(beach);
-    //                         setIsBack(true);
-    //                         setSearchBarOpen(false);
-    //                     }}
-    //                     icon={{
-    //                         url: '/markerRed.svg',
-    //                         scaledSize: new window.google.maps.Size(35, 35),
-    //                     }}
-    //                 ></Marker>
-    //             ) : (
-    //                 <>
-    //                     {data &&
-    //                         data.getBeaches &&
-    //                         data.getBeaches.map((place) => (
-    //                             <Marker
-    //                                 key={place.name}
-    //                                 position={{ lat: place.lat, lng: place.lon }}
-    //                                 onClick={() => {
-    //                                     console.log(place.name);
-    //                                     history.push(`/${place.name}`);
-    //                                     // setBeachSelected(place.name);
-    //                                     setBeach(place);
-    //                                     setIsBack(true);
-    //                                     setSearchBarOpen(false);
-    //                                 }}
-    //                                 icon={{
-    //                                     url: '/markerRed.svg',
-    //                                     scaledSize: new window.google.maps.Size(35, 35),
-    //                                 }}
-    //                             >
-    //                                 {/* <InfoWindow>
-    //                             <p>{place.meta.name}</p>
-    //                         </InfoWindow> */}
-    //                             </Marker>
-    //                         ))}
-    //                 </>
-    //             )}
-    //             {userPosition && (
-    //                 <Marker
-    //                     position={{ lat: userPosition.latitude, lng: userPosition.longitude }}
-    //                 ></Marker>
-    //             )}
-    //         </GoogleMap>
-    //     );
-    // }
-
-    // const WrappedMap = withScriptjs(withGoogleMap(Map));
-
     return (
         <div className={classes.homepage}>
             {/* <SearchBar /> */}
-            {/* <WrappedMap
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_KEY}&libraries=geometry,drawing,places`}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `100%` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
-            /> */}
+
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 mapStyle="mapbox://styles/viet-tran/ck53yt4us8iho1cqlcz1xaaxq"
                 onViewportChange={(viewport) => {
-                    if (beach) {
-                        setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
-                    } else {
-                        setViewport(viewport);
-                    }
+                    // if (beach) {
+                    //     setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
+                    // } else {
+                    //     setViewport(viewport);
+                    // }
+                    setViewport(viewport);
                 }}
             >
                 {beach ? (
                     <Marker key={beach.name} latitude={beach.lat} longitude={beach.lon}>
-                        <Tooltip title={beach.name}>
+                        <Tooltip title={beach.name} placement="top" arrow>
                             <img
                                 src="/markerRed.svg"
                                 alt={beach.name}
@@ -292,6 +210,8 @@ const HomePage = () => {
                 setIsVantaaSelected={setIsVantaaSelected}
                 isForDogs={isForDogs}
                 setIsForDogs={setIsForDogs}
+                isWinterSwimming={isWinterSwimming}
+                setIsWinterSwimming={setIsWinterSwimming}
                 filterSubmit={filterSubmit}
             />
         </div>

@@ -2,8 +2,8 @@ import { gql } from '@apollo/client';
 
 // GET ALL BEACHES
 export const GET_BEACHES_QUERY = gql`
-    query getBeaches($city: [String], $forDogs: String) {
-        getBeaches(city: $city, forDogs: $forDogs) {
+    query getBeaches($city: [String], $forDogs: String, $winterSwimming: String) {
+        getBeaches(city: $city, forDogs: $forDogs, winterSwimming: $winterSwimming) {
             name
             lat
             lon
