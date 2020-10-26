@@ -10,6 +10,7 @@ export const GET_BEACHES_QUERY = gql`
             address
             city
             forDogs
+            winterSwimming
         }
     }
 `;
@@ -24,6 +25,7 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             address
             city
             forDogs
+            winterSwimming
             reviews {
                 name
                 comment
