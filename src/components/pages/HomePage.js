@@ -186,6 +186,17 @@ const HomePage = () => {
                             ))}
                     </>
                 )}
+                {userPosition && (
+                    <Marker latitude={userPosition.latitude} longitude={userPosition.longitude}>
+                        <Tooltip title="Your location" placement="top" arrow>
+                            <img
+                                src="/markerGreen.svg"
+                                alt="userPosition"
+                                className={classes.markerIcon}
+                            />
+                        </Tooltip>
+                    </Marker>
+                )}
             </ReactMapGL>
             <Fab
                 color="primary"
