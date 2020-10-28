@@ -20,7 +20,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import HSLLogo from '../../assets/images/HSL_logo1.png';
 import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
 
-const Overview = ({ dataDetail, algaeSighting }) => {
+const Overview = ({ dataDetail, algaeSighting, weather }) => {
     const classes = useStyles();
     return (
         <Grid container direction="column" component="span" alignItems="center">
@@ -123,6 +123,31 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                         <NearMeIcon className={classes.tempIcon} />
                         <span className={classes.tempText}>
                             {algaeSighting.distance} metriä rannasta
+                        </span>{' '}
+                    </Typography>
+                </Grid>
+            )}
+            {weather && (
+                <Grid item xs={12} container component="span" justify="center" className={classes.algaeContainer}>
+                    <Grid item xs={12} container component="span" justify="center">
+                        <Typography component="span" className={classes.algaePadding}>
+                        <InfoIcon className={classes.tempIcon} />
+                            <span className={classes.tempText}>
+                                {}moi
+                            </span>{' '}
+                        </Typography>
+                        <Typography component="span" className={classes.algaePadding}>
+                        <CalendarTodayIcon className={classes.tempIcon} />
+                            <span className={classes.tempText}>
+                                {} päivää sitten
+                            </span>{' '}
+                        </Typography>
+                    </Grid>
+
+                    <Typography component="span">
+                        <NearMeIcon className={classes.tempIcon} />
+                        <span className={classes.tempText}>
+                            {} metriä rannasta
                         </span>{' '}
                     </Typography>
                 </Grid>

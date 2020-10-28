@@ -52,6 +52,9 @@ import { GET_BEACHE_BY_NAME_QUERY } from '../../utils/graphql';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { DataContext } from '../../context/dataContext';
 import { getAlgaeData } from '../../utils/algaeService';
+import { getWeatherData } from '../../utils/weatherService';
+
+const weatherLocations = require('../../utils/weatherLocations.json');
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -121,9 +124,13 @@ const DetailPage = (props) => {
     const [dataDetail, setDataDetail] = useState(null);
     // const { dataDetail, setDataDetail } = useContext(DataContext);
     const { algaeData, setAlgaeData } = useContext(DataContext);
+    const { weatherData, setWeatherData } = useContext(DataContext);
     const [tabValue, setTabValue] = useState(0);
-    const [algaeSighting, setAlgaeSighting] = useState('')
-    useEffect(() => setAlgaeSighting(''),[])
+    const [algaeSighting, setAlgaeSighting] = useState('');
+    const [weather, setWeather] = useState('');
+
+    useEffect(() => setAlgaeSighting(''),[]);
+    useEffect(() => setWeather(''),[]);
 
     let findedData;
 
@@ -138,6 +145,10 @@ const DetailPage = (props) => {
         onCompleted(data) {
             getAlgaes(data.getBeach)
             setDataDetail(data.getBeach);
+            //moi();
+            if (!weatherData) {
+                getWeather();
+            }
         },
         onError(error) {
             console.log('GET BEACH BY NAME QUERY ERROR', error);
@@ -155,8 +166,31 @@ const DetailPage = (props) => {
         }
     }
 
+    const moi = (a) => {
+        if (weatherData) {
+            setWeather(findWeather());
+        } else {
+            // Get weather data if refresh
+            console.log('Säädataa ei ollut ja päästiin tähän');
+            getWeatherData().then(weatherData => {
+                setWeather(weatherData);
+                console.log(weatherData, 'tämä on weatherData');
+                findWeather()
+            });
+        }
+    }
+
+    const getWeather = async (a) => {
+        const weatherData = await getWeatherData(a);
+        setWeatherData(weatherData);
+    }
+
     const findAlgae = () => {
         return algaeData.find((match) => match.beach.name === name);
+    };
+
+    const findWeather = () => {
+        return weatherData.find((match) => match.beach.name === name);
     };
 
 
@@ -215,7 +249,7 @@ const DetailPage = (props) => {
                     <>
                         {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0} style={{ backgroundColor: 'white' }}>
-                            <Overview dataDetail={dataDetail} algaeSighting={algaeSighting} />
+                            <Overview dataDetail={dataDetail} algaeSighting={algaeSighting} weather={weather}/>
                         </TabPanel>
 
                         {/* INFOMATION  TAB*/}

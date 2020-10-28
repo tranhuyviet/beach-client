@@ -1,0 +1,64 @@
+{
+    "locations": [
+        {
+            "beach": "Uunisaari",
+            "site": "Liukasaari"
+        },
+        {
+            "beach": "Pikkukosken uimaranta",
+            "site": "Veräjämäki"
+        },
+        {
+            "beach": "Lauttasaari (Vaskiniemi)",
+            "site": "Koivusaari,Helsinki"
+        },
+        {
+            "beach": "Vetokangas (Vantaa)",
+            "site": "Silvola,Vantaa"
+        },
+        {
+            "beach": "Rastilan uimaranta",
+            "site": "Rastila"
+        },
+        {
+            "beach": "Sompasauna",
+            "site": "Tervasaari,Helsinki"
+        },
+        {
+            "beach": "Pihlajasaari",
+            "site": "Läntinen Pihlajasaari"
+        },
+        {
+            "beach": "Vasikkasaari",
+            "site": "Vasikkasaari,Helsinki"
+        },
+        {
+            "beach": "Marjaniemen uimaranta",
+            "site": "Marjaniemi,Helsinki"
+        },
+        {
+            "beach": "Hietaniemi (Ourit)",
+            "site": "Grisen"
+        },
+        {
+            "beach": "Herttoniemi (Tuorinniemen uimalaituri)",
+            "site": "Killingholma"
+        },
+        {
+            "beach": "Vartiosaari (Reposalmen laituri)",
+            "site": "Uppby"
+        },
+        {
+            "beach": "Hanikan uimaranta (Espoo)",
+            "site": "Granholmen,Espoo"
+        },
+        {
+            "beach": "Eiranranta (Löyly)",
+            "site": "Eira,Helsinki"
+        },
+        {
+            "beach": "Kattilajärvi (Espoo)",
+            "site": "Vällskog"
+        }
+    ]
+}

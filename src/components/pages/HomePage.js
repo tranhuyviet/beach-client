@@ -19,10 +19,11 @@ import { GET_BEACHES_QUERY } from '../../utils/graphql';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
 import { getAlgaeData } from '../../utils/algaeService';
+import { getWeatherData } from '../../utils/weatherService';
 
 const HomePage = () => {
     const classes = useStyles();
-    const { data: apiData, setBeaches, beach, setBeachSelected, setBeach, algaeData, setAlgaeData } = useContext(
+    const { data: apiData, setBeaches, beach, setBeachSelected, setBeach, algaeData, setAlgaeData, weatherData, setWeatherData } = useContext(
         DataContext
     );
     const { setIsBack, setSearchBarOpen, isBack } = useContext(UIContext);
@@ -41,6 +42,9 @@ const HomePage = () => {
             if(!algaeData) {
                 getAlgaeSightings(data.getBeaches)
             }
+            if (!weatherData) {
+                getWeather();
+            }
             setBeaches(data.getBeaches);
         },
         onError(error) {
@@ -51,6 +55,11 @@ const HomePage = () => {
     const getAlgaeSightings = async (beaches) => {
         const data = await getAlgaeData(beaches)
         setAlgaeData(data)
+    }
+
+    const getWeather = async (a) => {
+        const weatherData = await getWeatherData(a);
+        setWeatherData(weatherData);
     }
 
 
