@@ -1,69 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStyles } from './Area.style';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
+
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import { Typography, Grid, Divider } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 
 import WcIcon from '@material-ui/icons/Wc';
 import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+
 const Area = ({ dataDetail }) => {
     const classes = useStyles();
 
-    function Map() {
-        return (
-            <GoogleMap
-                defaultZoom={12}
-                defaultCenter={{ lat: dataDetail.lat, lng: dataDetail.lon }}
-                options={{
-                    fullscreenControl: false,
-                    zoomControl: false,
-                    streetViewControl: false,
-                    mapTypeControl: false,
-                }}
-            >
-                {dataDetail && (
-                    <Marker
-                        key={dataDetail.name}
-                        position={{ lat: dataDetail.lat, lng: dataDetail.lon }}
-                        icon={{
-                            url: '/markerRed.svg',
-                            scaledSize: new window.google.maps.Size(35, 35),
-                        }}
-                    >
-                        <InfoWindow>
-                            <div className={classes.infoContainer}>
-                                <p className={classes.nameInfo}>{dataDetail.name}</p>
-                                <Rating
-                                    name="read-only"
-                                    value={dataDetail.ratingAverage}
-                                    precision={0.1}
-                                    readOnly
-                                    size="small"
-                                />
-                                <div>
-                                    <AccessibleForwardIcon className={classes.serviceIcon} />
-                                    <WcIcon className={classes.serviceIcon} />
-                                    <FastfoodIcon className={classes.serviceIcon} />
-                                </div>
-                            </div>
-                        </InfoWindow>
-                    </Marker>
-                )}
-            </GoogleMap>
-        );
-    }
+    const [viewport, setViewport] = useState({
+        longitude: dataDetail.lon,
+        latitude: dataDetail.lat,
+        width: '100%',
+        height: '100%',
+        zoom: 14,
+    });
+    const [onPopupClose, setOnPopupClose] = useState(true);
 
-    const WrappedMap = withScriptjs(withGoogleMap(Map));
+    // console.log(dataDetail);
+
     return (
         <div component="span" className={classes.area}>
-            <WrappedMap
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_KEY}&libraries=geometry,drawing,places`}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `100%` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
-                component="span"
-            />
+            <ReactMapGL
+                {...viewport}
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                mapStyle="mapbox://styles/viet-tran/ckgqgo1f60jvf19pkx6qxicro"
+                onViewportChange={(viewport) => {
+                    setViewport(viewport);
+                }}
+            >
+                <Marker latitude={dataDetail.lat} longitude={dataDetail.lon}>
+                    <img
+                        src="/markerRed.svg"
+                        alt={dataDetail.name}
+                        className={classes.markerIcon}
+                        onClick={() => {
+                            setOnPopupClose((prev) => !prev);
+                        }}
+                    />
+                </Marker>
+                {onPopupClose && (
+                    <Popup
+                        longitude={dataDetail.lon}
+                        latitude={dataDetail.lat}
+                        onClose={() => setOnPopupClose(false)}
+                    >
+                        <Grid container direction="column" alignItems="center">
+                            <Typography component="span" className={classes.poperTitle}>
+                                {dataDetail.name}
+                            </Typography>
+                            <Rating
+                                name="read-only"
+                                value={dataDetail.ratingAverage}
+                                precision={0.1}
+                                readOnly
+                            />
+                            <Typography component="span">{dataDetail.address}</Typography>
+
+                            <div className={classes.divider} />
+
+                            <Grid item container alignItems="center" justify="center">
+                                {dataDetail.forDogs ? (
+                                    <CheckIcon color="primary" />
+                                ) : (
+                                    <CloseIcon color="secondary" />
+                                )}
+                                <Typography component="span">Suitable for dogs</Typography>
+                            </Grid>
+                            <Grid item container alignItems="center" justify="center">
+                                {dataDetail.winterSwimming ? (
+                                    <CheckIcon color="primary" />
+                                ) : (
+                                    <CloseIcon color="secondary" />
+                                )}
+                                <Typography component="span">Winter Swimming</Typography>
+                            </Grid>
+                        </Grid>
+                    </Popup>
+                )}
+            </ReactMapGL>
         </div>
     );
 };

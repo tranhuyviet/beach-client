@@ -132,8 +132,6 @@ const DetailPage = (props) => {
     useEffect(() => setAlgaeSighting(''),[]);
     useEffect(() => setWeather(''),[]);
 
-    let findedData;
-
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
     };

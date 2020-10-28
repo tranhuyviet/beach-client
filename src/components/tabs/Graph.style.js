@@ -26,4 +26,19 @@ export const useStyles = makeStyles((theme) => ({
         bottom: 0,
         left: 0,
     },
+    timeSelectContainer: {
+        marginBottom: 24,
+    },
+    timeSelectTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 8,
+    },
+    timeSelect: {
+        // padding: '4px 8px',
+        background: theme.palette.common.white,
+    },
+    selected: {
+        background: theme.palette.common.white,
+    },
 }));

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import ReactMapGL, { Marker } from 'react-map-gl';
 // import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
 // import PoolIcon from '@material-ui/icons/Pool';
@@ -9,7 +9,7 @@ import { UIContext } from '../../context/uiContext';
 
 import SearchBar from '../bars/SearchBar';
 import { useHistory } from 'react-router-dom';
-import { Fab, Avatar } from '@material-ui/core';
+import { Fab, Avatar, Tooltip } from '@material-ui/core';
 import FilterIcon from '../../assets/images/filter.svg';
 import Footer from '../bars/Footer';
 import SearchForm from '../forms/SearchForm';
@@ -35,12 +35,23 @@ const HomePage = () => {
     const [isEspooSelected, setIsEspooSelected] = useState(false);
     const [isVantaaSelected, setIsVantaaSelected] = useState(false);
     const [isForDogs, setIsForDogs] = useState(false);
+    const [isWinterSwimming, setIsWinterSwimming] = useState(false);
+
+    const [userPosition, setUserPosition] = useState(false);
+
+    const [viewport, setViewport] = useState({
+        longitude: 24.888463,
+        latitude: 60.219014,
+        width: '100vw',
+        height: 'calc(100vh - 50px)',
+        zoom: 8.8,
+    });
 
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
             console.log('COMPLETED', data);
-            if(!algaeData) {
-                getAlgaeSightings(data.getBeaches)
+            if (!algaeData) {
+                getAlgaeSightings(data.getBeaches);
             }
             if (!weatherData) {
                 getWeather();
@@ -53,15 +64,24 @@ const HomePage = () => {
     });
 
     const getAlgaeSightings = async (beaches) => {
-        const data = await getAlgaeData(beaches)
-        setAlgaeData(data)
-    }
+        const data = await getAlgaeData(beaches);
+        setAlgaeData(data);
+    };
 
     const getWeather = async (a) => {
         const weatherData = await getWeatherData(a);
         setWeatherData(weatherData);
     }
 
+    const getUserLocation = () => {
+        if (navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                if (position) {
+                    setUserPosition(position.coords);
+                }
+            });
+        }
+    };
 
     const handleSearchFormClose = () => {
         setSearchFormOpen(false);
@@ -71,6 +91,7 @@ const HomePage = () => {
         const variables = {
             city: [],
             forDogs: '',
+            winterSwimming: '',
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -83,6 +104,9 @@ const HomePage = () => {
         }
         if (isForDogs) {
             variables.forDogs = 'true';
+        }
+        if (isWinterSwimming) {
+            variables.winterSwimming = 'true';
         } else {
             variables.forDogs = '';
         }
@@ -93,88 +117,90 @@ const HomePage = () => {
     useEffect(() => {
         console.log('isback', isBack);
         getBeachesQuery();
+        getUserLocation();
     }, [isBack]);
+
+    useEffect(() => {
+        if (beach) {
+            setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon, zoom: 14 });
+        }
+    }, [beach]);
 
     console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
 
-    function Map() {
-        const defaultCenter = {
-            lat: beach ? beach.lat : 60.219014,
-            lng: beach ? beach.lon : 24.857463,
-        };
+    return (
+        <div className={classes.homepage}>
+            {/* <SearchBar /> */}
 
-        return (
-            <GoogleMap
-                defaultZoom={10}
-                // defaultCenter={{ lat: 60.219014, lng: 24.857463 }}
-                defaultCenter={defaultCenter}
-                options={{
-                    fullscreenControl: false,
-                    zoomControl: false,
-                    streetViewControl: false,
+            <ReactMapGL
+                {...viewport}
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                mapStyle="mapbox://styles/viet-tran/ck53yt4us8iho1cqlcz1xaaxq"
+                onViewportChange={(viewport) => {
+                    // if (beach) {
+                    //     setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
+                    // } else {
+                    //     setViewport(viewport);
+                    // }
+                    setViewport(viewport);
                 }}
             >
                 {beach ? (
-                    <Marker
-                        key={beach.name}
-                        position={{ lat: beach.lat, lng: beach.lon }}
-                        onClick={() => {
-                            console.log(beach.name);
-                            history.push(`/${beach.name}`);
-                            // setBeachSelected(beach.name);
-                            setBeach(beach);
-                            setIsBack(true);
-                            setSearchBarOpen(false);
-                        }}
-                        icon={{
-                            url: '/markerRed.svg',
-                            scaledSize: new window.google.maps.Size(35, 35),
-                        }}
-                    ></Marker>
+                    <Marker key={beach.name} latitude={beach.lat} longitude={beach.lon}>
+                        <Tooltip title={beach.name} placement="top" arrow>
+                            <img
+                                src="/markerRed.svg"
+                                alt={beach.name}
+                                className={classes.markerIcon}
+                                onClick={() => {
+                                    console.log(beach.name);
+                                    history.push(`/${beach.name}`);
+                                    // setBeachSelected(beach.name);
+                                    setBeach(beach);
+                                    setIsBack(true);
+                                    setSearchBarOpen(false);
+                                }}
+                            />
+                        </Tooltip>
+                    </Marker>
                 ) : (
                     <>
                         {data &&
                             data.getBeaches &&
                             data.getBeaches.map((place) => (
-                                <Marker
-                                    key={place.name}
-                                    position={{ lat: place.lat, lng: place.lon }}
-                                    onClick={() => {
-                                        console.log(place.name);
-                                        history.push(`/${place.name}`);
-                                        // setBeachSelected(place.name);
-                                        setBeach(place);
-                                        setIsBack(true);
-                                        setSearchBarOpen(false);
-                                    }}
-                                    icon={{
-                                        url: '/markerRed.svg',
-                                        scaledSize: new window.google.maps.Size(35, 35),
-                                    }}
-                                >
-                                    {/* <InfoWindow>
-                                <p>{place.meta.name}</p>
-                            </InfoWindow> */}
+                                <Marker key={place.name} latitude={place.lat} longitude={place.lon}>
+                                    <Tooltip title={place.name} placement="top" arrow>
+                                        <img
+                                            src="/markerRed.svg"
+                                            alt={place.name}
+                                            className={classes.markerIcon}
+                                            onClick={() => {
+                                                console.log(place.name);
+                                                history.push(`/${place.name}`);
+                                                // setBeachSelected(place.name);
+                                                setBeach(place);
+                                                setIsBack(true);
+                                                setSearchBarOpen(false);
+                                            }}
+                                        />
+                                    </Tooltip>
                                 </Marker>
                             ))}
                     </>
                 )}
-            </GoogleMap>
-        );
-    }
-
-    const WrappedMap = withScriptjs(withGoogleMap(Map));
-
-    return (
-        <div className={classes.homepage}>
-            {/* <SearchBar /> */}
-            <WrappedMap
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_KEY}&libraries=geometry,drawing,places`}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `100%` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
-            />
+                {userPosition && (
+                    <Marker latitude={userPosition.latitude} longitude={userPosition.longitude}>
+                        <Tooltip title="Your location" placement="top" arrow>
+                            <img
+                                src="/markerGreen.svg"
+                                alt="userPosition"
+                                className={classes.markerIcon}
+                            />
+                        </Tooltip>
+                    </Marker>
+                )}
+            </ReactMapGL>
             <Fab
                 color="primary"
                 size="large"
@@ -186,7 +212,7 @@ const HomePage = () => {
             >
                 <Avatar variant="square" src={FilterIcon} style={{ width: 25, height: 25 }} />
             </Fab>
-            <Footer />
+            {/* <Footer /> */}
             <SearchForm
                 searchFormOpen={searchFormOpen}
                 handleSearchFormClose={handleSearchFormClose}
@@ -198,6 +224,8 @@ const HomePage = () => {
                 setIsVantaaSelected={setIsVantaaSelected}
                 isForDogs={isForDogs}
                 setIsForDogs={setIsForDogs}
+                isWinterSwimming={isWinterSwimming}
+                setIsWinterSwimming={setIsWinterSwimming}
                 filterSubmit={filterSubmit}
             />
         </div>
