@@ -5,21 +5,28 @@ import { Grid, Typography } from '@material-ui/core';
 import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
-const Info = () => {
+const Info = ({ info }) => {
     const classes = useStyles();
+    const infoText = info.split('.');
     return (
         <Grid container direction="column" component="span">
             <Grid item xs={12} component="span">
-                <Typography component="span">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel interdum ex.
-                    Proin quis vulputate lectus, in varius lectus. Aliquam erat volutpat.
-                    Suspendisse suscipit dolor sit amet mi bibendum.
+                {infoText &&
+                    infoText.map((inf, index) => (
+                        <>
+                            <Typography component="span" key={index}>
+                                {inf}.
+                            </Typography>
+                            <br />
+                            <br />
+                        </>
+                    ))}
+                {/* <Typography component="span" style={{ fontSize: 14 }}>
+                    {info}
                 </Typography>
-                <br />
-                <br />
-                <Typography component="span">Uimarantakausi alkaa normaalisti 1.6</Typography>
+                <br /> */}
             </Grid>
-            <Grid item xs={12} container style={{ marginTop: 16 }} component="span">
+            {/* <Grid item xs={12} container style={{ marginTop: 16 }} component="span">
                 <Grid item xs={3} container justify="center" alignItems="center" component="span">
                     <AccessTimeIcon className={classes.infoIcon} />
                 </Grid>
@@ -46,7 +53,7 @@ const Info = () => {
                         pysäköintialue sijaitsee yli 100 m etäisyydellä.
                     </Typography>
                 </Grid>
-            </Grid>
+            </Grid> */}
         </Grid>
     );
 };

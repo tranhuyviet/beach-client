@@ -123,6 +123,10 @@ const HomePage = () => {
         }
     }, [beach]);
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
+    }, []);
+
     console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
 

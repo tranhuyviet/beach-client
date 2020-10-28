@@ -122,8 +122,8 @@ const DetailPage = (props) => {
     // const { dataDetail, setDataDetail } = useContext(DataContext);
     const { algaeData, setAlgaeData } = useContext(DataContext);
     const [tabValue, setTabValue] = useState(0);
-    const [algaeSighting, setAlgaeSighting] = useState('')
-    useEffect(() => setAlgaeSighting(''),[])
+    const [algaeSighting, setAlgaeSighting] = useState('');
+    useEffect(() => setAlgaeSighting(''), []);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
@@ -134,7 +134,7 @@ const DetailPage = (props) => {
     const { loading } = useQuery(GET_BEACHE_BY_NAME_QUERY, {
         variables: { name },
         onCompleted(data) {
-            getAlgaes(data.getBeach)
+            getAlgaes(data.getBeach);
             setDataDetail(data.getBeach);
         },
         onError(error) {
@@ -144,14 +144,14 @@ const DetailPage = (props) => {
 
     const getAlgaes = (beach) => {
         if (algaeData) {
-            setAlgaeSighting(findAlgae())
+            setAlgaeSighting(findAlgae());
         } else {
             // Get algae data if refresh
-            getAlgaeData([beach]).then(algaeData => {
-                setAlgaeSighting(algaeData[0])                
+            getAlgaeData([beach]).then((algaeData) => {
+                setAlgaeSighting(algaeData[0]);
             });
         }
-    }
+    };
 
     const findAlgae = () => {
         return algaeData.find((match) => match.beach.name === name);
@@ -217,7 +217,7 @@ const DetailPage = (props) => {
 
                         {/* INFOMATION  TAB*/}
                         <TabPanel value={tabValue} index={1}>
-                            <Info />
+                            <Info info={dataDetail.info} />
                         </TabPanel>
 
                         {/* REVIEWS TAB */}
