@@ -194,7 +194,7 @@ const HomePage = () => {
                     <Marker latitude={userPosition.latitude} longitude={userPosition.longitude}>
                         <Tooltip title="Your location" placement="top" arrow>
                             <img
-                                src="/markerGreen.svg"
+                                src="/userMarker.svg"
                                 alt="userPosition"
                                 className={classes.markerIcon}
                             />

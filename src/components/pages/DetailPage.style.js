@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         padding: '0 0 16px 0',
         backgroundColor: theme.palette.common.white,
         maxWidth: 600,
-        margin: '0 auto',
+        margin: '50px auto',
     },
     tabs: {
         textTransform: 'capitalize!important',
