@@ -141,7 +141,7 @@ const DetailPage = (props) => {
     const { loading } = useQuery(GET_BEACHE_BY_NAME_QUERY, {
         variables: { name },
         onCompleted(data) {
-            getAlgaes(data.getBeach)
+            getAlgaes(data.getBeach);
             setDataDetail(data.getBeach);
             //moi();
             if (!weatherData) {
@@ -155,14 +155,14 @@ const DetailPage = (props) => {
 
     const getAlgaes = (beach) => {
         if (algaeData) {
-            setAlgaeSighting(findAlgae())
+            setAlgaeSighting(findAlgae());
         } else {
             // Get algae data if refresh
-            getAlgaeData([beach]).then(algaeData => {
-                setAlgaeSighting(algaeData[0])                
+            getAlgaeData([beach]).then((algaeData) => {
+                setAlgaeSighting(algaeData[0]);
             });
         }
-    }
+    };
 
     const moi = (a) => {
         if (weatherData) {
@@ -252,7 +252,7 @@ const DetailPage = (props) => {
 
                         {/* INFOMATION  TAB*/}
                         <TabPanel value={tabValue} index={1}>
-                            <Info />
+                            <Info dataDetail={dataDetail} />
                         </TabPanel>
 
                         {/* REVIEWS TAB */}

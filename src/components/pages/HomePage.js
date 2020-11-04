@@ -126,6 +126,10 @@ const HomePage = () => {
         }
     }, [beach]);
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
+    }, []);
+
     console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
 
@@ -193,7 +197,7 @@ const HomePage = () => {
                     <Marker latitude={userPosition.latitude} longitude={userPosition.longitude}>
                         <Tooltip title="Your location" placement="top" arrow>
                             <img
-                                src="/markerGreen.svg"
+                                src="/userMarker.svg"
                                 alt="userPosition"
                                 className={classes.markerIcon}
                             />

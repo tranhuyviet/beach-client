@@ -10,4 +10,10 @@ export const useStyles = makeStyles((theme) => ({
         borderLeft: '1px solid',
         borderColor: theme.palette.primary.main,
     },
+    moreInfoTitle: {
+        color: theme.palette.primary.main,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        padding: '16px 0px',
+    },
 }));

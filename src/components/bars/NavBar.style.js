@@ -5,7 +5,10 @@ export const useStyles = makeStyles((theme) => ({
         height: 50,
         backgroundColor: `${theme.palette.primary.main}!important`,
         color: `${theme.palette.common.white}!important`,
-        position: 'relative',
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 1
     },
     logoContainer: {
         paddingLeft: 16,

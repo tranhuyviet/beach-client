@@ -5,8 +5,8 @@ export const useStyles = makeStyles((theme) => ({
         height: 'calc(100vh - 50px)',
         padding: '0 0 16px 0',
         backgroundColor: theme.palette.common.white,
-        maxWidth: 900,
-        margin: '0 auto',
+        maxWidth: 600,
+        margin: '50px auto',
     },
     tabs: {
         textTransform: 'capitalize!important',

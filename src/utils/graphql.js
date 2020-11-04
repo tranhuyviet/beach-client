@@ -38,6 +38,7 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
                 temp_water
                 time
             }
+            info
         }
     }
 `;

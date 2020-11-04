@@ -31,7 +31,7 @@ const Area = ({ dataDetail }) => {
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                mapStyle="mapbox://styles/viet-tran/ckgqgo1f60jvf19pkx6qxicro"
+                mapStyle="mapbox://styles/viet-tran/ck80svk49069i1is9zrq5yoae"
                 onViewportChange={(viewport) => {
                     setViewport(viewport);
                 }}
@@ -64,7 +64,7 @@ const Area = ({ dataDetail }) => {
                             />
                             <Typography component="span">{dataDetail.address}</Typography>
 
-                            <div className={classes.divider} />
+                            {/* <div className={classes.divider} />
 
                             <Grid item container alignItems="center" justify="center">
                                 {dataDetail.forDogs ? (
@@ -81,7 +81,7 @@ const Area = ({ dataDetail }) => {
                                     <CloseIcon color="secondary" />
                                 )}
                                 <Typography component="span">Winter Swimming</Typography>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                     </Popup>
                 )}
