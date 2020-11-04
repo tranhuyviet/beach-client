@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     homepage: {
         width: '100vw',
-        height: 'calc(100vh - 50px - 55px)',
+        height: 'calc(100vh - 55px)',
 
         // height: window.innerHeight,
-        // marginTop: 50,
+        marginTop: 50,
         position: 'relative',
     },
     fab: {
