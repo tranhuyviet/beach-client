@@ -217,7 +217,7 @@ const DetailPage = (props) => {
 
                         {/* INFOMATION  TAB*/}
                         <TabPanel value={tabValue} index={1}>
-                            <Info info={dataDetail.info} />
+                            <Info dataDetail={dataDetail} />
                         </TabPanel>
 
                         {/* REVIEWS TAB */}
