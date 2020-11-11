@@ -104,8 +104,6 @@ const HomePage = () => {
         }
         if (isWinterSwimming) {
             variables.winterSwimming = 'true';
-        } else {
-            variables.forDogs = '';
         }
 
         getBeachesQuery({ variables });
@@ -127,7 +125,7 @@ const HomePage = () => {
         navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
     }, []);
 
-    console.log('DATA LOAD FROM SERVER', data, beach);
+    // console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
 
     return (

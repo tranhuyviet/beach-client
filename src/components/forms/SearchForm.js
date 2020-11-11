@@ -63,7 +63,7 @@ const SearchForm = ({
                     style={{ padding: '0 0 16px 0' }}
                     alignItems="center"
                 >
-                    <Typography className={classes.title}>LOCATION</Typography>
+                    <Typography className={classes.title}>LOCATIONS</Typography>
                     <Grid item xs={12} container justify="center">
                         <Button
                             variant={isHelsinkiSelected ? 'contained' : 'outlined'}
@@ -107,8 +107,8 @@ const SearchForm = ({
                             labelPlacement="bottom"
                         />
                     </Grid> */}
-                    <Typography className={classes.title}>AMENITIES</Typography>
-                    <Grid item xs={12} container justify="center">
+                    <Typography className={classes.title}>SERVICES</Typography>
+                    {/* <Grid item xs={12} container justify="center">
                         <WcIcon className={classes.serviceIcon} />
                         <AccessibleForwardIcon className={classes.serviceIcon} />
                         <FastfoodIcon className={classes.serviceIcon} />
@@ -124,17 +124,19 @@ const SearchForm = ({
                             />
                         </Tooltip>
                         <LocalParkingIcon className={classes.serviceIcon} />
-                    </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        container
-                        style={{ marginTop: 16, paddingLeft: 24 }}
-                        direction="column"
-                    >
-                        <FormControlLabel control={<Checkbox />} label="Suitable for children" />
-
-                        <FormControlLabel control={<Checkbox />} label="Water temperature > 23" />
+                    </Grid> */}
+                    <Grid item xs={12} container style={{ paddingLeft: 24 }} direction="column">
+                        {/* <FormControlLabel control={<Checkbox />} label="Suitable for children" /> */}
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isForDogs}
+                                    onChange={(event) => setIsForDogs(event.target.checked)}
+                                />
+                            }
+                            label="Suitable for dogs"
+                        />
+                        <FormControlLabel control={<Checkbox />} label="Water temperature > 18" />
                         <FormControlLabel control={<Checkbox />} label="No algae" />
                         <FormControlLabel
                             control={
@@ -145,7 +147,7 @@ const SearchForm = ({
                             }
                             label="Winter swimming"
                         />
-                        <FormControlLabel control={<Checkbox />} label="Show closest to me" />
+                        {/* <FormControlLabel control={<Checkbox />} label="Show closest to me" /> */}
                     </Grid>
                     <Grid
                         item
