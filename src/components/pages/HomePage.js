@@ -146,7 +146,7 @@ const HomePage = () => {
                 }}
             >
                 {beach ? (
-                    <Marker key={beach.name} latitude={beach.lat} longitude={beach.lon}>
+                    <Marker key={beach.name} latitude={beach.lat} longitude={beach.lon} offsetLeft={-18} offsetTop={-36}>
                         <Tooltip title={beach.name} placement="top" arrow>
                             <img
                                 src="/markerRed.svg"
@@ -168,7 +168,7 @@ const HomePage = () => {
                         {data &&
                             data.getBeaches &&
                             data.getBeaches.map((place) => (
-                                <Marker key={place.name} latitude={place.lat} longitude={place.lon}>
+                                <Marker key={place.name} latitude={place.lat} longitude={place.lon} offsetLeft={-18} offsetTop={-36}>
                                     <Tooltip title={place.name} placement="top" arrow>
                                         <img
                                             src="/markerRed.svg"
@@ -189,7 +189,7 @@ const HomePage = () => {
                     </>
                 )}
                 {userPosition && (
-                    <Marker latitude={userPosition.latitude} longitude={userPosition.longitude}>
+                    <Marker latitude={userPosition.latitude} longitude={userPosition.longitude} offsetLeft={-18} offsetTop={-36}>
                         <Tooltip title="Your location" placement="top" arrow>
                             <img
                                 src="/userMarker.svg"

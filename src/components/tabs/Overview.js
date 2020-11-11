@@ -16,6 +16,8 @@ import FlagIcon from '@material-ui/icons/Flag';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import InfoIcon from '@material-ui/icons/Info';
+import PetsIcon from '@material-ui/icons/Pets';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 const Overview = ({ dataDetail, algaeSighting }) => {
     const classes = useStyles();
@@ -59,18 +61,19 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                 <AccessTimeIcon style={{ fontSize: 32, marginRight: 8 }} />
                 <Typography component="span">OPEN</Typography>
             </Grid>
-            <Grid
-                item
-                xs={12}
-                container
-                justify="center"
-                className={classes.serviceContainer}
-                component="span"
-            >
-                <AccessibleForwardIcon className={classes.serviceIcon} />
-                <WcIcon className={classes.serviceIcon} />
-                <FastfoodIcon className={classes.serviceIcon} />
-            </Grid>
+            {(dataDetail.forDogs || dataDetail.winterSwimming) && (
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    justify="center"
+                    className={classes.serviceContainer}
+                    component="span"
+                >
+                    {dataDetail.forDogs && <PetsIcon className={classes.serviceIcon} />}
+                    {dataDetail.winterSwimming && <AcUnitIcon className={classes.serviceIcon} />}
+                </Grid>
+            )}
             <Grid
                 item
                 xs={12}
@@ -144,15 +147,24 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                 justify="center"
                 className={classes.buttonGroup}
             >
-                
-                <Button variant="contained" color="primary" className={classes.routingButton} onClick={() => {
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.routingButton}
+                    onClick={() => {
                         redirect(algaeSighting.hslUrl);
-                    }}>
+                    }}
+                >
                     Avaa reittioppaassa
                 </Button>
-                <Button variant="contained" color="primary" className={classes.routingButton} onClick={() => {
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.routingButton}
+                    onClick={() => {
                         redirect(algaeSighting.mapsUrl);
-                    }}>
+                    }}
+                >
                     Avaa Google Mapsissa
                 </Button>
             </Grid>
