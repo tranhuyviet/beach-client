@@ -19,7 +19,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 
-const Overview = ({ dataDetail, algaeSighting }) => {
+const Overview = ({ dataDetail }) => {
     const classes = useStyles();
 
     function redirect(url) {
@@ -107,7 +107,7 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                     </Typography>
                 </Box>
             </Grid>
-            {algaeSighting.sighting && (
+            {dataDetail.sighting && (
                 <Grid
                     item
                     xs={12}
@@ -120,13 +120,13 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                         <Typography component="span" className={classes.algaePadding}>
                             <InfoIcon className={classes.tempIcon} />
                             <span className={classes.tempText}>
-                                {algaeSighting.sighting.printouts['Display fi']}
+                                {dataDetail.sighting.text}
                             </span>{' '}
                         </Typography>
                         <Typography component="span" className={classes.algaePadding}>
                             <CalendarTodayIcon className={classes.tempIcon} />
                             <span className={classes.tempText}>
-                                {algaeSighting.date} päivää sitten
+                                {dataDetail.sighting.date} päivää sitten
                             </span>{' '}
                         </Typography>
                     </Grid>
@@ -134,7 +134,7 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                     <Typography component="span">
                         <NearMeIcon className={classes.tempIcon} />
                         <span className={classes.tempText}>
-                            {algaeSighting.distance} metriä rannasta
+                            {dataDetail.sighting.distance} metriä rannasta
                         </span>{' '}
                     </Typography>
                 </Grid>

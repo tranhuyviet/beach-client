@@ -18,7 +18,6 @@ import { FilterDrama } from '@material-ui/icons';
 import { GET_BEACHES_QUERY } from '../../utils/graphql';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
-import { getAlgaeData } from '../../utils/algaeService';
 
 const HomePage = () => {
     const classes = useStyles();
@@ -41,6 +40,7 @@ const HomePage = () => {
     const [isVantaaSelected, setIsVantaaSelected] = useState(false);
     const [isForDogs, setIsForDogs] = useState(false);
     const [isWinterSwimming, setIsWinterSwimming] = useState(false);
+    const [noAlgae, setNoAlgae] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
 
@@ -55,20 +55,12 @@ const HomePage = () => {
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
             console.log('COMPLETED', data);
-            if (!algaeData) {
-                getAlgaeSightings(data.getBeaches);
-            }
             setBeaches(data.getBeaches);
         },
         onError(error) {
             console.log('ERROR', error);
         },
     });
-
-    const getAlgaeSightings = async (beaches) => {
-        const data = await getAlgaeData(beaches);
-        setAlgaeData(data);
-    };
 
     const getUserLocation = () => {
         if (navigator) {
@@ -89,6 +81,7 @@ const HomePage = () => {
             city: [],
             forDogs: '',
             winterSwimming: '',
+            noAlgae: ''
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -104,6 +97,9 @@ const HomePage = () => {
         }
         if (isWinterSwimming) {
             variables.winterSwimming = 'true';
+        }
+        if(noAlgae) {
+            variables.noAlgae = 'true'
         }
 
         getBeachesQuery({ variables });
@@ -225,6 +221,8 @@ const HomePage = () => {
                 setIsForDogs={setIsForDogs}
                 isWinterSwimming={isWinterSwimming}
                 setIsWinterSwimming={setIsWinterSwimming}
+                noAlgae={noAlgae}
+                setNoAlgae={setNoAlgae}
                 filterSubmit={filterSubmit}
             />
         </div>

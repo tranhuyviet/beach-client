@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
-import { getAlgaeData } from '../utils/algaeService';
 const DataContext = createContext();
 
 const initialState = {
@@ -27,12 +26,6 @@ const beachReducer = (state, action) => {
             return {
                 ...state,
                 dataDetail: action.payload,
-            };
-        }
-        case 'SET_ALGAE_DATA': {
-            return {
-                ...state,
-                algaeData: action.payload,
             };
         }
 
@@ -80,13 +73,6 @@ const DataProvider = (props) => {
         });
     };
 
-    const setAlgaeData = (algaeData) => {
-        dispatch({
-            type: 'SET_ALGAE_DATA',
-            payload: algaeData,
-        });
-    };
-
     return (
         <DataContext.Provider
             value={{
@@ -97,8 +83,6 @@ const DataProvider = (props) => {
                 setBeach,
                 dataDetail: state.dataDetail,
                 setDataDetail,
-                algaeData: state.algaeData,
-                setAlgaeData,
             }}
         >
             {props.children}

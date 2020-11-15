@@ -36,6 +36,8 @@ const SearchForm = ({
     isWinterSwimming,
     setIsWinterSwimming,
     filterSubmit,
+    noAlgae,
+    setNoAlgae,
 }) => {
     const classes = useStyles();
     // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
@@ -137,7 +139,15 @@ const SearchForm = ({
                             label="Suitable for dogs"
                         />
                         <FormControlLabel control={<Checkbox />} label="Water temperature > 18" />
-                        <FormControlLabel control={<Checkbox />} label="No algae" />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={noAlgae}
+                                    onChange={(event) => setNoAlgae(event.target.checked)}
+                                />
+                            }
+                            label="No algae"
+                        />
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -147,7 +157,6 @@ const SearchForm = ({
                             }
                             label="Winter swimming"
                         />
-                        {/* <FormControlLabel control={<Checkbox />} label="Show closest to me" /> */}
                     </Grid>
                     <Grid
                         item
