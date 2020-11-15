@@ -152,7 +152,7 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                     color="primary"
                     className={classes.routingButton}
                     onClick={() => {
-                        redirect(algaeSighting.hslUrl);
+                        redirect(dataDetail.hslUrl);
                     }}
                 >
                     Avaa reittioppaassa
@@ -162,7 +162,7 @@ const Overview = ({ dataDetail, algaeSighting }) => {
                     color="primary"
                     className={classes.routingButton}
                     onClick={() => {
-                        redirect(algaeSighting.mapsUrl);
+                        redirect(dataDetail.mapsUrl);
                     }}
                 >
                     Avaa Google Mapsissa
