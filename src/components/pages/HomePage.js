@@ -42,6 +42,8 @@ const HomePage = () => {
     const [isForDogs, setIsForDogs] = useState(false);
     const [isWinterSwimming, setIsWinterSwimming] = useState(false);
     const [isShower, setIsShower] = useState(false);
+    const [isToilet, setIsToilet] = useState(false);
+    const [isRestaurant, setIsRestaurant] = useState(false);
     const [isOver18, setIsOver18] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
@@ -110,6 +112,12 @@ const HomePage = () => {
         }
         if (isShower) {
             variables.shower = 'true';
+        }
+        if (isToilet) {
+            variables.toilet = 'true';
+        }
+        if (isRestaurant) {
+            variables.restaurant = 'true';
         }
         if (isOver18) {
             variables.isOver18 = 'true';
@@ -254,6 +262,10 @@ const HomePage = () => {
                 setIsWinterSwimming={setIsWinterSwimming}
                 isShower={isShower}
                 setIsShower={setIsShower}
+                isToilet={isToilet}
+                setIsToilet={setIsToilet}
+                isRestaurant={isRestaurant}
+                setIsRestaurant={setIsRestaurant}
                 isOver18={isOver18}
                 setIsOver18={setIsOver18}
                 filterSubmit={filterSubmit}

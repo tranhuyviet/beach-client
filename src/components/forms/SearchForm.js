@@ -37,6 +37,10 @@ const SearchForm = ({
     setIsWinterSwimming,
     isShower,
     setIsShower,
+    isToilet,
+    setIsToilet,
+    isRestaurant,
+    setIsRestaurant,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -148,6 +152,24 @@ const SearchForm = ({
                                 />
                             }
                             label="Shower"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isToilet}
+                                    onChange={(event) => setIsToilet(event.target.checked)}
+                                />
+                            }
+                            label="Toilet"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isRestaurant}
+                                    onChange={(event) => setIsRestaurant(event.target.checked)}
+                                />
+                            }
+                            label="Restaurant"
                         />
                         <FormControlLabel
                             control={

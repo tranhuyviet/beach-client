@@ -7,6 +7,8 @@ export const GET_BEACHES_QUERY = gql`
         $forDogs: String
         $winterSwimming: String
         $shower: String
+        $toilet: String
+        $restaurant: String
         $isOver18: String
     ) {
         getBeaches(
@@ -14,6 +16,8 @@ export const GET_BEACHES_QUERY = gql`
             forDogs: $forDogs
             winterSwimming: $winterSwimming
             shower: $shower
+            toilet: $toilet
+            restaurant: $restaurant
             isOver18: $isOver18
         ) {
             name
@@ -24,6 +28,8 @@ export const GET_BEACHES_QUERY = gql`
             forDogs
             winterSwimming
             shower
+            toilet
+            restaurant
         }
     }
 `;
@@ -40,6 +46,8 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             forDogs
             winterSwimming
             shower
+            toilet
+            restaurant
             reviews {
                 name
                 comment
