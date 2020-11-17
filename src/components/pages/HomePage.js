@@ -44,6 +44,7 @@ const HomePage = () => {
     const [isShower, setIsShower] = useState(false);
     const [isToilet, setIsToilet] = useState(false);
     const [isRestaurant, setIsRestaurant] = useState(false);
+    const [isChildren, setIsChildren] = useState(false);
     const [isOver18, setIsOver18] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
@@ -118,6 +119,9 @@ const HomePage = () => {
         }
         if (isRestaurant) {
             variables.restaurant = 'true';
+        }
+        if (isChildren) {
+            variables.children = 'true';
         }
         if (isOver18) {
             variables.isOver18 = 'true';
@@ -266,6 +270,8 @@ const HomePage = () => {
                 setIsToilet={setIsToilet}
                 isRestaurant={isRestaurant}
                 setIsRestaurant={setIsRestaurant}
+                isChildren={isChildren}
+                setIsChildren={setIsChildren}
                 isOver18={isOver18}
                 setIsOver18={setIsOver18}
                 filterSubmit={filterSubmit}

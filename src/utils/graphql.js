@@ -9,6 +9,7 @@ export const GET_BEACHES_QUERY = gql`
         $shower: String
         $toilet: String
         $restaurant: String
+        $children: String
         $isOver18: String
     ) {
         getBeaches(
@@ -18,6 +19,7 @@ export const GET_BEACHES_QUERY = gql`
             shower: $shower
             toilet: $toilet
             restaurant: $restaurant
+            children: $children
             isOver18: $isOver18
         ) {
             name
@@ -30,6 +32,7 @@ export const GET_BEACHES_QUERY = gql`
             shower
             toilet
             restaurant
+            children
         }
     }
 `;
@@ -48,6 +51,7 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             shower
             toilet
             restaurant
+            children
             reviews {
                 name
                 comment

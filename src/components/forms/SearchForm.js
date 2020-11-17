@@ -41,6 +41,8 @@ const SearchForm = ({
     setIsToilet,
     isRestaurant,
     setIsRestaurant,
+    isChildren,
+    setIsChildren,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -135,6 +137,15 @@ const SearchForm = ({
                     </Grid> */}
                     <Grid item xs={12} container style={{ paddingLeft: 24 }} direction="column">
                         {/* <FormControlLabel control={<Checkbox />} label="Suitable for children" /> */}
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isChildren}
+                                    onChange={(event) => setIsChildren(event.target.checked)}
+                                />
+                            }
+                            label="Suitable for children"
+                        />
                         <FormControlLabel
                             control={
                                 <Checkbox
