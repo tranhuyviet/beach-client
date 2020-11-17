@@ -41,6 +41,8 @@ const HomePage = () => {
     const [isVantaaSelected, setIsVantaaSelected] = useState(false);
     const [isForDogs, setIsForDogs] = useState(false);
     const [isWinterSwimming, setIsWinterSwimming] = useState(false);
+    const [isShower, setIsShower] = useState(false);
+    const [isOver18, setIsOver18] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
 
@@ -89,6 +91,7 @@ const HomePage = () => {
             city: [],
             forDogs: '',
             winterSwimming: '',
+            isOver18: '',
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -105,7 +108,14 @@ const HomePage = () => {
         if (isWinterSwimming) {
             variables.winterSwimming = 'true';
         }
+        if (isShower) {
+            variables.shower = 'true';
+        }
+        if (isOver18) {
+            variables.isOver18 = 'true';
+        }
 
+        console.log(variables);
         getBeachesQuery({ variables });
     };
 
@@ -135,7 +145,7 @@ const HomePage = () => {
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                mapStyle="mapbox://styles/viet-tran/ck53yt4us8iho1cqlcz1xaaxq"
+                mapStyle="mapbox://styles/viet-tran/ck80svk49069i1is9zrq5yoae"
                 onViewportChange={(viewport) => {
                     // if (beach) {
                     //     setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
@@ -146,7 +156,13 @@ const HomePage = () => {
                 }}
             >
                 {beach ? (
-                    <Marker key={beach.name} latitude={beach.lat} longitude={beach.lon} offsetLeft={-18} offsetTop={-36}>
+                    <Marker
+                        key={beach.name}
+                        latitude={beach.lat}
+                        longitude={beach.lon}
+                        offsetLeft={-18}
+                        offsetTop={-36}
+                    >
                         <Tooltip title={beach.name} placement="top" arrow>
                             <img
                                 src="/markerRed.svg"
@@ -168,7 +184,13 @@ const HomePage = () => {
                         {data &&
                             data.getBeaches &&
                             data.getBeaches.map((place) => (
-                                <Marker key={place.name} latitude={place.lat} longitude={place.lon} offsetLeft={-18} offsetTop={-36}>
+                                <Marker
+                                    key={place.name}
+                                    latitude={place.lat}
+                                    longitude={place.lon}
+                                    offsetLeft={-18}
+                                    offsetTop={-36}
+                                >
                                     <Tooltip title={place.name} placement="top" arrow>
                                         <img
                                             src="/markerRed.svg"
@@ -189,7 +211,12 @@ const HomePage = () => {
                     </>
                 )}
                 {userPosition && (
-                    <Marker latitude={userPosition.latitude} longitude={userPosition.longitude} offsetLeft={-18} offsetTop={-36}>
+                    <Marker
+                        latitude={userPosition.latitude}
+                        longitude={userPosition.longitude}
+                        offsetLeft={-18}
+                        offsetTop={-36}
+                    >
                         <Tooltip title="Your location" placement="top" arrow>
                             <img
                                 src="/userMarker.svg"
@@ -225,6 +252,10 @@ const HomePage = () => {
                 setIsForDogs={setIsForDogs}
                 isWinterSwimming={isWinterSwimming}
                 setIsWinterSwimming={setIsWinterSwimming}
+                isShower={isShower}
+                setIsShower={setIsShower}
+                isOver18={isOver18}
+                setIsOver18={setIsOver18}
                 filterSubmit={filterSubmit}
             />
         </div>

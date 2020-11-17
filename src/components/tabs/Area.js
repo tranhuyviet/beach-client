@@ -22,7 +22,6 @@ const Area = ({ dataDetail }) => {
         height: '100%',
         zoom: 14,
     });
-    const [onPopupClose, setOnPopupClose] = useState(true);
 
     // console.log(dataDetail);
 
@@ -41,50 +40,8 @@ const Area = ({ dataDetail }) => {
                         src="/markerRed.svg"
                         alt={dataDetail.name}
                         className={classes.markerIcon}
-                        onClick={() => {
-                            setOnPopupClose((prev) => !prev);
-                        }}
                     />
                 </Marker>
-                {onPopupClose && (
-                    <Popup
-                        longitude={dataDetail.lon}
-                        latitude={dataDetail.lat}
-                        onClose={() => setOnPopupClose(false)}
-                    >
-                        <Grid container direction="column" alignItems="center">
-                            <Typography component="span" className={classes.poperTitle}>
-                                {dataDetail.name}
-                            </Typography>
-                            <Rating
-                                name="read-only"
-                                value={dataDetail.ratingAverage}
-                                precision={0.1}
-                                readOnly
-                            />
-                            <Typography component="span">{dataDetail.address}</Typography>
-
-                            {/* <div className={classes.divider} />
-
-                            <Grid item container alignItems="center" justify="center">
-                                {dataDetail.forDogs ? (
-                                    <CheckIcon color="primary" />
-                                ) : (
-                                    <CloseIcon color="secondary" />
-                                )}
-                                <Typography component="span">Suitable for dogs</Typography>
-                            </Grid>
-                            <Grid item container alignItems="center" justify="center">
-                                {dataDetail.winterSwimming ? (
-                                    <CheckIcon color="primary" />
-                                ) : (
-                                    <CloseIcon color="secondary" />
-                                )}
-                                <Typography component="span">Winter Swimming</Typography>
-                            </Grid> */}
-                        </Grid>
-                    </Popup>
-                )}
             </ReactMapGL>
         </div>
     );

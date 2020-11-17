@@ -35,6 +35,10 @@ const SearchForm = ({
     setIsForDogs,
     isWinterSwimming,
     setIsWinterSwimming,
+    isShower,
+    setIsShower,
+    isOver18,
+    setIsOver18,
     filterSubmit,
 }) => {
     const classes = useStyles();
@@ -136,7 +140,25 @@ const SearchForm = ({
                             }
                             label="Suitable for dogs"
                         />
-                        <FormControlLabel control={<Checkbox />} label="Water temperature > 18" />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isShower}
+                                    onChange={(event) => setIsShower(event.target.checked)}
+                                />
+                            }
+                            label="Shower"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isOver18}
+                                    onChange={(event) => setIsOver18(event.target.checked)}
+                                />
+                            }
+                            label="Water temperature > 18 &#8451;"
+                        />
+
                         <FormControlLabel control={<Checkbox />} label="No algae" />
                         <FormControlLabel
                             control={

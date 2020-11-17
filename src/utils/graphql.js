@@ -2,8 +2,20 @@ import { gql } from '@apollo/client';
 
 // GET ALL BEACHES
 export const GET_BEACHES_QUERY = gql`
-    query getBeaches($city: [String], $forDogs: String, $winterSwimming: String) {
-        getBeaches(city: $city, forDogs: $forDogs, winterSwimming: $winterSwimming) {
+    query getBeaches(
+        $city: [String]
+        $forDogs: String
+        $winterSwimming: String
+        $shower: String
+        $isOver18: String
+    ) {
+        getBeaches(
+            city: $city
+            forDogs: $forDogs
+            winterSwimming: $winterSwimming
+            shower: $shower
+            isOver18: $isOver18
+        ) {
             name
             lat
             lon
@@ -11,6 +23,7 @@ export const GET_BEACHES_QUERY = gql`
             city
             forDogs
             winterSwimming
+            shower
         }
     }
 `;
@@ -26,6 +39,7 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             city
             forDogs
             winterSwimming
+            shower
             reviews {
                 name
                 comment
