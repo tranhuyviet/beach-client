@@ -25,22 +25,9 @@ const NavBar = () => {
     };
     return (
         <Paper className={classes.navbar} elevation={0} square>
-            <Grid container alignItems="center">
-                <Grid item xs={8} className={classes.logoContainer} container alignItems="center">
-                    <PoolIcon className={classes.logoIcon} />
-                    <Typography className={classes.logoText}>RANTAOPAS</Typography>
-                </Grid>
-                <Grid item xs={4} container justify="flex-end">
-                    {!isBack ? (
-                        <Tooltip title="Show Search Name">
-                            <IconButton
-                                color="inherit"
-                                onClick={() => setSearchBarOpen((prev) => !prev)}
-                            >
-                                <SearchIcon />
-                            </IconButton>
-                        </Tooltip>
-                    ) : (
+            <Grid container alignItems="center" justify="space-between">
+                {isBack && (
+                    <Grid item xs={1} container>
                         <IconButton
                             onClick={() => {
                                 history.push('/');
@@ -51,8 +38,26 @@ const NavBar = () => {
                         >
                             <ArrowBackIcon />
                         </IconButton>
-                    )}
+                    </Grid>
+                )}
+
+                <Grid item xs={11} className={classes.logoContainer} container alignItems="center">
+                    <PoolIcon className={classes.logoIcon} />
+                    <Typography className={classes.logoText}>RANTAOPAS</Typography>
                 </Grid>
+
+                {!isBack && (
+                    <Grid item xs={1} container justify="flex-end">
+                        <Tooltip title="Show Search Name">
+                            <IconButton
+                                color="inherit"
+                                onClick={() => setSearchBarOpen((prev) => !prev)}
+                            >
+                                <SearchIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Grid>
+                )}
             </Grid>
             {searchBarOpen && <SearchBar handleSearchFormClose={handleSearchFormClose} />}
         </Paper>
