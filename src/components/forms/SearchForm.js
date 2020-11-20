@@ -194,7 +194,15 @@ const SearchForm = ({
                             label="Water temperature > 18 &#8451;"
                         />
 
-                        <FormControlLabel control={<Checkbox />} label="No algae" />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={noAlgae}
+                                    onChange={(event) => setNoAlgae(event.target.checked)}
+                                />
+                            }
+                            label="No algae"
+                        />
                         <FormControlLabel
                             control={
                                 <Checkbox

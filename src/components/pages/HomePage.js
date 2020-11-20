@@ -45,6 +45,7 @@ const HomePage = () => {
     const [isRestaurant, setIsRestaurant] = useState(false);
     const [isChildren, setIsChildren] = useState(false);
     const [isOver18, setIsOver18] = useState(false);
+    const [noAlgae, setNoAlgae] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
 
@@ -86,6 +87,7 @@ const HomePage = () => {
             forDogs: '',
             winterSwimming: '',
             isOver18: '',
+            noAlgae: ''
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -116,6 +118,9 @@ const HomePage = () => {
         }
         if (isOver18) {
             variables.isOver18 = 'true';
+        }
+        if(noAlgae) {
+            variables.noAlgae = 'true'
         }
 
         console.log(variables);
@@ -265,6 +270,8 @@ const HomePage = () => {
                 setIsChildren={setIsChildren}
                 isOver18={isOver18}
                 setIsOver18={setIsOver18}
+                noAlgae={noAlgae}
+                setNoAlgae={setNoAlgae}
                 filterSubmit={filterSubmit}
             />
         </div>

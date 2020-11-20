@@ -11,6 +11,7 @@ export const GET_BEACHES_QUERY = gql`
         $restaurant: String
         $children: String
         $isOver18: String
+        $noAlgae: String
     ) {
         getBeaches(
             city: $city
@@ -21,6 +22,7 @@ export const GET_BEACHES_QUERY = gql`
             restaurant: $restaurant
             children: $children
             isOver18: $isOver18
+            noAlgae: $noAlgae
         ) {
             name
             lat
@@ -33,6 +35,7 @@ export const GET_BEACHES_QUERY = gql`
             toilet
             restaurant
             children
+            noAlgae
         }
     }
 `;
