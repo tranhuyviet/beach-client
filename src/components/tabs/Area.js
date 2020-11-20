@@ -35,7 +35,7 @@ const Area = ({ dataDetail }) => {
                     setViewport(viewport);
                 }}
             >
-                <Marker latitude={dataDetail.lat} longitude={dataDetail.lon}>
+                <Marker latitude={dataDetail.lat} longitude={dataDetail.lon} offsetLeft={-18} offsetTop={-36}>
                     <img
                         src="/markerRed.svg"
                         alt={dataDetail.name}

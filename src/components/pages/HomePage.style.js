@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'relative',
     },
     fab: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 20,
         right: 20,
         color: theme.palette.common.white,

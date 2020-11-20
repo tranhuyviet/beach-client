@@ -50,8 +50,6 @@ import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
 import { GET_BEACHE_BY_NAME_QUERY } from '../../utils/graphql';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { DataContext } from '../../context/dataContext';
-import { getAlgaeData } from '../../utils/algaeService';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -120,10 +118,7 @@ const DetailPage = (props) => {
 
     const [dataDetail, setDataDetail] = useState(null);
     // const { dataDetail, setDataDetail } = useContext(DataContext);
-    const { algaeData, setAlgaeData } = useContext(DataContext);
     const [tabValue, setTabValue] = useState(0);
-    const [algaeSighting, setAlgaeSighting] = useState('');
-    useEffect(() => setAlgaeSighting(''), []);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
@@ -134,28 +129,12 @@ const DetailPage = (props) => {
     const { loading } = useQuery(GET_BEACHE_BY_NAME_QUERY, {
         variables: { name },
         onCompleted(data) {
-            getAlgaes(data.getBeach);
             setDataDetail(data.getBeach);
         },
         onError(error) {
             console.log('GET BEACH BY NAME QUERY ERROR', error);
         },
     });
-
-    const getAlgaes = (beach) => {
-        if (algaeData) {
-            setAlgaeSighting(findAlgae());
-        } else {
-            // Get algae data if refresh
-            getAlgaeData([beach]).then((algaeData) => {
-                setAlgaeSighting(algaeData[0]);
-            });
-        }
-    };
-
-    const findAlgae = () => {
-        return algaeData.find((match) => match.beach.name === name);
-    };
 
     console.log(dataDetail);
 
@@ -212,7 +191,7 @@ const DetailPage = (props) => {
                     <>
                         {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0} style={{ backgroundColor: 'white' }}>
-                            <Overview dataDetail={dataDetail} algaeSighting={algaeSighting} />
+                            <Overview dataDetail={dataDetail} />
                         </TabPanel>
 
                         {/* INFOMATION  TAB*/}

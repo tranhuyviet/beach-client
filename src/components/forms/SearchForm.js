@@ -46,6 +46,8 @@ const SearchForm = ({
     isOver18,
     setIsOver18,
     filterSubmit,
+    noAlgae,
+    setNoAlgae,
 }) => {
     const classes = useStyles();
     // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
@@ -202,7 +204,6 @@ const SearchForm = ({
                             }
                             label="Winter swimming"
                         />
-                        {/* <FormControlLabel control={<Checkbox />} label="Show closest to me" /> */}
                     </Grid>
                     <Grid
                         item

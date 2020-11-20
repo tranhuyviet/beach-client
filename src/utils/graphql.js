@@ -65,6 +65,13 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
                 time
             }
             info
+            hslUrl
+            mapsUrl
+            sighting {
+                distance
+                date
+                text
+            }
         }
     }
 `;
