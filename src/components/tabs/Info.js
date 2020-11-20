@@ -12,11 +12,19 @@ const Info = ({ dataDetail }) => {
     const classes = useStyles();
     const info = dataDetail.info;
     const infoText = info.match(/[^\.!\?]+[\.!\?]+["']?|.+$/g);
-    console.log(info);
-    console.log(infoText);
+
+    console.log(dataDetail);
     return (
         <Grid container direction="column" component="span">
             <Grid item xs={12}>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.children ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Suitable for children</Typography>
+                </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.forDogs ? (
                         <CheckIcon color="primary" />
@@ -24,6 +32,30 @@ const Info = ({ dataDetail }) => {
                         <CloseIcon color="secondary" />
                     )}
                     <Typography component="span">Suitable for dogs</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.shower ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Shower</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.toilet ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Toilet</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.restaurant ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Restaurant</Typography>
                 </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.winterSwimming ? (
