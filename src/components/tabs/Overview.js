@@ -103,7 +103,7 @@ const Overview = ({ dataDetail, algaeSighting, weather }) => {
                 <Box className={classes.groupContainer} component="span">
                     <FlagIcon className={classes.tempIcon} />
                     <Typography component="span">
-                        <span className={classes.tempText}>4 m/s</span>{' '}
+                        <span className={classes.tempText}>{weather.data.WindSpeedMS.timeValuePairs[0].value} m/s</span>{' '}
                     </Typography>
                 </Box>
             </Grid>
@@ -141,27 +141,6 @@ const Overview = ({ dataDetail, algaeSighting, weather }) => {
             )}
             {weather && (
                 <Grid item xs={12} container component="span" justify="center" className={classes.algaeContainer}>
-                    <Grid item xs={12} container component="span" justify="center">
-                        <Typography component="span" className={classes.algaePadding}>
-                        <InfoIcon className={classes.tempIcon} />
-                            <span className={classes.tempText}>
-                                {}moi
-                            </span>{' '}
-                        </Typography>
-                        <Typography component="span" className={classes.algaePadding}>
-                        <CalendarTodayIcon className={classes.tempIcon} />
-                            <span className={classes.tempText}>
-                                {} päivää sitten
-                            </span>{' '}
-                        </Typography>
-                    </Grid>
-
-                    <Typography component="span">
-                        <NearMeIcon className={classes.tempIcon} />
-                        <span className={classes.tempText}>
-                            {} metriä rannasta
-                        </span>{' '}
-                    </Typography>
                 </Grid>
             )}
 

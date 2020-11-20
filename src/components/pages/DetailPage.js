@@ -129,8 +129,8 @@ const DetailPage = (props) => {
     const [algaeSighting, setAlgaeSighting] = useState('');
     const [weather, setWeather] = useState('');
 
-    useEffect(() => setAlgaeSighting(''),[]);
-    useEffect(() => setWeather(''),[]);
+    useEffect(() => setAlgaeSighting(''), []);
+    useEffect(() => setWeather(''), []);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
@@ -142,8 +142,9 @@ const DetailPage = (props) => {
         variables: { name },
         onCompleted(data) {
             getAlgaes(data.getBeach);
+            moi(data.getBeach);
             setDataDetail(data.getBeach);
-            //moi();
+
             if (!weatherData) {
                 getWeather();
             }
@@ -164,35 +165,40 @@ const DetailPage = (props) => {
         }
     };
 
-    const moi = (a) => {
+    const moi = (beach) => {
         if (weatherData) {
-            setWeather(findWeather());
+            filterWeatherData(beach);
         } else {
             // Get weather data if refresh
             console.log('Säädataa ei ollut ja päästiin tähän');
             getWeatherData().then(weatherData => {
                 setWeather(weatherData);
                 console.log(weatherData, 'tämä on weatherData');
-                findWeather()
+                filterWeatherData(beach);
             });
         }
-    }
+    };
 
     const getWeather = async (a) => {
         const weatherData = await getWeatherData(a);
         setWeatherData(weatherData);
-    }
+    };
 
     const findAlgae = () => {
         return algaeData.find((match) => match.beach.name === name);
     };
 
-    const findWeather = () => {
-        return weatherData.find((match) => match.beach.name === name);
+    const filterWeatherData = (beach) => {
+        const filteredLocation = weatherLocations.locations.find(location => location.beach === beach.name);
+        console.log('weatherData :>> ', weatherData);
+        const filteredWeatherData = weatherData.locations.find(location => location.info.name === filteredLocation.site);
+        console.log('filteredWeatherData :>> ', filteredWeatherData);
+        setWeather(filteredWeatherData);
+        return
     };
 
 
-    console.log(dataDetail);
+    // console.log(dataDetail);
 
     return (
         <Paper elevation={0} square className={classes.detailPage}>
@@ -205,7 +211,7 @@ const DetailPage = (props) => {
                     onChange={handleTabValueChange}
                     // variant="fullWidth"
                     classes={{ indicator: classes.indicator }}
-                    // className={classes.tabs}
+                // className={classes.tabs}
                 >
                     <AntTab
                         // label="Overview"
@@ -247,7 +253,7 @@ const DetailPage = (props) => {
                     <>
                         {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0} style={{ backgroundColor: 'white' }}>
-                            <Overview dataDetail={dataDetail} algaeSighting={algaeSighting} weather={weather}/>
+                            <Overview dataDetail={dataDetail} algaeSighting={algaeSighting} weather={weather} />
                         </TabPanel>
 
                         {/* INFOMATION  TAB*/}
