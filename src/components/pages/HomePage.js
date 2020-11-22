@@ -7,17 +7,18 @@ import { useStyles } from './HomePage.style';
 import { DataContext } from '../../context/dataContext';
 import { UIContext } from '../../context/uiContext';
 
-import SearchBar from '../bars/SearchBar';
+// import SearchBar from '../bars/SearchBar';
 import { useHistory } from 'react-router-dom';
 import { Fab, Avatar, Tooltip } from '@material-ui/core';
 import FilterIcon from '../../assets/images/filter.svg';
-import Footer from '../bars/Footer';
+// import Footer from '../bars/Footer';
 import SearchForm from '../forms/SearchForm';
-import { FilterDrama } from '@material-ui/icons';
+// import { FilterDrama } from '@material-ui/icons';
 
 import { GET_BEACHES_QUERY } from '../../utils/graphql';
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { /*useQuery,*/ useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
+import { getWeatherData } from '../../utils/weatherService';
 
 const HomePage = () => {
     const classes = useStyles();
@@ -25,10 +26,12 @@ const HomePage = () => {
         data: apiData,
         setBeaches,
         beach,
-        setBeachSelected,
+        // setBeachSelected,
         setBeach,
-        algaeData,
-        setAlgaeData,
+        // algaeData,
+        // setAlgaeData,
+        weatherData,
+        setWeatherData,
     } = useContext(DataContext);
     const { setIsBack, setSearchBarOpen, isBack } = useContext(UIContext);
     const history = useHistory();
@@ -60,12 +63,21 @@ const HomePage = () => {
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
             console.log('COMPLETED', data);
+            if (!weatherData) {
+                getWeather();
+            }
             setBeaches(data.getBeaches);
         },
         onError(error) {
             console.log('ERROR', error);
         },
     });
+
+    const getWeather = async (a) => {
+        const weatherData = await getWeatherData(a);
+        console.log('weatherData', weatherData);
+        setWeatherData(weatherData);
+    }
 
     const getUserLocation = () => {
         if (navigator) {

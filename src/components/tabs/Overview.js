@@ -6,9 +6,9 @@ import UimarantaImg from '../../assets/images/uimaranta.jpg';
 
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
-import WcIcon from '@material-ui/icons/Wc';
-import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
-import FastfoodIcon from '@material-ui/icons/Fastfood';
+// import WcIcon from '@material-ui/icons/Wc';
+// import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
+// import FastfoodIcon from '@material-ui/icons/Fastfood';
 
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import WavesIcon from '@material-ui/icons/Waves';
@@ -18,13 +18,19 @@ import NearMeIcon from '@material-ui/icons/NearMe';
 import InfoIcon from '@material-ui/icons/Info';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
+import Navigation from '@material-ui/icons/Navigation';
 
-const Overview = ({ dataDetail }) => {
+// import * from '../../assets/svg/svg/';
+    import { from } from '@apollo/client';
+
+const Overview = ({ dataDetail, weather }) => {
     const classes = useStyles();
 
     function redirect(url) {
         window.open(url);
     }
+
+    // console.log(weather.data.WindSpeedMS.timeValuePairs[0].value);
 
     return (
         <Grid container direction="column" component="span" alignItems="center">
@@ -74,7 +80,7 @@ const Overview = ({ dataDetail }) => {
                     {dataDetail.winterSwimming && <AcUnitIcon className={classes.serviceIcon} />}
                 </Grid>
             )}
-            <Grid
+            { weather && (<Grid
                 item
                 xs={12}
                 container
@@ -82,9 +88,11 @@ const Overview = ({ dataDetail }) => {
                 className={classes.tempContainer}
                 justify="center"
             >
+                 
                 <Grid item xs={12} container component="span" justify="center">
                     <Box className={classes.groupContainer} component="span">
-                        <WbSunnyIcon className={`${classes.tempIcon} ${classes.tempIconBig}`} />
+                        <img className={`${classes.weatherSymbol}`} src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[0].value}.svg`)}/>
+                        {/* <WbSunnyIcon className={`${classes.tempIcon} ${classes.tempIconBig}`} /> */}
                         <Typography component="span">
                             <span className={`${classes.tempText} ${classes.tempTextBig}`}>
                                 {dataDetail.data[dataDetail.data.length - 1].temp_air} &#8451;{' '}
@@ -100,13 +108,15 @@ const Overview = ({ dataDetail }) => {
                         </span>{' '}
                     </Typography>
                 </Box>
+               
                 <Box className={classes.groupContainer} component="span">
-                    <FlagIcon className={classes.tempIcon} />
+                    <Navigation className={classes.tempIcon} style={{transform: `rotate(${weather.data.WindDirection.timeValuePairs[0].value}deg)`}}/>
                     <Typography component="span">
-                        <span className={classes.tempText}>4 m/s</span>{' '}
+                        <span className={classes.tempText}>{weather.data.WindSpeedMS.timeValuePairs[0].value} m/s</span>{' '}
                     </Typography>
                 </Box>
-            </Grid>
+               
+            </Grid> )}
             {dataDetail.sighting && (
                 <Grid
                     item

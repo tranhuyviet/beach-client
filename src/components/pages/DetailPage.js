@@ -7,34 +7,34 @@ import {
     Paper,
     Typography,
     Box,
-    Button,
-    Divider,
-    Tooltip,
+    // Button,
+    // Divider,
+    // Tooltip,
     CircularProgress,
 } from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
-import WavesIcon from '@material-ui/icons/Waves';
-import StarIcon from '@material-ui/icons/Star';
-import StarHalfIcon from '@material-ui/icons/StarHalf';
-import UpdateIcon from '@material-ui/icons/Update';
-import AccessibleIcon from '@material-ui/icons/Accessible';
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import WcIcon from '@material-ui/icons/Wc';
-import LocalParkingIcon from '@material-ui/icons/LocalParking';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
+// import WbSunnyIcon from '@material-ui/icons/WbSunny';
+// import WavesIcon from '@material-ui/icons/Waves';
+// import StarIcon from '@material-ui/icons/Star';
+// import StarHalfIcon from '@material-ui/icons/StarHalf';
+// import UpdateIcon from '@material-ui/icons/Update';
+// import AccessibleIcon from '@material-ui/icons/Accessible';
+// import FastfoodIcon from '@material-ui/icons/Fastfood';
+// import WcIcon from '@material-ui/icons/Wc';
+// import LocalParkingIcon from '@material-ui/icons/LocalParking';
+// import AccessTimeIcon from '@material-ui/icons/AccessTime';
+// import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
 
-import UimarantaImg from '../../assets/images/uimaranta.jpg';
-import GraphImg from '../../assets/images/graph.png';
+// import UimarantaImg from '../../assets/images/uimaranta.jpg';
+// import GraphImg from '../../assets/images/graph.png';
 
 // import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
 // import HSLLogo from '../../assets/images/hsl-logo.svg';
-import moment from 'moment';
-import ReviewCard from '../shared/ReviewCard';
+// import moment from 'moment';
+// import ReviewCard from '../shared/ReviewCard';
 
-import ReviewForm from '../forms/ReviewForm';
+// import ReviewForm from '../forms/ReviewForm';
 import { withStyles } from '@material-ui/core/styles';
 
 import Overview from '../tabs/Overview';
@@ -49,7 +49,11 @@ import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
 import { GET_BEACHE_BY_NAME_QUERY } from '../../utils/graphql';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { /*useLazyQuery,*/ useQuery } from '@apollo/client';
+import { DataContext } from '../../context/dataContext';
+import { getWeatherData } from '../../utils/weatherService';
+
+const weatherLocations = require('../../utils/weatherLocations.json');
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -119,6 +123,10 @@ const DetailPage = (props) => {
     const [dataDetail, setDataDetail] = useState(null);
     // const { dataDetail, setDataDetail } = useContext(DataContext);
     const [tabValue, setTabValue] = useState(0);
+    const { weatherData, setWeatherData } = useContext(DataContext);
+    const [weather, setWeather] = useState('');
+
+    useEffect(() => setWeather(''), []);
 
     const handleTabValueChange = (event, newValue) => {
         setTabValue(newValue);
@@ -129,12 +137,53 @@ const DetailPage = (props) => {
     const { loading } = useQuery(GET_BEACHE_BY_NAME_QUERY, {
         variables: { name },
         onCompleted(data) {
+            moi(data.getBeach);
             setDataDetail(data.getBeach);
+            // if (!weatherData) {
+            //     getWeather();
+            // }
         },
         onError(error) {
             console.log('GET BEACH BY NAME QUERY ERROR', error);
         },
     });
+
+    const moi = (beach) => {
+        console.log('Kutsuttiin moi funktiota. Onko weatherData?');
+        if (weatherData) {
+            console.log('Oli weatherData. Seuraavaksi filteröidään');
+            filterWeatherData(beach, weatherData);
+        } else {
+            // Get weather data if refresh
+            console.log('Säädataa ei ollut ja päästiin tähän');
+            getWeatherData().then(weatherData2 => {
+                console.log('Uusi weatherData haettu ja nyt se asetetaan.');
+                // setWeather(weatherData2);
+                setWeatherData(weatherData2);
+                return weatherData2
+            }).then(b => {
+                filterWeatherData(beach, b);
+            });
+        }
+    };
+
+    const getWeather = async (a) => {
+        console.log('Kutsuttiin getWeather funktiota, koska weatherdataa ei ollut');
+        const weatherData9 = await getWeatherData(a);
+        setWeatherData(weatherData9);
+    };
+
+    const filterWeatherData =  (beach, weatherData3) => {
+        console.log('beach.name :>> ', beach.name);
+        console.log('weatherData3 :>> ', weatherData3);
+        const filteredLocation = weatherLocations.locations.find(location => location.beach === beach.name);
+        console.log('weatherData3 :>> ', weatherData3);
+        console.log('filteredLocation :>> ', filteredLocation);
+        const filteredWeatherData =  weatherData3.locations.find(location => location.info.name === filteredLocation.site);
+        console.log('filteredWeatherData :>> ', filteredWeatherData);
+        setWeather(filteredWeatherData);
+        return
+    };
 
     console.log(dataDetail);
 
@@ -191,7 +240,7 @@ const DetailPage = (props) => {
                     <>
                         {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0} style={{ backgroundColor: 'white' }}>
-                            <Overview dataDetail={dataDetail} />
+                            <Overview dataDetail={dataDetail} weather={weather}/>
                         </TabPanel>
 
                         {/* INFOMATION  TAB*/}

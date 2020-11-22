@@ -13,7 +13,7 @@ import {
 
 import CloseIcon from '@material-ui/icons/Close';
 
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+// import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SendIcon from '@material-ui/icons/Send';
 
 import Rating from '@material-ui/lab/Rating';

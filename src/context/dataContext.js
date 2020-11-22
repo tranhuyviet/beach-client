@@ -28,6 +28,12 @@ const beachReducer = (state, action) => {
                 dataDetail: action.payload,
             };
         }
+        case 'SET_WEATHER_DATA': {
+            return {
+                ...state,
+                weatherData: action.payload,
+            };
+        }
 
         default:
             return state;
@@ -73,6 +79,13 @@ const DataProvider = (props) => {
         });
     };
 
+    const setWeatherData = (weatherData) => {
+        dispatch({
+            type: 'SET_WEATHER_DATA',
+            payload: weatherData,
+        });
+    };
+
     return (
         <DataContext.Provider
             value={{
@@ -83,6 +96,8 @@ const DataProvider = (props) => {
                 setBeach,
                 dataDetail: state.dataDetail,
                 setDataDetail,
+                weatherData: state.weatherData,
+                setWeatherData,
             }}
         >
             {props.children}

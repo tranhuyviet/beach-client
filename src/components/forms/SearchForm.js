@@ -10,17 +10,17 @@ import {
     Grid,
     FormControlLabel,
     Button,
-    Tooltip,
+    // Tooltip,
 } from '@material-ui/core';
 
 import CloseIcon from '@material-ui/icons/Close';
 
-import WcIcon from '@material-ui/icons/Wc';
-import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
-import LocalParkingIcon from '@material-ui/icons/LocalParking';
-import PetsIcon from '@material-ui/icons/Pets';
+// import WcIcon from '@material-ui/icons/Wc';
+// import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
+// import FastfoodIcon from '@material-ui/icons/Fastfood';
+// import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
+// import LocalParkingIcon from '@material-ui/icons/LocalParking';
+// import PetsIcon from '@material-ui/icons/Pets';
 
 const SearchForm = ({
     searchFormOpen,

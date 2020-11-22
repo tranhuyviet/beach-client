@@ -62,5 +62,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     routingButton: {
         margin: '8px'
+    },
+    weatherSymbol: {
+        width: '100px'
     }
 }));
