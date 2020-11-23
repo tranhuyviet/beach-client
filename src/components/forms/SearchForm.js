@@ -19,7 +19,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import WcIcon from '@material-ui/icons/Wc';
 // import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
-// import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
+import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
 // import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
@@ -54,6 +54,8 @@ const SearchForm = ({
     setIsGuard,
     isFitness,
     setIsFitness,
+    isSport,
+    setIsSport,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -187,6 +189,15 @@ const SearchForm = ({
                             onClick={() => setIsFitness((prev) => !prev)}
                         >
                             Outdoor Fitness
+                        </Button>
+                        <Button
+                            variant={isSport ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<SportsVolleyballIcon />}
+                            onClick={() => setIsSport((prev) => !prev)}
+                        >
+                            Sport
                         </Button>
                         <Button
                             variant={noAlgae ? 'contained' : 'outlined'}
