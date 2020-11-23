@@ -24,6 +24,7 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
+import SecurityIcon from '@material-ui/icons/Security';
 
 const SearchForm = ({
     searchFormOpen,
@@ -48,6 +49,8 @@ const SearchForm = ({
     setIsChildren,
     isChanging,
     setIsChanging,
+    isGuard,
+    setIsGuard,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -163,6 +166,15 @@ const SearchForm = ({
                             onClick={() => setIsChanging((prev) => !prev)}
                         >
                             Changing Room
+                        </Button>
+                        <Button
+                            variant={isGuard ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<SecurityIcon />}
+                            onClick={() => setIsGuard((prev) => !prev)}
+                        >
+                            Lifeguard
                         </Button>
                         <Button
                             variant={noAlgae ? 'contained' : 'outlined'}
