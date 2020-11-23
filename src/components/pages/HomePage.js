@@ -47,6 +47,7 @@ const HomePage = () => {
     const [isToilet, setIsToilet] = useState(false);
     const [isRestaurant, setIsRestaurant] = useState(false);
     const [isChildren, setIsChildren] = useState(false);
+    const [isChanging, setIsChanging] = useState(false);
     const [isOver18, setIsOver18] = useState(false);
     const [noAlgae, setNoAlgae] = useState(false);
 
@@ -77,7 +78,7 @@ const HomePage = () => {
         const weatherData = await getWeatherData(a);
         console.log('weatherData', weatherData);
         setWeatherData(weatherData);
-    }
+    };
 
     const getUserLocation = () => {
         if (navigator) {
@@ -99,7 +100,7 @@ const HomePage = () => {
             forDogs: '',
             winterSwimming: '',
             isOver18: '',
-            noAlgae: ''
+            noAlgae: '',
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -128,11 +129,14 @@ const HomePage = () => {
         if (isChildren) {
             variables.children = 'true';
         }
+        if (isChanging) {
+            variables.changing = 'true';
+        }
         if (isOver18) {
             variables.isOver18 = 'true';
         }
-        if(noAlgae) {
-            variables.noAlgae = 'true'
+        if (noAlgae) {
+            variables.noAlgae = 'true';
         }
 
         console.log(variables);
@@ -280,6 +284,8 @@ const HomePage = () => {
                 setIsRestaurant={setIsRestaurant}
                 isChildren={isChildren}
                 setIsChildren={setIsChildren}
+                isChanging={isChanging}
+                setIsChanging={setIsChanging}
                 isOver18={isOver18}
                 setIsOver18={setIsOver18}
                 noAlgae={noAlgae}

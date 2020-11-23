@@ -10,6 +10,7 @@ export const GET_BEACHES_QUERY = gql`
         $toilet: String
         $restaurant: String
         $children: String
+        $changing: String
         $isOver18: String
         $noAlgae: String
     ) {
@@ -21,6 +22,7 @@ export const GET_BEACHES_QUERY = gql`
             toilet: $toilet
             restaurant: $restaurant
             children: $children
+            changing: $changing
             isOver18: $isOver18
             noAlgae: $noAlgae
         ) {
@@ -35,6 +37,7 @@ export const GET_BEACHES_QUERY = gql`
             toilet
             restaurant
             children
+            changing
             noAlgae
         }
     }
@@ -55,6 +58,7 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             toilet
             restaurant
             children
+            changing
             reviews {
                 name
                 comment

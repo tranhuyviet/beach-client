@@ -46,6 +46,8 @@ const SearchForm = ({
     setIsRestaurant,
     isChildren,
     setIsChildren,
+    isChanging,
+    setIsChanging,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -153,6 +155,14 @@ const SearchForm = ({
                             onClick={() => setIsRestaurant((prev) => !prev)}
                         >
                             Restaurant
+                        </Button>
+                        <Button
+                            variant={isChanging ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            onClick={() => setIsChanging((prev) => !prev)}
+                        >
+                            Changing Room
                         </Button>
                         <Button
                             variant={noAlgae ? 'contained' : 'outlined'}
