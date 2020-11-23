@@ -15,12 +15,15 @@ import {
 
 import CloseIcon from '@material-ui/icons/Close';
 
-// import WcIcon from '@material-ui/icons/Wc';
+import DoneIcon from '@material-ui/icons/Done';
+import WcIcon from '@material-ui/icons/Wc';
 // import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
-// import FastfoodIcon from '@material-ui/icons/Fastfood';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 // import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
 // import LocalParkingIcon from '@material-ui/icons/LocalParking';
-// import PetsIcon from '@material-ui/icons/Pets';
+import PetsIcon from '@material-ui/icons/Pets';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
+import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 
 const SearchForm = ({
     searchFormOpen,
@@ -102,43 +105,74 @@ const SearchForm = ({
                             Vantaa
                         </Button>
                     </Grid>
-                    {/* <Grid item xs={12} container justify="center">
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Helsinki"
-                            labelPlacement="bottom"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Espoo"
-                            labelPlacement="bottom"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox />}
-                            label="Vantaa"
-                            labelPlacement="bottom"
-                        />
-                    </Grid> */}
+
                     <Typography className={classes.title}>SERVICES</Typography>
-                    {/* <Grid item xs={12} container justify="center">
-                        <WcIcon className={classes.serviceIcon} />
-                        <AccessibleForwardIcon className={classes.serviceIcon} />
-                        <FastfoodIcon className={classes.serviceIcon} />
-                        <SportsVolleyballIcon className={classes.serviceIcon} />
-                        <Tooltip title="Suitable for dogs">
-                            <PetsIcon
-                                className={`${classes.serviceIcon} ${
-                                    isForDogs ? classes.iconSelected : ''
-                                }`}
-                                onClick={() => {
-                                    setIsForDogs((prev) => !prev);
-                                }}
-                            />
-                        </Tooltip>
-                        <LocalParkingIcon className={classes.serviceIcon} />
-                    </Grid> */}
-                    <Grid item xs={12} container style={{ paddingLeft: 24 }} direction="column">
+
+                    <Grid item xs={12} container style={{ paddingLeft: 24 }}>
                         {/* <FormControlLabel control={<Checkbox />} label="Suitable for children" /> */}
+                        <Button
+                            variant={isChildren ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<ChildFriendlyIcon />}
+                            onClick={() => setIsChildren((prev) => !prev)}
+                        >
+                            Suitable for children
+                        </Button>
+                        <Button
+                            variant={isForDogs ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<PetsIcon />}
+                            onClick={() => setIsForDogs((prev) => !prev)}
+                        >
+                            Suitable for dogs
+                        </Button>
+                        <Button
+                            variant={isShower ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            onClick={() => setIsShower((prev) => !prev)}
+                        >
+                            Shower
+                        </Button>
+                        <Button
+                            variant={isToilet ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<WcIcon />}
+                            onClick={() => setIsToilet((prev) => !prev)}
+                        >
+                            Toilet
+                        </Button>
+                        <Button
+                            variant={isRestaurant ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<FastfoodIcon />}
+                            onClick={() => setIsRestaurant((prev) => !prev)}
+                        >
+                            Restaurant
+                        </Button>
+                        <Button
+                            variant={noAlgae ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            onClick={() => setNoAlgae((prev) => !prev)}
+                        >
+                            No algae
+                        </Button>
+                        <Button
+                            variant={isWinterSwimming ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<AcUnitIcon />}
+                            onClick={() => setIsWinterSwimming((prev) => !prev)}
+                        >
+                            Winter swimming
+                        </Button>
+
+                        {/* 
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -211,7 +245,7 @@ const SearchForm = ({
                                 />
                             }
                             label="Winter swimming"
-                        />
+                        /> */}
                     </Grid>
                     <Grid
                         item

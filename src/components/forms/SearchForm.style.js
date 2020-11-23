@@ -28,6 +28,13 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: '30px!important',
         margin: '8px 4px ',
     },
+    services: {
+        borderRadius: '30px!important',
+        fontSize: 12,
+        padding: '4px 12px',
+        marginBottom: '8px',
+        marginRight: '8px',
+    },
     titleOfFilter: {
         borderLeft: '3px solid',
         paddingLeft: 5,
@@ -35,12 +42,12 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: `${theme.palette.secondary.main}!important`,
     },
     serviceIcon: {
-        ...theme.share.serviceIcon,
-        color: theme.palette.primary.main,
-        cursor: 'pointer',
-        // border: '1px solid',
-        // fontSize: 35,
-        // borderRadius: 10,
+        // ...theme.share.serviceIcon,
+        // color: theme.palette.primary.main,
+        // cursor: 'pointer',
+
+        fontSize: 35,
+        // borderRadius: 50,
         // margin: '8px 4px',
         // padding: 4,
     },
