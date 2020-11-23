@@ -12,6 +12,7 @@ export const GET_BEACHES_QUERY = gql`
         $children: String
         $changing: String
         $guard: String
+        $fitness: String
         $isOver18: String
         $noAlgae: String
     ) {
@@ -25,6 +26,7 @@ export const GET_BEACHES_QUERY = gql`
             children: $children
             changing: $changing
             guard: $guard
+            fitness: $fitness
             isOver18: $isOver18
             noAlgae: $noAlgae
         ) {
@@ -41,6 +43,7 @@ export const GET_BEACHES_QUERY = gql`
             children
             changing
             guard
+            fitness
             noAlgae
         }
     }
@@ -63,6 +66,7 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             children
             changing
             guard
+            fitness
             reviews {
                 name
                 comment

@@ -25,6 +25,7 @@ import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import SecurityIcon from '@material-ui/icons/Security';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 
 const SearchForm = ({
     searchFormOpen,
@@ -51,6 +52,8 @@ const SearchForm = ({
     setIsChanging,
     isGuard,
     setIsGuard,
+    isFitness,
+    setIsFitness,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -175,6 +178,15 @@ const SearchForm = ({
                             onClick={() => setIsGuard((prev) => !prev)}
                         >
                             Lifeguard
+                        </Button>
+                        <Button
+                            variant={isFitness ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<FitnessCenterIcon />}
+                            onClick={() => setIsFitness((prev) => !prev)}
+                        >
+                            Outdoor Fitness
                         </Button>
                         <Button
                             variant={noAlgae ? 'contained' : 'outlined'}
