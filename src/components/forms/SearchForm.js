@@ -26,6 +26,7 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import SecurityIcon from '@material-ui/icons/Security';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import StorefrontIcon from '@material-ui/icons/Storefront';
 
 const SearchForm = ({
     searchFormOpen,
@@ -56,6 +57,8 @@ const SearchForm = ({
     setIsFitness,
     isSport,
     setIsSport,
+    isKiosk,
+    setIsKiosk,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -198,6 +201,15 @@ const SearchForm = ({
                             onClick={() => setIsSport((prev) => !prev)}
                         >
                             Sport
+                        </Button>
+                        <Button
+                            variant={isKiosk ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<StorefrontIcon />}
+                            onClick={() => setIsKiosk((prev) => !prev)}
+                        >
+                            Kiosk
                         </Button>
                         <Button
                             variant={noAlgae ? 'contained' : 'outlined'}

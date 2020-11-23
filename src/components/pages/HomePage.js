@@ -51,6 +51,7 @@ const HomePage = () => {
     const [isGuard, setIsGuard] = useState(false);
     const [isFitness, setIsFitness] = useState(false);
     const [isSport, setIsSport] = useState(false);
+    const [isKiosk, setIsKiosk] = useState(false);
     const [isOver18, setIsOver18] = useState(false);
     const [noAlgae, setNoAlgae] = useState(false);
 
@@ -143,6 +144,9 @@ const HomePage = () => {
         }
         if (isSport) {
             variables.sport = 'true';
+        }
+        if (isKiosk) {
+            variables.kiosk = 'true';
         }
         if (isOver18) {
             variables.isOver18 = 'true';
@@ -304,6 +308,8 @@ const HomePage = () => {
                 setIsFitness={setIsFitness}
                 isSport={isSport}
                 setIsSport={setIsSport}
+                isKiosk={isKiosk}
+                setIsKiosk={setIsKiosk}
                 isOver18={isOver18}
                 setIsOver18={setIsOver18}
                 noAlgae={noAlgae}
