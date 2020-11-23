@@ -59,6 +59,8 @@ const SearchForm = ({
     setIsSport,
     isKiosk,
     setIsKiosk,
+    isSauna,
+    setIsSauna,
     isOver18,
     setIsOver18,
     filterSubmit,
@@ -210,6 +212,14 @@ const SearchForm = ({
                             onClick={() => setIsKiosk((prev) => !prev)}
                         >
                             Kiosk
+                        </Button>
+                        <Button
+                            variant={isSauna ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            onClick={() => setIsSauna((prev) => !prev)}
+                        >
+                            Sauna
                         </Button>
                         <Button
                             variant={noAlgae ? 'contained' : 'outlined'}
