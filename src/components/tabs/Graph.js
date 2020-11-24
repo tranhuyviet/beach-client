@@ -27,33 +27,33 @@ const Graph = ({ data }) => {
         data.forEach((dt) => {
             if (timeSelect === '2 weeks') {
                 airTemp.push({
-                    label: moment(dt.time).format('DD.MM'),
+                    label: moment(dt.time).format('DD.MM. HH:mm'),
                     y: dt.temp_air,
                 });
                 waterTemp.push({
-                    label: moment(dt.time).format('DD.MM'),
-                    y: dt.temp_water,
+                    label: moment(dt.time).format('DD.MM. HH:mm'),
+                    y: dt.temp_air,
                 });
             } else if (timeSelect === '1 week') {
                 if (new Date(dt.time) >= week) {
                     airTemp.push({
-                        label: moment(dt.time).format('DD.MM'),
+                        label: moment(dt.time).format('DD.MM. HH:mm'),
                         y: dt.temp_air,
                     });
                     waterTemp.push({
-                        label: moment(dt.time).format('DD.MM'),
-                        y: dt.temp_water,
+                        label: moment(dt.time).format('DD.MM. HH:mm'),
+                        y: dt.temp_air,
                     });
                 }
             } else if (timeSelect === '48 hours') {
                 if (new Date(dt.time) >= day) {
                     airTemp.push({
-                        label: moment(dt.time).format('DD.MM'),
+                        label: moment(dt.time).format('DD.MM. HH:mm'),
                         y: dt.temp_air,
                     });
                     waterTemp.push({
-                        label: moment(dt.time).format('DD.MM'),
-                        y: dt.temp_water,
+                        label: moment(dt.time).format('DD.MM. HH:mm'),
+                        y: dt.temp_air,
                     });
                 }
             }
@@ -87,6 +87,9 @@ const Graph = ({ data }) => {
             includeZero: false,
             valueFormatString: '##.# ℃',
         },
+        toolTip:{
+            content:"Aika: {label}</br>Lämpötila: {y} °C" ,
+          },
         data: [
             {
                 type: 'spline',
@@ -108,6 +111,9 @@ const Graph = ({ data }) => {
             includeZero: false,
             valueFormatString: '##.# ℃',
         },
+        toolTip:{
+            content:"Aika: {label}</br>Lämpötila: {y} °C" ,
+          },
         data: [
             {
                 type: 'spline',
@@ -122,7 +128,7 @@ const Graph = ({ data }) => {
 
     return (
         <Grid container component="span" direction="column" alignItems="center">
-            <Typography className={classes.timeSelectTitle}>Select time range</Typography>
+            <Typography className={classes.timeSelectTitle}>Valitse aikaväli</Typography>
             <Grid
                 item
                 container
@@ -132,18 +138,18 @@ const Graph = ({ data }) => {
             >
                 <Select value={timeSelect} onChange={handleChange} className={classes.timeSelect}>
                     <MenuItem value={'2 weeks'} classes={{ selected: classes.selected }}>
-                        2 weeks
+                        2 viikkoa
                     </MenuItem>
                     <MenuItem value={'1 week'} className={classes.menuItem}>
-                        1 week
+                        1 viikko
                     </MenuItem>
                     <MenuItem value={'48 hours'} className={classes.menuItem}>
-                        48 hours
+                        48 tuntia
                     </MenuItem>
                 </Select>
             </Grid>
             <Typography component="span" className={classes.title}>
-                Air Temperature:
+                Ilman lämpötila:
             </Typography>
             <Grid
                 item
@@ -157,7 +163,7 @@ const Graph = ({ data }) => {
                 <span className={classes.hideTrial} component="span"></span>
             </Grid>
             <Typography component="span" className={classes.title}>
-                Water Temperature:
+                Veden lämpötila:
             </Typography>
             <Grid
                 item
