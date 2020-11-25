@@ -149,40 +149,44 @@ const DetailPage = (props) => {
     });
 
     const moi = (beach) => {
-        console.log('Kutsuttiin moi funktiota. Onko weatherData?');
         if (weatherData) {
-            console.log('Oli weatherData. Seuraavaksi filteröidään');
             filterWeatherData(beach, weatherData);
         } else {
-            // Get weather data if refresh
-            console.log('Säädataa ei ollut ja päästiin tähän');
-            getWeatherData().then(weatherData2 => {
-                console.log('Uusi weatherData haettu ja nyt se asetetaan.');
-                // setWeather(weatherData2);
-                setWeatherData(weatherData2);
-                return weatherData2
-            }).then(b => {
-                filterWeatherData(beach, b);
+            // Get new weather data if page refresh
+            getWeatherData().then((newWeatherData) => {
+                setWeatherData(newWeatherData);
+                filterWeatherData(beach, newWeatherData);
             });
+            // The section under this is previous version.
+
+            // .then((newWeatherData) => {
+            //     setWeatherData(newWeatherData);
+            //     return newWeatherData;
+            // })
+            // .then((b) => {
+            //     filterWeatherData(beach, b);
+            // });
         }
     };
+    // This function might be unnecessary
 
-    const getWeather = async (a) => {
-        console.log('Kutsuttiin getWeather funktiota, koska weatherdataa ei ollut');
-        const weatherData9 = await getWeatherData(a);
-        setWeatherData(weatherData9);
-    };
+    // const getWeather = async (a) => {
+    //     console.log('Kutsuttiin getWeather funktiota, koska weatherdataa ei ollut');
+    //     const weatherData9 = await getWeatherData(a);
+    //     setWeatherData(weatherData9);
+    // };
 
-    const filterWeatherData =  (beach, weatherData3) => {
-        console.log('beach.name :>> ', beach.name);
-        console.log('weatherData3 :>> ', weatherData3);
-        const filteredLocation = weatherLocations.locations.find(location => location.beach === beach.name);
-        console.log('weatherData3 :>> ', weatherData3);
-        console.log('filteredLocation :>> ', filteredLocation);
-        const filteredWeatherData =  weatherData3.locations.find(location => location.info.name === filteredLocation.site);
-        console.log('filteredWeatherData :>> ', filteredWeatherData);
+    const filterWeatherData = (beach, weatherData3) => {
+        // Filter JSON locations which matches the beach name
+        const filteredLocation = weatherLocations.locations.find(
+            (location) => location.beach === beach.name
+        );
+        // Filter weatherData location which matches the filteredLocation
+        const filteredWeatherData = weatherData3.locations.find(
+            (location) => location.info.name === filteredLocation.site
+        );
         setWeather(filteredWeatherData);
-        return
+        return;
     };
 
     console.log(dataDetail);
@@ -240,7 +244,7 @@ const DetailPage = (props) => {
                     <>
                         {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0} style={{ backgroundColor: 'white' }}>
-                            <Overview dataDetail={dataDetail} weather={weather}/>
+                            <Overview dataDetail={dataDetail} weather={weather} />
                         </TabPanel>
 
                         {/* INFOMATION  TAB*/}

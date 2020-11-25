@@ -69,6 +69,7 @@ const HomePage = () => {
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
             console.log('COMPLETED', data);
+            // If there is no weatherData in state, load it.
             if (!weatherData) {
                 getWeather();
             }
@@ -79,9 +80,9 @@ const HomePage = () => {
         },
     });
 
-    const getWeather = async (a) => {
-        const weatherData = await getWeatherData(a);
-        console.log('weatherData', weatherData);
+    const getWeather = async () => {
+        const weatherData = await getWeatherData();
+        // console.log('weatherData', weatherData);
         setWeatherData(weatherData);
     };
 
