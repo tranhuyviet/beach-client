@@ -55,4 +55,9 @@ export const useStyles = makeStyles((theme) => ({
         background: theme.palette.primary.main,
         color: theme.palette.common.white,
     },
+    sliderContainer: {
+        width: '100%',
+        height: 50,
+        padding: '0px 16px',
+    },
 }));

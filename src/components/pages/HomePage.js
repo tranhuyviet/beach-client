@@ -53,7 +53,8 @@ const HomePage = () => {
     const [isSport, setIsSport] = useState(false);
     const [isKiosk, setIsKiosk] = useState(false);
     const [isSauna, setIsSauna] = useState(false);
-    const [isOver18, setIsOver18] = useState(false);
+    const [isTemp, setIsTemp] = useState(false);
+    const [temp, setTemp] = useState(15);
     const [noAlgae, setNoAlgae] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
@@ -153,9 +154,10 @@ const HomePage = () => {
         if (isSauna) {
             variables.sauna = 'true';
         }
-        if (isOver18) {
-            variables.isOver18 = 'true';
+        if (isTemp) {
+            variables.temp = temp;
         }
+
         if (noAlgae) {
             variables.noAlgae = 'true';
         }
@@ -317,8 +319,10 @@ const HomePage = () => {
                 setIsKiosk={setIsKiosk}
                 isSauna={isSauna}
                 setIsSauna={setIsSauna}
-                isOver18={isOver18}
-                setIsOver18={setIsOver18}
+                isTemp={isTemp}
+                setIsTemp={setIsTemp}
+                temp={temp}
+                setTemp={setTemp}
                 noAlgae={noAlgae}
                 setNoAlgae={setNoAlgae}
                 filterSubmit={filterSubmit}

@@ -16,7 +16,7 @@ export const GET_BEACHES_QUERY = gql`
         $sport: String
         $kiosk: String
         $sauna: String
-        $isOver18: String
+        $temp: Int
         $noAlgae: String
     ) {
         getBeaches(
@@ -33,7 +33,7 @@ export const GET_BEACHES_QUERY = gql`
             sport: $sport
             kiosk: $kiosk
             sauna: $sauna
-            isOver18: $isOver18
+            temp: $temp
             noAlgae: $noAlgae
         ) {
             name
@@ -53,6 +53,7 @@ export const GET_BEACHES_QUERY = gql`
             sport
             kiosk
             sauna
+            temp
             noAlgae
         }
     }
@@ -79,6 +80,7 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             sport
             kiosk
             sauna
+            temp
             reviews {
                 name
                 comment
