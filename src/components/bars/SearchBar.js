@@ -46,7 +46,7 @@ const SearchBar = ({ handleSearchFormClose }) => {
                                 {...params}
                                 margin="normal"
                                 variant="outlined"
-                                placeholder="Search by name..."
+                                placeholder="Hae nimellä..."
                                 InputProps={{ ...params.InputProps }}
                             />
                         )}

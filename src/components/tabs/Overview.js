@@ -53,18 +53,6 @@ const Overview = ({ dataDetail, weather }) => {
             <Typography component="span" style={{ marginTop: 8 }}>
                 {`${dataDetail.address}, ${dataDetail.city}`}
             </Typography>
-            <Grid
-                item
-                xs={12}
-                container
-                component="span"
-                justify="center"
-                alignItems="center"
-                style={{ marginTop: 16 }}
-            >
-                <AccessTimeIcon style={{ fontSize: 32, marginRight: 8 }} />
-                <Typography component="span">OPEN</Typography>
-            </Grid>
             {(dataDetail.forDogs || dataDetail.winterSwimming) && (
                 <Grid
                     item
@@ -135,15 +123,23 @@ const Overview = ({ dataDetail, weather }) => {
                     className={classes.algaeContainer}
                 >
                     <Grid item xs={12} container component="span" justify="center">
+                        <Typography
+                            component="span"
+                            className={`${classes.algaePadding} ${classes.algaeHeader}`}
+                        >
+                            Levähavainto
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} container component="span" justify="center">
                         <Typography component="span" className={classes.algaePadding}>
                             <InfoIcon className={classes.tempIcon} />
-                            <span className={classes.tempText}>
+                            <span className={classes.algaeText}>
                                 {dataDetail.sighting.text}
                             </span>{' '}
                         </Typography>
                         <Typography component="span" className={classes.algaePadding}>
                             <CalendarTodayIcon className={classes.tempIcon} />
-                            <span className={classes.tempText}>
+                            <span className={classes.algaeText}>
                                 {dataDetail.sighting.date} päivää sitten
                             </span>{' '}
                         </Typography>
@@ -151,7 +147,7 @@ const Overview = ({ dataDetail, weather }) => {
 
                     <Typography component="span">
                         <NearMeIcon className={classes.tempIcon} />
-                        <span className={classes.tempText}>
+                        <span className={classes.algaeText}>
                             {dataDetail.sighting.distance} metriä rannasta
                         </span>{' '}
                     </Typography>
