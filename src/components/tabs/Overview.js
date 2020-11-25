@@ -76,6 +76,14 @@ const Overview = ({ dataDetail, weather }) => {
                     justify="center"
                 >
                     <Grid item xs={12} container component="span" justify="center">
+                        <Typography
+                            component="span"
+                            className={`${classes.algaePadding} ${classes.algaeHeader}`}
+                        >
+                            Säähavainnot
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} container component="span" justify="center">
                         <Box className={classes.groupContainer} component="span">
                             <img
                                 className={classes.weatherSymbol}
