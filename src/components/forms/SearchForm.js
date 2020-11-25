@@ -284,7 +284,7 @@ const SearchForm = ({
                             onClick={() => setIsTemp((prev) => !prev)}
                             style={{ display: 'flex', flexDirection: 'column' }}
                         >
-                            Water Temperature Over &nbsp;
+                            Veden Lämpötila Suurempi&nbsp;
                             <span
                                 style={{ fontWeight: 'bold', fontSize: '12px' }}
                             >{` ${temp}°C`}</span>
