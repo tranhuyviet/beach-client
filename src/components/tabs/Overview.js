@@ -21,7 +21,7 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 import Navigation from '@material-ui/icons/Navigation';
 
 // import * from '../../assets/svg/svg/';
-    import { from } from '@apollo/client';
+import { from } from '@apollo/client';
 
 const Overview = ({ dataDetail, weather }) => {
     const classes = useStyles();
@@ -29,8 +29,6 @@ const Overview = ({ dataDetail, weather }) => {
     function redirect(url) {
         window.open(url);
     }
-
-    // console.log(weather.data.WindSpeedMS.timeValuePairs[0].value);
 
     return (
         <Grid container direction="column" component="span" alignItems="center">
@@ -55,18 +53,6 @@ const Overview = ({ dataDetail, weather }) => {
             <Typography component="span" style={{ marginTop: 8 }}>
                 {`${dataDetail.address}, ${dataDetail.city}`}
             </Typography>
-            <Grid
-                item
-                xs={12}
-                container
-                component="span"
-                justify="center"
-                alignItems="center"
-                style={{ marginTop: 16 }}
-            >
-                <AccessTimeIcon style={{ fontSize: 32, marginRight: 8 }} />
-                <Typography component="span">OPEN</Typography>
-            </Grid>
             {(dataDetail.forDogs || dataDetail.winterSwimming) && (
                 <Grid
                     item
@@ -80,43 +66,53 @@ const Overview = ({ dataDetail, weather }) => {
                     {dataDetail.winterSwimming && <AcUnitIcon className={classes.serviceIcon} />}
                 </Grid>
             )}
-            { weather && (<Grid
-                item
-                xs={12}
-                container
-                component="span"
-                className={classes.tempContainer}
-                justify="center"
-            >
-                 
-                <Grid item xs={12} container component="span" justify="center">
+            {weather && (
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    component="span"
+                    className={classes.tempContainer}
+                    justify="center"
+                >
+                    <Grid item xs={12} container component="span" justify="center">
+                        <Box className={classes.groupContainer} component="span">
+                            <img
+                                className={classes.weatherSymbol}
+                                src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[0].value}.svg`)}
+                            />
+                            {/* <WbSunnyIcon className={`${classes.tempIcon} ${classes.tempIconBig}`} /> */}
+                            <Typography component="span">
+                                <span className={`${classes.tempText} ${classes.tempTextBig}`}>
+                                    {dataDetail.data[dataDetail.data.length - 1].temp_air} &#8451;{' '}
+                                </span>{' '}
+                            </Typography>
+                        </Box>
+                    </Grid>
                     <Box className={classes.groupContainer} component="span">
-                        <img className={`${classes.weatherSymbol}`} src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[0].value}.svg`)}/>
-                        {/* <WbSunnyIcon className={`${classes.tempIcon} ${classes.tempIconBig}`} /> */}
+                        <WavesIcon className={classes.tempIcon} />
                         <Typography component="span">
-                            <span className={`${classes.tempText} ${classes.tempTextBig}`}>
-                                {dataDetail.data[dataDetail.data.length - 1].temp_air} &#8451;{' '}
+                            <span className={classes.tempText}>
+                                {dataDetail.data[dataDetail.data.length - 1].temp_water} &#8451;
+                            </span>{' '}
+                        </Typography>
+                    </Box>
+
+                    <Box className={classes.groupContainer} component="span">
+                        <Navigation
+                            className={classes.tempIcon}
+                            style={{
+                                transform: `rotate(${weather.data.WindDirection.timeValuePairs[0].value}deg)`,
+                            }}
+                        />
+                        <Typography component="span">
+                            <span className={classes.tempText}>
+                                {weather.data.WindSpeedMS.timeValuePairs[0].value} m/s
                             </span>{' '}
                         </Typography>
                     </Box>
                 </Grid>
-                <Box className={classes.groupContainer} component="span">
-                    <WavesIcon className={classes.tempIcon} />
-                    <Typography component="span">
-                        <span className={classes.tempText}>
-                            {dataDetail.data[dataDetail.data.length - 1].temp_water} &#8451;
-                        </span>{' '}
-                    </Typography>
-                </Box>
-               
-                <Box className={classes.groupContainer} component="span">
-                    <Navigation className={classes.tempIcon} style={{transform: `rotate(${weather.data.WindDirection.timeValuePairs[0].value}deg)`}}/>
-                    <Typography component="span">
-                        <span className={classes.tempText}>{weather.data.WindSpeedMS.timeValuePairs[0].value} m/s</span>{' '}
-                    </Typography>
-                </Box>
-               
-            </Grid> )}
+            )}
             {dataDetail.sighting && (
                 <Grid
                     item
@@ -127,15 +123,23 @@ const Overview = ({ dataDetail, weather }) => {
                     className={classes.algaeContainer}
                 >
                     <Grid item xs={12} container component="span" justify="center">
+                        <Typography
+                            component="span"
+                            className={`${classes.algaePadding} ${classes.algaeHeader}`}
+                        >
+                            Levähavainto
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} container component="span" justify="center">
                         <Typography component="span" className={classes.algaePadding}>
                             <InfoIcon className={classes.tempIcon} />
-                            <span className={classes.tempText}>
+                            <span className={classes.algaeText}>
                                 {dataDetail.sighting.text}
                             </span>{' '}
                         </Typography>
                         <Typography component="span" className={classes.algaePadding}>
                             <CalendarTodayIcon className={classes.tempIcon} />
-                            <span className={classes.tempText}>
+                            <span className={classes.algaeText}>
                                 {dataDetail.sighting.date} päivää sitten
                             </span>{' '}
                         </Typography>
@@ -143,7 +147,7 @@ const Overview = ({ dataDetail, weather }) => {
 
                     <Typography component="span">
                         <NearMeIcon className={classes.tempIcon} />
-                        <span className={classes.tempText}>
+                        <span className={classes.algaeText}>
                             {dataDetail.sighting.distance} metriä rannasta
                         </span>{' '}
                     </Typography>

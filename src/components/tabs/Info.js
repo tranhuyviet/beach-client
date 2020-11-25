@@ -23,7 +23,7 @@ const Info = ({ dataDetail }) => {
                     ) : (
                         <CloseIcon color="secondary" />
                     )}
-                    <Typography component="span">Suitable for children</Typography>
+                    <Typography component="span">Lapsiystävällinen</Typography>
                 </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.forDogs ? (
@@ -31,7 +31,7 @@ const Info = ({ dataDetail }) => {
                     ) : (
                         <CloseIcon color="secondary" />
                     )}
-                    <Typography component="span">Suitable for dogs</Typography>
+                    <Typography component="span">Koiraystävällinen</Typography>
                 </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.shower ? (
@@ -39,7 +39,7 @@ const Info = ({ dataDetail }) => {
                     ) : (
                         <CloseIcon color="secondary" />
                     )}
-                    <Typography component="span">Shower</Typography>
+                    <Typography component="span">Suihku</Typography>
                 </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.toilet ? (
@@ -47,7 +47,7 @@ const Info = ({ dataDetail }) => {
                     ) : (
                         <CloseIcon color="secondary" />
                     )}
-                    <Typography component="span">Toilet</Typography>
+                    <Typography component="span">WC</Typography>
                 </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.restaurant ? (
@@ -55,7 +55,7 @@ const Info = ({ dataDetail }) => {
                     ) : (
                         <CloseIcon color="secondary" />
                     )}
-                    <Typography component="span">Restaurant</Typography>
+                    <Typography component="span">Ravintola</Typography>
                 </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.winterSwimming ? (
@@ -63,11 +63,11 @@ const Info = ({ dataDetail }) => {
                     ) : (
                         <CloseIcon color="secondary" />
                     )}
-                    <Typography component="span">Winter Swimming</Typography>
+                    <Typography component="span">Avantouinti</Typography>
                 </Grid>
             </Grid>
             <Typography component="span" className={classes.moreInfoTitle}>
-                More infomation:
+                Lisätietoja:
             </Typography>
             <Grid item xs={12} component="span">
                 {infoText ? (

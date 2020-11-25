@@ -114,7 +114,7 @@ const SearchForm = ({
         <Dialog open={searchFormOpen} onClose={handleSearchFormClose} className={classes.dialog}>
             <DialogTitle className={classes.dialogTitleContainer}>
                 <div className={classes.dialogTitle}>
-                    Filter results by...
+                    Rajaa hakua
                     <IconButton
                         color="inherit"
                         onClick={handleSearchFormClose}
@@ -131,7 +131,7 @@ const SearchForm = ({
                     style={{ padding: '0 0 16px 0' }}
                     alignItems="center"
                 >
-                    <Typography className={classes.title}>LOCATIONS</Typography>
+                    <Typography className={classes.title}>KAUPUNGIT</Typography>
                     <Grid item xs={12} container justify="center">
                         <Button
                             variant={isHelsinkiSelected ? 'contained' : 'outlined'}
@@ -159,7 +159,7 @@ const SearchForm = ({
                         </Button>
                     </Grid>
 
-                    <Typography className={classes.title}>SERVICES</Typography>
+                    <Typography className={classes.title}>PALVELUT</Typography>
 
                     <Grid item xs={12} container style={{ paddingLeft: 16, paddingRight: 16 }}>
                         {/* <FormControlLabel control={<Checkbox />} label="Suitable for children" /> */}
@@ -170,7 +170,7 @@ const SearchForm = ({
                             startIcon={<ChildFriendlyIcon />}
                             onClick={() => setIsChildren((prev) => !prev)}
                         >
-                            Suitable for children
+                            Lapsiystävällinen
                         </Button>
                         <Button
                             variant={isForDogs ? 'contained' : 'outlined'}
@@ -179,7 +179,7 @@ const SearchForm = ({
                             startIcon={<PetsIcon />}
                             onClick={() => setIsForDogs((prev) => !prev)}
                         >
-                            Suitable for dogs
+                            Koiraystävällinen
                         </Button>
                         <Button
                             variant={isShower ? 'contained' : 'outlined'}
@@ -187,7 +187,7 @@ const SearchForm = ({
                             className={classes.services}
                             onClick={() => setIsShower((prev) => !prev)}
                         >
-                            Shower
+                            Suihku
                         </Button>
                         <Button
                             variant={isToilet ? 'contained' : 'outlined'}
@@ -196,7 +196,7 @@ const SearchForm = ({
                             startIcon={<WcIcon />}
                             onClick={() => setIsToilet((prev) => !prev)}
                         >
-                            Toilet
+                            WC
                         </Button>
                         <Button
                             variant={isRestaurant ? 'contained' : 'outlined'}
@@ -205,7 +205,7 @@ const SearchForm = ({
                             startIcon={<FastfoodIcon />}
                             onClick={() => setIsRestaurant((prev) => !prev)}
                         >
-                            Restaurant
+                            Ravintola
                         </Button>
                         <Button
                             variant={isChanging ? 'contained' : 'outlined'}
@@ -213,7 +213,7 @@ const SearchForm = ({
                             className={classes.services}
                             onClick={() => setIsChanging((prev) => !prev)}
                         >
-                            Changing Room
+                            Pukuhuone
                         </Button>
                         <Button
                             variant={isGuard ? 'contained' : 'outlined'}
@@ -222,7 +222,7 @@ const SearchForm = ({
                             startIcon={<SecurityIcon />}
                             onClick={() => setIsGuard((prev) => !prev)}
                         >
-                            Lifeguard
+                            Uimavalvonta
                         </Button>
                         <Button
                             variant={isFitness ? 'contained' : 'outlined'}
@@ -231,7 +231,7 @@ const SearchForm = ({
                             startIcon={<FitnessCenterIcon />}
                             onClick={() => setIsFitness((prev) => !prev)}
                         >
-                            Outdoor Fitness
+                            Fitness
                         </Button>
                         <Button
                             variant={isSport ? 'contained' : 'outlined'}
@@ -240,7 +240,7 @@ const SearchForm = ({
                             startIcon={<SportsVolleyballIcon />}
                             onClick={() => setIsSport((prev) => !prev)}
                         >
-                            Sport
+                            Urheilu
                         </Button>
                         <Button
                             variant={isKiosk ? 'contained' : 'outlined'}
@@ -249,7 +249,7 @@ const SearchForm = ({
                             startIcon={<StorefrontIcon />}
                             onClick={() => setIsKiosk((prev) => !prev)}
                         >
-                            Kiosk
+                            Kioski
                         </Button>
                         <Button
                             variant={isSauna ? 'contained' : 'outlined'}
@@ -265,7 +265,7 @@ const SearchForm = ({
                             className={classes.services}
                             onClick={() => setNoAlgae((prev) => !prev)}
                         >
-                            No algae
+                            Ei levähavaintoja
                         </Button>
                         <Button
                             variant={isWinterSwimming ? 'contained' : 'outlined'}
@@ -274,7 +274,7 @@ const SearchForm = ({
                             startIcon={<AcUnitIcon />}
                             onClick={() => setIsWinterSwimming((prev) => !prev)}
                         >
-                            Winter swimming
+                            Avantouinti
                         </Button>
                         <Button
                             variant={isTemp ? 'contained' : 'outlined'}
@@ -400,7 +400,7 @@ const SearchForm = ({
                                 filterSubmit();
                             }}
                         >
-                            Apply
+                            Hae
                         </Button>
                     </Grid>
                     {/* <Typography className={classes.titleOfFilter}>CITY</Typography>

@@ -82,7 +82,7 @@ const ReviewForm = ({
         <Dialog open={reviewFormOpen} onClose={handleReviewFormClose} className={classes.dialog}>
             <DialogTitle className={classes.dialogTitleContainer}>
                 <div className={classes.dialogTitle}>
-                    Review
+                    Arvostelu
                     <IconButton
                         color="inherit"
                         onClick={handleReviewFormClose}
@@ -97,8 +97,8 @@ const ReviewForm = ({
                     <TextField
                         type="text"
                         name="name"
-                        label="Name"
-                        placeholder="Enter your name"
+                        label="Nimi"
+                        placeholder="Syötä nimesi"
                         variant="outlined"
                         size="small"
                         className={classes.textInput}
@@ -111,8 +111,8 @@ const ReviewForm = ({
                     <TextField
                         type="text"
                         name="comment"
-                        label="Comment"
-                        placeholder="Enter your comment"
+                        label="Kommentti"
+                        placeholder="Syötä kommenttisi"
                         variant="outlined"
                         multiline
                         rows={4}
@@ -124,7 +124,7 @@ const ReviewForm = ({
                         helperText={errors && errors.comment}
                     />
                     <div className={classes.ratingContainer}>
-                        <Typography style={{ marginRight: 8 }}>Rating:</Typography>
+                        <Typography style={{ marginRight: 8 }}>Arvosana:</Typography>
 
                         <Rating
                             defaultValue={0}
@@ -146,7 +146,7 @@ const ReviewForm = ({
                             startIcon={<SendIcon />}
                             // onClick={handleReviewFormClose}
                         >
-                            Submit
+                            Lähetä
                         </Button>
                     </Grid>
                 </form>

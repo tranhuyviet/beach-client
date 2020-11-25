@@ -25,8 +25,11 @@ const Review = ({ beachName, reviews, setDataDetail, dataDetail }) => {
                 {reviews.length === 0 && (
                     <Grid container component="span" justify="center">
                         <Typography component="span">
-                            No reviews yet. Leave the first one!
+                            Ei arvosteluita. Ole ensimmäinen ja jätä arvostelu!
                         </Typography>
+                        {/* <Typography component="span">
+                            No reviews yet. Leave the first one!
+                        </Typography> */}
                     </Grid>
                 )}
                 {reviews &&
@@ -48,7 +51,7 @@ const Review = ({ beachName, reviews, setDataDetail, dataDetail }) => {
                     color="primary"
                     onClick={() => setReviewFormOpen(true)}
                 >
-                    Add Review
+                    Lisää arvostelu
                 </Button>
             </Grid>
             <ReviewForm
