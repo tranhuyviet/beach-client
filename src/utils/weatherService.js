@@ -2,7 +2,7 @@ import Metolib from '@fmidev/metolib';
 
 export async function getWeatherData() {
     return new Promise((resolve, reject) => {
-        const SERVER_URL = "http://opendata.fmi.fi/wfs";
+        const SERVER_URL = "https://opendata.fmi.fi/wfs";
         const STORED_QUERY_FORECAST = "fmi::forecast::hirlam::surface::point::multipointcoverage";
         const parser = new Metolib.WfsRequestParser();
 
