@@ -10,6 +10,7 @@ import {
     Grid,
     FormControlLabel,
     Button,
+    Slider,
     // Tooltip,
 } from '@material-ui/core';
 
@@ -27,6 +28,7 @@ import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import SecurityIcon from '@material-ui/icons/Security';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import StorefrontIcon from '@material-ui/icons/Storefront';
+import WavesIcon from '@material-ui/icons/Waves';
 
 const SearchForm = ({
     searchFormOpen,
@@ -61,8 +63,10 @@ const SearchForm = ({
     setIsKiosk,
     isSauna,
     setIsSauna,
-    isOver18,
-    setIsOver18,
+    isTemp,
+    setIsTemp,
+    temp,
+    setTemp,
     filterSubmit,
     noAlgae,
     setNoAlgae,
@@ -71,6 +75,40 @@ const SearchForm = ({
     // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
     // const [isEspooSelected, setIsEspooSelected] = useState(false);
     // const [isVantaaSelected, setIsVantaaSelected] = useState(false);
+    const marks = [
+        {
+            value: 0,
+            label: '0°C',
+        },
+        {
+            value: 5,
+            label: '5°C',
+        },
+        {
+            value: 10,
+            label: '10°C',
+        },
+        {
+            value: 15,
+            label: '15°C',
+        },
+        {
+            value: 20,
+            label: '20°C',
+        },
+        {
+            value: 25,
+            label: '25°C',
+        },
+        {
+            value: 30,
+            label: '30°C',
+        },
+    ];
+
+    const tempHandleChange = (event, newValue) => {
+        setTemp(newValue);
+    };
 
     return (
         <Dialog open={searchFormOpen} onClose={handleSearchFormClose} className={classes.dialog}>
@@ -123,7 +161,7 @@ const SearchForm = ({
 
                     <Typography className={classes.title}>SERVICES</Typography>
 
-                    <Grid item xs={12} container style={{ paddingLeft: 24 }}>
+                    <Grid item xs={12} container style={{ paddingLeft: 16, paddingRight: 16 }}>
                         {/* <FormControlLabel control={<Checkbox />} label="Suitable for children" /> */}
                         <Button
                             variant={isChildren ? 'contained' : 'outlined'}
@@ -238,6 +276,36 @@ const SearchForm = ({
                         >
                             Winter swimming
                         </Button>
+                        <Button
+                            variant={isTemp ? 'contained' : 'outlined'}
+                            color="primary"
+                            className={classes.services}
+                            startIcon={<WavesIcon />}
+                            onClick={() => setIsTemp((prev) => !prev)}
+                            style={{ display: 'flex', flexDirection: 'column' }}
+                        >
+                            Water Temperature Over &nbsp;
+                            <span
+                                style={{ fontWeight: 'bold', fontSize: '12px' }}
+                            >{` ${temp}°C`}</span>
+                        </Button>
+                        {isTemp && (
+                            <div className={classes.sliderContainer}>
+                                <Slider
+                                    defaultValue={15}
+                                    // color="secondary"
+                                    // getAriaValueText={valuetext}
+                                    onChange={tempHandleChange}
+                                    aria-labelledby="discrete-slider"
+                                    // valueLabelDisplay="auto"
+                                    step={5}
+                                    marks={marks}
+                                    min={0}
+                                    max={30}
+                                    className={classes.slider}
+                                />
+                            </div>
+                        )}
 
                         {/* 
                         <FormControlLabel
