@@ -11,6 +11,8 @@ import { UIContext } from '../../context/uiContext';
 import { useHistory } from 'react-router-dom';
 import { Fab, Avatar, Tooltip } from '@material-ui/core';
 import FilterIcon from '../../assets/images/filter.svg';
+import RoomIcon from '@material-ui/icons/Room';
+
 // import Footer from '../bars/Footer';
 import SearchForm from '../forms/SearchForm';
 // import { FilterDrama } from '@material-ui/icons';
@@ -265,11 +267,7 @@ const HomePage = () => {
                         offsetTop={-36}
                     >
                         <Tooltip title="Your location" placement="top" arrow>
-                            <img
-                                src="/userMarker.svg"
-                                alt="userPosition"
-                                className={classes.markerIcon}
-                            />
+                            <RoomIcon color={'primary'} style={{ fontSize: 36 }}></RoomIcon>
                         </Tooltip>
                     </Marker>
                 )}
