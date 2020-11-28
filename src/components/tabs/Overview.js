@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from './Overview.style';
-import { Grid, Typography, Box, Button } from '@material-ui/core';
+import { Grid, Typography, Box, Button, SvgIcon } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import UimarantaImg from '../../assets/images/uimaranta.jpg';
 
@@ -19,9 +19,26 @@ import InfoIcon from '@material-ui/icons/Info';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import Navigation from '@material-ui/icons/Navigation';
+import WcIcon from '@material-ui/icons/Wc';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
+import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
+import SecurityIcon from '@material-ui/icons/Security';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import BathtubIcon from '@material-ui/icons/Bathtub';
+import HotTubIcon from '@material-ui/icons/HotTub';
 
 // import * from '../../assets/svg/svg/';
 import { from } from '@apollo/client';
+
+function RoomIcon(props) {
+    return (
+        <SvgIcon {...props}>
+            <path d="M21.6,18.2L13,11.75v-0.91c1.65-0.49,2.8-2.17,2.43-4.05c-0.26-1.31-1.3-2.4-2.61-2.7C10.54,3.57,8.5,5.3,8.5,7.5h2 C10.5,6.67,11.17,6,12,6s1.5,0.67,1.5,1.5c0,0.84-0.69,1.52-1.53,1.5C11.43,8.99,11,9.45,11,9.99v1.76L2.4,18.2 C1.63,18.78,2.04,20,3,20h9h9C21.96,20,22.37,18.78,21.6,18.2z M6,18l6-4.5l6,4.5H6z" />
+        </SvgIcon>
+    );
+}
 
 const Overview = ({ dataDetail, weather }) => {
     const classes = useStyles();
@@ -53,7 +70,18 @@ const Overview = ({ dataDetail, weather }) => {
             <Typography component="span" style={{ marginTop: 8 }}>
                 {`${dataDetail.address}, ${dataDetail.city}`}
             </Typography>
-            {(dataDetail.forDogs || dataDetail.winterSwimming) && (
+            {(dataDetail.children ||
+                dataDetail.forDogs ||
+                dataDetail.shower ||
+                dataDetail.toilet ||
+                dataDetail.restaurant ||
+                dataDetail.changing ||
+                dataDetail.guard ||
+                dataDetail.fitness ||
+                dataDetail.sport ||
+                dataDetail.kiosk ||
+                dataDetail.sauna ||
+                dataDetail.winterSwimming) && (
                 <Grid
                     item
                     xs={12}
@@ -62,7 +90,17 @@ const Overview = ({ dataDetail, weather }) => {
                     className={classes.serviceContainer}
                     component="span"
                 >
+                    {dataDetail.children && <ChildFriendlyIcon className={classes.serviceIcon} />}
                     {dataDetail.forDogs && <PetsIcon className={classes.serviceIcon} />}
+                    {dataDetail.shower && <BathtubIcon className={classes.serviceIcon} />}
+                    {dataDetail.toilet && <WcIcon className={classes.serviceIcon} />}
+                    {dataDetail.restaurant && <FastfoodIcon className={classes.serviceIcon} />}
+                    {dataDetail.changing && <RoomIcon className={classes.serviceIcon} />}
+                    {dataDetail.guard && <SecurityIcon className={classes.serviceIcon} />}
+                    {dataDetail.fitness && <FitnessCenterIcon className={classes.serviceIcon} />}
+                    {dataDetail.sport && <SportsVolleyballIcon className={classes.serviceIcon} />}
+                    {dataDetail.kiosk && <StorefrontIcon className={classes.serviceIcon} />}
+                    {dataDetail.sauna && <HotTubIcon className={classes.serviceIcon} />}
                     {dataDetail.winterSwimming && <AcUnitIcon className={classes.serviceIcon} />}
                 </Grid>
             )}

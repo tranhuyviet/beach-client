@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         top: 0,
         width: '100%',
-        zIndex: 1
+        zIndex: 101,
     },
     logoContainer: {
         paddingLeft: 16,

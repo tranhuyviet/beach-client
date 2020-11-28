@@ -12,16 +12,15 @@ import {
     Button,
     Slider,
     // Tooltip,
+    SvgIcon,
 } from '@material-ui/core';
 
 import CloseIcon from '@material-ui/icons/Close';
 
 import DoneIcon from '@material-ui/icons/Done';
 import WcIcon from '@material-ui/icons/Wc';
-// import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
-// import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
@@ -29,6 +28,27 @@ import SecurityIcon from '@material-ui/icons/Security';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import WavesIcon from '@material-ui/icons/Waves';
+import BathtubIcon from '@material-ui/icons/Bathtub';
+import HotTubIcon from '@material-ui/icons/HotTub';
+
+function RoomIcon(props) {
+    return (
+        <SvgIcon {...props}>
+            <path d="M21.6,18.2L13,11.75v-0.91c1.65-0.49,2.8-2.17,2.43-4.05c-0.26-1.31-1.3-2.4-2.61-2.7C10.54,3.57,8.5,5.3,8.5,7.5h2 C10.5,6.67,11.17,6,12,6s1.5,0.67,1.5,1.5c0,0.84-0.69,1.52-1.53,1.5C11.43,8.99,11,9.45,11,9.99v1.76L2.4,18.2 C1.63,18.78,2.04,20,3,20h9h9C21.96,20,22.37,18.78,21.6,18.2z M6,18l6-4.5l6,4.5H6z" />
+        </SvgIcon>
+    );
+}
+
+function SaunaIcon(props) {
+    return (
+        <SvgIcon {...props}>
+            <path
+                d="M128.347,166.461v40.911c0,5.274,4.277,9.559,9.556,9.559c5.279,0,9.559-4.284,9.559-9.559v-40.911
+			c0-5.283-4.279-9.559-9.559-9.559C132.619,156.902,128.347,161.178,128.347,166.461z"
+            />
+        </SvgIcon>
+    );
+}
 
 const SearchForm = ({
     searchFormOpen,
@@ -185,6 +205,7 @@ const SearchForm = ({
                             variant={isShower ? 'contained' : 'outlined'}
                             color="primary"
                             className={classes.services}
+                            startIcon={<BathtubIcon />}
                             onClick={() => setIsShower((prev) => !prev)}
                         >
                             Suihku
@@ -211,6 +232,7 @@ const SearchForm = ({
                             variant={isChanging ? 'contained' : 'outlined'}
                             color="primary"
                             className={classes.services}
+                            startIcon={<RoomIcon />}
                             onClick={() => setIsChanging((prev) => !prev)}
                         >
                             Pukuhuone
@@ -255,6 +277,7 @@ const SearchForm = ({
                             variant={isSauna ? 'contained' : 'outlined'}
                             color="primary"
                             className={classes.services}
+                            startIcon={<HotTubIcon />}
                             onClick={() => setIsSauna((prev) => !prev)}
                         >
                             Sauna
@@ -284,7 +307,7 @@ const SearchForm = ({
                             onClick={() => setIsTemp((prev) => !prev)}
                             style={{ display: 'flex', flexDirection: 'column' }}
                         >
-                            Veden Lämpötila Suurempi&nbsp;
+                            Veden Lämpötila Yli&nbsp;
                             <span
                                 style={{ fontWeight: 'bold', fontSize: '12px' }}
                             >{` ${temp}°C`}</span>
