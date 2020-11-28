@@ -13,7 +13,7 @@ const Info = ({ dataDetail }) => {
     const info = dataDetail.info;
     const infoText = info.match(/[^\.!\?]+[\.!\?]+["']?|.+$/g);
 
-    console.log(dataDetail);
+    console.log(infoText);
     return (
         <Grid container direction="column" component="span">
             <Grid item xs={12}>
@@ -66,23 +66,27 @@ const Info = ({ dataDetail }) => {
                     <Typography component="span">Avantouinti</Typography>
                 </Grid>
             </Grid>
-            <Typography component="span" className={classes.moreInfoTitle}>
-                Lisätietoja:
-            </Typography>
-            <Grid item xs={12} component="span">
-                {infoText ? (
-                    infoText.map((inf, index) => (
-                        <div key={index} style={{ marginBottom: 8 }} component="span">
-                            <Typography component="span" key={index}>
-                                {inf}
-                            </Typography>
-                            <br />
-                        </div>
-                    ))
-                ) : (
-                    <Typography component="span">{info}</Typography>
-                )}
-            </Grid>
+            {infoText[0] === 'No data from API' ? null : (
+                <>
+                    <Typography component="span" className={classes.moreInfoTitle}>
+                        Lisätietoja:
+                    </Typography>
+                    <Grid item xs={12} component="span">
+                        {infoText ? (
+                            infoText.map((inf, index) => (
+                                <div key={index} style={{ marginBottom: 8 }} component="span">
+                                    <Typography component="span" key={index}>
+                                        {inf}
+                                    </Typography>
+                                    <br />
+                                </div>
+                            ))
+                        ) : (
+                            <Typography component="span">{info}</Typography>
+                        )}
+                    </Grid>
+                </>
+            )}
             {/* <Grid item xs={12} container style={{ marginTop: 16 }} component="span">
                 <Grid item xs={3} container justify="center" alignItems="center" component="span">
                     <AccessTimeIcon className={classes.infoIcon} />
