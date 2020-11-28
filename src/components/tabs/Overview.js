@@ -4,24 +4,23 @@ import { Grid, Typography, Box, Button } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import UimarantaImg from '../../assets/images/uimaranta.jpg';
 
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-
-// import WcIcon from '@material-ui/icons/Wc';
-// import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
-// import FastfoodIcon from '@material-ui/icons/Fastfood';
-
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import WavesIcon from '@material-ui/icons/Waves';
-import FlagIcon from '@material-ui/icons/Flag';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import InfoIcon from '@material-ui/icons/Info';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
-import Navigation from '@material-ui/icons/Navigation';
 
-// import * from '../../assets/svg/svg/';
 import { from } from '@apollo/client';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { ArrowUpward } from '@material-ui/icons';
 
 const Overview = ({ dataDetail, weather }) => {
     const classes = useStyles();
@@ -29,6 +28,34 @@ const Overview = ({ dataDetail, weather }) => {
     function redirect(url) {
         window.open(url);
     }
+
+    console.log('weather', weather);
+
+    const createRow = (weather) => {
+        for (let i = 0; i < weather.data.Temperature.timeValuePairs.length; i++) {
+            const timestamp = weather.data.Temperature.timeValuePairs[i].time;
+            const airTemperature = weather.data.Temperature.timeValuePairs[i].value;
+            const weatherSymbol = weather.data.WeatherSymbol3.timeValuePairs[i].value;
+            const windDirection = weather.data.WindDirection.timeValuePairs[i].value;
+            const WindSpeedMS = weather.data.WindSpeedMS.timeValuePairs[i].value;
+            const object = {
+                a: timestamp,
+                b: airTemperature,
+                c: weatherSymbol,
+                d: windDirection,
+                e: WindSpeedMS,
+            };
+            console.log('object', object);
+        }
+    };
+
+    if (weather) {
+        createRow(weather);
+    }
+
+    const formatDate = (timestamp) => {
+        return new Date(timestamp).toLocaleString();
+    };
 
     return (
         <Grid container direction="column" component="span" alignItems="center">
@@ -89,7 +116,6 @@ const Overview = ({ dataDetail, weather }) => {
                                 className={classes.weatherSymbol}
                                 src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[0].value}.svg`)}
                             />
-                            {/* <WbSunnyIcon className={`${classes.tempIcon} ${classes.tempIconBig}`} /> */}
                             <Typography component="span">
                                 <span className={`${classes.tempText} ${classes.tempTextBig}`}>
                                     {dataDetail.data[dataDetail.data.length - 1].temp_air} &#8451;{' '}
@@ -107,7 +133,7 @@ const Overview = ({ dataDetail, weather }) => {
                     </Box>
 
                     <Box className={classes.groupContainer} component="span">
-                        <Navigation
+                        <ArrowUpward
                             className={classes.tempIcon}
                             style={{
                                 transform: `rotate(${weather.data.WindDirection.timeValuePairs[0].value}deg)`,
@@ -118,6 +144,61 @@ const Overview = ({ dataDetail, weather }) => {
                                 {weather.data.WindSpeedMS.timeValuePairs[0].value} m/s
                             </span>{' '}
                         </Typography>
+                    </Box>
+                    <Box className={classes.groupContainer} component="span">
+                        <TableContainer component={Paper}>
+                            <Table className={classes.table} aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell component="th" scope="row">
+                                            Aika
+                                        </TableCell>
+                                        <TableCell component="th" scope="row">
+                                            Lämpötila
+                                        </TableCell>
+                                        <TableCell component="th" scope="row">
+                                            Sääsymboli
+                                        </TableCell>
+                                        <TableCell component="th" scope="row">
+                                            Tuulen suunta
+                                        </TableCell>
+                                        <TableCell component="th" scope="row">
+                                            Tuulennopeus
+                                        </TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {weather.data.Temperature.timeValuePairs.map((row, index) => (
+                                        <TableRow key={row.time}>
+                                            <TableCell component="th" scope="row">
+                                                {formatDate(row.time)}
+                                            </TableCell>
+                                            <TableCell align="right">{row.value}</TableCell>
+                                            <TableCell align="right">
+                                                <img
+                                                    className={classes.weatherSymbol}
+                                                    src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[index].value}.svg`)}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <ArrowUpward
+                                                    className={classes.tempIcon}
+                                                    style={{
+                                                        transform: `rotate(${weather.data.WindDirection.timeValuePairs[index].value}deg)`,
+                                                    }}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                {
+                                                    weather.data.WindSpeedMS.timeValuePairs[index]
+                                                        .value
+                                                }
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </Box>
                 </Grid>
             )}
