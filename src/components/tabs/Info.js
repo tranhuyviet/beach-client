@@ -58,6 +58,55 @@ const Info = ({ dataDetail }) => {
                     <Typography component="span">Ravintola</Typography>
                 </Grid>
                 <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.changing ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Pukuhuone</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.guard ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Uimavalvonta</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.fitness ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Fitness</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.sport ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Urheilu</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.kiosk ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Kioski</Typography>
+                </Grid>
+                <Grid item container alignItems="center" justify="flex-start">
+                    {dataDetail.sauna ? (
+                        <CheckIcon color="primary" />
+                    ) : (
+                        <CloseIcon color="secondary" />
+                    )}
+                    <Typography component="span">Sauna</Typography>
+                </Grid>
+
+                <Grid item container alignItems="center" justify="flex-start">
                     {dataDetail.winterSwimming ? (
                         <CheckIcon color="primary" />
                     ) : (
