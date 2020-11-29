@@ -11,7 +11,7 @@ export async function getWeatherData() {
             storedQueryId: STORED_QUERY_FORECAST,
             requestParameter: 'WeatherSymbol3,Temperature,WindDirection,WindSpeedMS',
             begin: new Date(), // Time now
-            end: new Date(new Date().getTime() + 23 * 60 * 60 * 1000), // Time tomorrow
+            end: new Date(new Date().getTime() + 4 * 60 * 60 * 1000), // Time tomorrow
             timestep: 60 * 60 * 1000, // Every hour
             sites: [
                 'Liukasaari',

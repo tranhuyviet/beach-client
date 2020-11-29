@@ -66,5 +66,22 @@ export const useStyles = makeStyles((theme) => ({
     weatherSymbol: {
         width: '64px',
         height: '64px'
+    },
+    tableWeatherSymbol: {
+        width: '40px',
+        height: '40px',
+        margin: '-8px'
+    },
+    heading: {
+        fontWeight: 'bold',
+    },
+    accordionDetails: {
+        padding: '0'
+    },
+    summary: {
+        flexGrow: '0'
+    },
+    windSpeed: {
+        width: '40px'
     }
 }));

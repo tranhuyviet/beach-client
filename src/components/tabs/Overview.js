@@ -28,8 +28,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { ArrowUpward } from '@material-ui/icons';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { from } from '@apollo/client';
+import moment from 'moment';
 
 function RoomIcon(props) {
     return (
@@ -47,7 +52,7 @@ const Overview = ({ dataDetail, weather }) => {
     }
 
     const formatDate = (timestamp) => {
-        return new Date(timestamp).toLocaleString();
+        return moment(timestamp).format('DD.MM.YYYY, HH.mm');
     };
 
     return (
@@ -132,7 +137,7 @@ const Overview = ({ dataDetail, weather }) => {
                             />
                             <Typography component="span">
                                 <span className={`${classes.tempText} ${classes.tempTextBig}`}>
-                                    {dataDetail.data[dataDetail.data.length - 1].temp_air} &#8451;{' '}
+                                    {`${dataDetail.data[dataDetail.data.length - 1].temp_air} °C`}{' '}
                                 </span>{' '}
                             </Typography>
                         </Box>
@@ -141,7 +146,7 @@ const Overview = ({ dataDetail, weather }) => {
                         <WavesIcon className={classes.tempIcon} />
                         <Typography component="span">
                             <span className={classes.tempText}>
-                                {dataDetail.data[dataDetail.data.length - 1].temp_water} &#8451;
+                                {`${dataDetail.data[dataDetail.data.length - 1].temp_water} °C`}
                             </span>{' '}
                         </Typography>
                     </Box>
@@ -159,61 +164,97 @@ const Overview = ({ dataDetail, weather }) => {
                             </span>{' '}
                         </Typography>
                     </Box>
-                    <Box className={classes.groupContainer} component="span">
-                        <TableContainer component={Paper}>
-                            <Table className={classes.table} aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            Aika
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            Lämpötila
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            Sääsymboli
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            Tuulen suunta
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            Tuulennopeus
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {weather.data.Temperature.timeValuePairs.map((row, index) => (
-                                        <TableRow key={row.time}>
-                                            <TableCell component="th" scope="row">
-                                                {formatDate(row.time)}
-                                            </TableCell>
-                                            <TableCell align="right">{row.value}</TableCell>
-                                            <TableCell align="right">
-                                                <img
-                                                    className={classes.weatherSymbol}
-                                                    src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[index].value}.svg`)}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <ArrowUpward
-                                                    className={classes.tempIcon}
-                                                    style={{
-                                                        transform: `rotate(${weather.data.WindDirection.timeValuePairs[index].value}deg)`,
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {
-                                                    weather.data.WindSpeedMS.timeValuePairs[index]
-                                                        .value
-                                                }
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Box>
+                    <div className="accordionContainer">
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                classes={{ content: classes.summary }}
+                            >
+                                <Typography component="div" classes={{ body1: classes.heading }}>
+                                    <div>Avaa sääennuste</div>
+                                </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails classes={{ root: classes.accordionDetails }}>
+                                <Box component="div">
+                                    <TableContainer component={Paper}>
+                                        <Table
+                                            className={classes.table}
+                                            size="small"
+                                            aria-label="simple table"
+                                        >
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell
+                                                        component="th"
+                                                        scope="row"
+                                                        classes={{ root: classes.rowHeader }}
+                                                    >
+                                                        Aika
+                                                    </TableCell>
+                                                    <TableCell
+                                                        component="th"
+                                                        scope="row"
+                                                        classes={{ root: classes.rowHeader }}
+                                                    >
+                                                        Lämpötila
+                                                    </TableCell>
+                                                    <TableCell
+                                                        component="th"
+                                                        scope="row"
+                                                        classes={{ root: classes.rowHeader }}
+                                                    >
+                                                        Tuuli
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {weather.data.Temperature.timeValuePairs.map(
+                                                    (row, index) => (
+                                                        <TableRow key={row.time}>
+                                                            <TableCell component="th" scope="row">
+                                                                {formatDate(row.time)}
+                                                            </TableCell>
+                                                            <TableCell align="center">
+                                                                <div>
+                                                                    {Math.round(row.value)} °C
+                                                                </div>
+                                                                <div>
+                                                                    <img
+                                                                        className={
+                                                                            classes.tableWeatherSymbol
+                                                                        }
+                                                                        alt="img"
+                                                                        src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[index].value}.svg`)}
+                                                                    />
+                                                                </div>
+                                                            </TableCell>
+                                                            <TableCell align="center">
+                                                                <div className={classes.windSpeed}>
+                                                                    {`${Math.round(
+                                                                        weather.data.WindSpeedMS
+                                                                            .timeValuePairs[index]
+                                                                            .value
+                                                                    )} m/s`}
+                                                                </div>
+                                                                <div>
+                                                                    <ArrowUpward
+                                                                        className={classes.tempIcon}
+                                                                        style={{
+                                                                            transform: `rotate(${weather.data.WindDirection.timeValuePairs[index].value}deg)`,
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    )
+                                                )}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                </Box>
+                            </AccordionDetails>
+                        </Accordion>
+                    </div>
                 </Grid>
             )}
             {dataDetail.sighting && (
