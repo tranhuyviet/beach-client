@@ -38,27 +38,15 @@ const ReviewForm = ({
         beachName,
     };
 
-    const {
-        values,
-        handleChange,
-        handleSubmit,
-        handleBlur,
-        errors,
-        setErrors,
-        // isValid,
-        setValues,
-        // touched,
-        setFieldValue,
-    } = useFormik({
+    const { values, handleChange, handleSubmit, handleBlur, errors, setErrors } = useFormik({
         initialValues,
         onSubmit,
         // validationSchema: signupSchema,
     });
 
-    const [createReview, { loading }] = useMutation(CREATE_REVIEW_MUTATION, {
+    const [createReview] = useMutation(CREATE_REVIEW_MUTATION, {
         update(proxy, result) {
             if (result) {
-                console.log(result.data.createReview);
                 setDataDetail({
                     ...dataDetail,
                     ratingAverage: result.data.createReview.ratingAverage,
@@ -74,7 +62,6 @@ const ReviewForm = ({
     });
 
     function onSubmit(values) {
-        console.log('REVIEW SUBMIT', values);
         createReview({ variables: { ...values, rating: values.rating * 1 } });
     }
 

@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, useReducer } from 'react';
-import axios from 'axios';
+import React, { createContext, useReducer } from 'react';
+
 const DataContext = createContext();
 
 const initialState = {
@@ -43,21 +43,7 @@ const beachReducer = (state, action) => {
 const DataProvider = (props) => {
     const [state, dispatch] = useReducer(beachReducer, initialState);
 
-    // const [dataAPI, setDataAPI] = useState([]);
-    // useEffect(() => {
-    //     axios
-    //         .get('https://iot.fvh.fi/opendata/uiras/uiras2_v1.json')
-    //         .then((res) => {
-    //             return res.data.sensors;
-    //         })
-    //         .then((data) => {
-    //             setDataAPI(Object.values(data));
-    //         })
-    //         .catch((error) => console.log('ERROR LOADING DATA FROM SERVER', error));
-    // }, []);
-
     const setBeaches = (beaches) => {
-        console.log('SET_BEACHES', beaches);
         dispatch({
             type: 'SET_BEACHES',
             payload: beaches,
@@ -72,7 +58,6 @@ const DataProvider = (props) => {
     };
 
     const setDataDetail = (beach) => {
-        console.log(beach);
         dispatch({
             type: 'SET_DATA_DETAIL',
             payload: beach,

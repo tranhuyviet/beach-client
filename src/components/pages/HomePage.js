@@ -1,31 +1,25 @@
 import React, { useContext, useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
-// import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
-// import PoolIcon from '@material-ui/icons/Pool';
 
 import { DataContext } from '../../context/dataContext';
 import { UIContext } from '../../context/uiContext';
 
-// import SearchBar from '../bars/SearchBar';
 import { useHistory } from 'react-router-dom';
 import { Fab, Avatar, Tooltip } from '@material-ui/core';
 import FilterIcon from '../../assets/images/filter.svg';
 import RoomIcon from '@material-ui/icons/Room';
 
-// import Footer from '../bars/Footer';
 import SearchForm from '../forms/SearchForm';
-// import { FilterDrama } from '@material-ui/icons';
 
 import { GET_BEACHES_QUERY } from '../../utils/graphql';
 import { /*useQuery,*/ useLazyQuery } from '@apollo/client';
-import _ from 'lodash';
 import { getWeatherData } from '../../utils/weatherService';
 
 const HomePage = () => {
     const classes = useStyles();
     const {
-        data: apiData,
+        // data: apiData,
         setBeaches,
         beach,
         // setBeachSelected,
@@ -71,7 +65,6 @@ const HomePage = () => {
 
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
-            console.log('COMPLETED', data);
             // If there is no weatherData in state, load it.
             if (!weatherData) {
                 getWeather();
@@ -169,23 +162,19 @@ const HomePage = () => {
     };
 
     useEffect(() => {
-        console.log('isback', isBack);
         getBeachesQuery();
         getUserLocation();
-    }, [isBack]);
+    }, [isBack, getBeachesQuery]);
 
     useEffect(() => {
         if (beach) {
             setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon, zoom: 14 });
         }
-    }, [beach]);
+    }, [beach, viewport]);
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
-    }, []);
-
-    // console.log('DATA LOAD FROM SERVER', data, beach);
-    // console.log('DATA LOAD FROM API', apiData);
+    // useEffect(() => {
+    //     navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
+    // }, []);
 
     return (
         <div className={classes.homepage}>
@@ -196,11 +185,6 @@ const HomePage = () => {
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 mapStyle="mapbox://styles/viet-tran/ck80svk49069i1is9zrq5yoae"
                 onViewportChange={(viewport) => {
-                    // if (beach) {
-                    //     setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
-                    // } else {
-                    //     setViewport(viewport);
-                    // }
                     setViewport(viewport);
                 }}
             >
@@ -218,9 +202,7 @@ const HomePage = () => {
                                 alt={beach.name}
                                 className={classes.markerIcon}
                                 onClick={() => {
-                                    console.log(beach.name);
                                     history.push(`/${beach.name}`);
-                                    // setBeachSelected(beach.name);
                                     setBeach(beach);
                                     setIsBack(true);
                                     setSearchBarOpen(false);
@@ -246,9 +228,7 @@ const HomePage = () => {
                                             alt={place.name}
                                             className={classes.markerIcon}
                                             onClick={() => {
-                                                console.log(place.name);
                                                 history.push(`/${place.name}`);
-                                                // setBeachSelected(place.name);
                                                 setBeach(place);
                                                 setIsBack(true);
                                                 setSearchBarOpen(false);

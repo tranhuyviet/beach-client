@@ -33,7 +33,6 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import { from } from '@apollo/client';
 import moment from 'moment';
 
 function RoomIcon(props) {
@@ -134,6 +133,7 @@ const Overview = ({ dataDetail, weather }) => {
                             <img
                                 className={classes.weatherSymbol}
                                 src={require(`../../assets/svg/svg/${weather.data.WeatherSymbol3.timeValuePairs[0].value}.svg`)}
+                                alt="weather"
                             />
                             <Typography component="span">
                                 <span className={`${classes.tempText} ${classes.tempTextBig}`}>

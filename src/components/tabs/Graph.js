@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStyles } from './Graph.style';
-import GraphImg from '../../assets/images/graph.png';
+
 import { Grid, Typography, Select, MenuItem } from '@material-ui/core';
 import CanvasJSReact from '../../assets/canvasjs.react';
 import moment from 'moment';
@@ -15,14 +15,13 @@ const Graph = ({ data }) => {
         setTimeSelect(event.target.value);
     };
 
-    console.log('GRAPH DATA', data);
     let airTemp = [];
     let waterTemp = [];
     let week = new Date();
     week.setDate(week.getDate() - 7);
     let day = new Date();
     day.setDate(day.getDate() - 2);
-    console.log(day);
+
     if (data) {
         data.forEach((dt) => {
             if (timeSelect === '2 weeks') {
@@ -59,22 +58,6 @@ const Graph = ({ data }) => {
             }
         });
     }
-    // const airTemp = data.map((dt) => {
-    //     return {
-    //         label: moment(dt.time).format('DD.MM'),
-    //         y: dt.temp_air,
-    //     };
-    // });
-
-    // const waterTemp = data.map((dt) => {
-    //     return {
-    //         label: moment(dt.time).format('DD.MM'),
-    //         y: dt.temp_water,
-    //     };
-    // });
-
-    console.log('air temp', airTemp);
-    console.log('water temp', waterTemp);
 
     const optionsAir = {
         theme: 'light2', // "light1", "dark1", "dark2"
@@ -87,9 +70,9 @@ const Graph = ({ data }) => {
             includeZero: false,
             valueFormatString: '##.# ℃',
         },
-        toolTip:{
-            content:"Aika: {label}</br>Lämpötila: {y} °C" ,
-          },
+        toolTip: {
+            content: 'Aika: {label}</br>Lämpötila: {y} °C',
+        },
         data: [
             {
                 type: 'spline',
@@ -111,9 +94,9 @@ const Graph = ({ data }) => {
             includeZero: false,
             valueFormatString: '##.# ℃',
         },
-        toolTip:{
-            content:"Aika: {label}</br>Lämpötila: {y} °C" ,
-          },
+        toolTip: {
+            content: 'Aika: {label}</br>Lämpötila: {y} °C',
+        },
         data: [
             {
                 type: 'spline',
@@ -123,8 +106,6 @@ const Graph = ({ data }) => {
             },
         ],
     };
-
-    console.log(timeSelect);
 
     return (
         <Grid container component="span" direction="column" alignItems="center">

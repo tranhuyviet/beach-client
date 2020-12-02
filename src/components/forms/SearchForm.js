@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useStyles } from './SearchForm.style';
 import {
     Dialog,
@@ -6,18 +6,13 @@ import {
     DialogContent,
     Typography,
     IconButton,
-    Checkbox,
     Grid,
-    FormControlLabel,
     Button,
     Slider,
-    // Tooltip,
     SvgIcon,
 } from '@material-ui/core';
 
 import CloseIcon from '@material-ui/icons/Close';
-
-import DoneIcon from '@material-ui/icons/Done';
 import WcIcon from '@material-ui/icons/Wc';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
@@ -35,17 +30,6 @@ function RoomIcon(props) {
     return (
         <SvgIcon {...props}>
             <path d="M21.6,18.2L13,11.75v-0.91c1.65-0.49,2.8-2.17,2.43-4.05c-0.26-1.31-1.3-2.4-2.61-2.7C10.54,3.57,8.5,5.3,8.5,7.5h2 C10.5,6.67,11.17,6,12,6s1.5,0.67,1.5,1.5c0,0.84-0.69,1.52-1.53,1.5C11.43,8.99,11,9.45,11,9.99v1.76L2.4,18.2 C1.63,18.78,2.04,20,3,20h9h9C21.96,20,22.37,18.78,21.6,18.2z M6,18l6-4.5l6,4.5H6z" />
-        </SvgIcon>
-    );
-}
-
-function SaunaIcon(props) {
-    return (
-        <SvgIcon {...props}>
-            <path
-                d="M128.347,166.461v40.911c0,5.274,4.277,9.559,9.556,9.559c5.279,0,9.559-4.284,9.559-9.559v-40.911
-			c0-5.283-4.279-9.559-9.559-9.559C132.619,156.902,128.347,161.178,128.347,166.461z"
-            />
         </SvgIcon>
     );
 }
@@ -92,9 +76,7 @@ const SearchForm = ({
     setNoAlgae,
 }) => {
     const classes = useStyles();
-    // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
-    // const [isEspooSelected, setIsEspooSelected] = useState(false);
-    // const [isVantaaSelected, setIsVantaaSelected] = useState(false);
+
     const marks = [
         {
             value: 0,
@@ -321,7 +303,7 @@ const SearchForm = ({
                                     onChange={tempHandleChange}
                                     aria-labelledby="discrete-slider"
                                     // valueLabelDisplay="auto"
-                                    step={5}
+                                    step={1}
                                     marks={marks}
                                     min={0}
                                     max={30}
@@ -329,81 +311,6 @@ const SearchForm = ({
                                 />
                             </div>
                         )}
-
-                        {/* 
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={isChildren}
-                                    onChange={(event) => setIsChildren(event.target.checked)}
-                                />
-                            }
-                            label="Suitable for children"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={isForDogs}
-                                    onChange={(event) => setIsForDogs(event.target.checked)}
-                                />
-                            }
-                            label="Suitable for dogs"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={isShower}
-                                    onChange={(event) => setIsShower(event.target.checked)}
-                                />
-                            }
-                            label="Shower"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={isToilet}
-                                    onChange={(event) => setIsToilet(event.target.checked)}
-                                />
-                            }
-                            label="Toilet"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={isRestaurant}
-                                    onChange={(event) => setIsRestaurant(event.target.checked)}
-                                />
-                            }
-                            label="Restaurant"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={isOver18}
-                                    onChange={(event) => setIsOver18(event.target.checked)}
-                                />
-                            }
-                            label="Water temperature > 18 &#8451;"
-                        />
-
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={noAlgae}
-                                    onChange={(event) => setNoAlgae(event.target.checked)}
-                                />
-                            }
-                            label="No algae"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={isWinterSwimming}
-                                    onChange={(event) => setIsWinterSwimming(event.target.checked)}
-                                />
-                            }
-                            label="Winter swimming"
-                        /> */}
                     </Grid>
                     <Grid
                         item
@@ -413,7 +320,6 @@ const SearchForm = ({
                         alignItems="center"
                         style={{ marginTop: 8, paddingRight: 24 }}
                     >
-                        {/* <FormControlLabel control={<Checkbox />} label="Show closest to me" /> */}
                         <Button
                             variant="contained"
                             color="primary"
@@ -426,24 +332,6 @@ const SearchForm = ({
                             Hae
                         </Button>
                     </Grid>
-                    {/* <Typography className={classes.titleOfFilter}>CITY</Typography>
-
-                    <FormControlLabel control={<Checkbox />} label="Helsinki" />
-                    <FormControlLabel control={<Checkbox />} label="Espoo" />
-                    <FormControlLabel control={<Checkbox />} label="Vantaa" />
-                    <Typography className={classes.titleOfFilter}>OTHER</Typography>
-                    <FormControlLabel control={<Checkbox />} label="Suitable for children" />
-                    <FormControlLabel control={<Checkbox />} label="Suitable for dogs" />
-                    <FormControlLabel control={<Checkbox />} label="Water temperature > 23" />
-                    <FormControlLabel control={<Checkbox />} label="No algae" /> */}
-                    {/* <Button
-                        variant="outlined"
-                        color="primary"
-                        style={{ marginTop: 16 }}
-                        onClick={handleSearchFormClose}
-                    >
-                        Apply
-                    </Button> */}
                 </Grid>
             </DialogContent>
         </Dialog>

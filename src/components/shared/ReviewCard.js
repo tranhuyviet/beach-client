@@ -2,8 +2,6 @@ import React from 'react';
 import { useStyles } from './ReviewCard.style';
 import { Avatar, Typography, Paper, Grid } from '@material-ui/core';
 
-import StarIcon from '@material-ui/icons/Star';
-// import StarHalfIcon from '@material-ui/icons/StarHalf';
 import moment from 'moment';
 import Rating from '@material-ui/lab/Rating';
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useStyles } from './Area.style';
 
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
@@ -23,12 +23,8 @@ const Area = ({ dataDetail }) => {
 
     const areaServicesUrl = `http://www.hel.fi/palvelukarttaws/rest/v4/unit/?lat=${dataDetail.lat}&lon=${dataDetail.lon}&distance=250`;
 
-    useEffect(() => {
-        getNearbyServices();
-    }, []);
-
-    const getNearbyServices = async () => {
-        const response = await await Axios.get(areaServicesUrl);
+    const getNearbyServices = useCallback(async () => {
+        const response = await Axios.get(areaServicesUrl);
         const nearbyServices = [];
         if (response) {
             response.data.forEach((service) => {
@@ -38,11 +34,14 @@ const Area = ({ dataDetail }) => {
                     lon: service.longitude,
                 });
             });
-            console.log('nearby services', nearbyServices);
+
             setNearbyServices(nearbyServices);
         }
-    };
-    // console.log(dataDetail);
+    }, [areaServicesUrl]);
+
+    useEffect(() => {
+        getNearbyServices();
+    }, [getNearbyServices]);
 
     return (
         <div component="span" className={classes.area}>
