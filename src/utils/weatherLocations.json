@@ -10,11 +10,19 @@
         },
         {
             "beach": "Lauttasaari (Vaskiniemi)",
+<<<<<<< HEAD
             "site": "Koivusaari,Helsinki"
         },
         {
             "beach": "Vetokannas (Vantaa)",
             "site": "Silvola,Vantaa"
+=======
+            "site": "Koivusaari"
+        },
+        {
+            "beach": "Vetokannas (Vantaa)",
+            "site": "Silvola"
+>>>>>>> ab37688ddabd33cd94d71c43fdfa000729b5d89a
         },
         {
             "beach": "Rastilan uimaranta",
@@ -22,7 +30,11 @@
         },
         {
             "beach": "Sompasauna",
+<<<<<<< HEAD
             "site": "Tervasaari,Helsinki"
+=======
+            "site": "Tervasaari"
+>>>>>>> ab37688ddabd33cd94d71c43fdfa000729b5d89a
         },
         {
             "beach": "Pihlajasaari",
@@ -30,11 +42,19 @@
         },
         {
             "beach": "Vasikkasaari",
+<<<<<<< HEAD
             "site": "Vasikkasaari,Helsinki"
         },
         {
             "beach": "Marjaniemen uimaranta",
             "site": "Marjaniemi,Helsinki"
+=======
+            "site": "Vasikkasaari"
+        },
+        {
+            "beach": "Marjaniemen uimaranta",
+            "site": "Marjaniemi"
+>>>>>>> ab37688ddabd33cd94d71c43fdfa000729b5d89a
         },
         {
             "beach": "Hietaniemi (Ourit)",
@@ -50,11 +70,19 @@
         },
         {
             "beach": "Hanikan uimaranta (Espoo)",
+<<<<<<< HEAD
             "site": "Granholmen,Espoo"
         },
         {
             "beach": "Eiranranta (Löyly)",
             "site": "Eira,Helsinki"
+=======
+            "site": "Granholmen"
+        },
+        {
+            "beach": "Eiranranta (Löyly)",
+            "site": "Eira"
+>>>>>>> ab37688ddabd33cd94d71c43fdfa000729b5d89a
         },
         {
             "beach": "Kattilajärvi (Espoo)",

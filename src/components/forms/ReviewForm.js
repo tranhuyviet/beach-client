@@ -13,7 +13,7 @@ import {
 
 import CloseIcon from '@material-ui/icons/Close';
 
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+// import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SendIcon from '@material-ui/icons/Send';
 
 import Rating from '@material-ui/lab/Rating';
@@ -38,27 +38,15 @@ const ReviewForm = ({
         beachName,
     };
 
-    const {
-        values,
-        handleChange,
-        handleSubmit,
-        handleBlur,
-        errors,
-        setErrors,
-        // isValid,
-        setValues,
-        // touched,
-        setFieldValue,
-    } = useFormik({
+    const { values, handleChange, handleSubmit, handleBlur, errors, setErrors } = useFormik({
         initialValues,
         onSubmit,
         // validationSchema: signupSchema,
     });
 
-    const [createReview, { loading }] = useMutation(CREATE_REVIEW_MUTATION, {
+    const [createReview] = useMutation(CREATE_REVIEW_MUTATION, {
         update(proxy, result) {
             if (result) {
-                console.log(result.data.createReview);
                 setDataDetail({
                     ...dataDetail,
                     ratingAverage: result.data.createReview.ratingAverage,
@@ -74,7 +62,6 @@ const ReviewForm = ({
     });
 
     function onSubmit(values) {
-        console.log('REVIEW SUBMIT', values);
         createReview({ variables: { ...values, rating: values.rating * 1 } });
     }
 
@@ -82,7 +69,7 @@ const ReviewForm = ({
         <Dialog open={reviewFormOpen} onClose={handleReviewFormClose} className={classes.dialog}>
             <DialogTitle className={classes.dialogTitleContainer}>
                 <div className={classes.dialogTitle}>
-                    Review
+                    Arvostelu
                     <IconButton
                         color="inherit"
                         onClick={handleReviewFormClose}
@@ -97,8 +84,8 @@ const ReviewForm = ({
                     <TextField
                         type="text"
                         name="name"
-                        label="Name"
-                        placeholder="Enter your name"
+                        label="Nimi"
+                        placeholder="Syötä nimesi"
                         variant="outlined"
                         size="small"
                         className={classes.textInput}
@@ -111,8 +98,8 @@ const ReviewForm = ({
                     <TextField
                         type="text"
                         name="comment"
-                        label="Comment"
-                        placeholder="Enter your comment"
+                        label="Kommentti"
+                        placeholder="Syötä kommenttisi"
                         variant="outlined"
                         multiline
                         rows={4}
@@ -124,7 +111,7 @@ const ReviewForm = ({
                         helperText={errors && errors.comment}
                     />
                     <div className={classes.ratingContainer}>
-                        <Typography style={{ marginRight: 8 }}>Rating:</Typography>
+                        <Typography style={{ marginRight: 8 }}>Arvosana:</Typography>
 
                         <Rating
                             defaultValue={0}
@@ -146,7 +133,7 @@ const ReviewForm = ({
                             startIcon={<SendIcon />}
                             // onClick={handleReviewFormClose}
                         >
-                            Submit
+                            Lähetä
                         </Button>
                     </Grid>
                 </form>

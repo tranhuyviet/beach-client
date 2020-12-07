@@ -43,4 +43,11 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.primary.main,
         margin: '10px 0',
     },
+    popup: {
+        width: '200px !important',
+        zIndex: 1,
+    },
+    serviceMarker: {
+        cursor: 'pointer',
+    },
 }));

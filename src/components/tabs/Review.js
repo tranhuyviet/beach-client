@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useStyles } from './Review.style';
 import { Paper, Grid, Button, Typography } from '@material-ui/core';
 
@@ -6,9 +6,6 @@ import ReviewCard from '../shared/ReviewCard';
 import ReviewForm from '../forms/ReviewForm';
 
 import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
-import { DataContext } from '../../context/dataContext';
-import { useQuery } from '@apollo/client';
-import { GET_BEACHE_BY_NAME_QUERY } from '../../utils/graphql';
 
 const Review = ({ beachName, reviews, setDataDetail, dataDetail }) => {
     const classes = useStyles();
@@ -25,7 +22,7 @@ const Review = ({ beachName, reviews, setDataDetail, dataDetail }) => {
                 {reviews.length === 0 && (
                     <Grid container component="span" justify="center">
                         <Typography component="span">
-                            No reviews yet. Leave the first one!
+                            Ei arvosteluita. Ole ensimmäinen ja jätä arvostelu!
                         </Typography>
                     </Grid>
                 )}
@@ -48,7 +45,7 @@ const Review = ({ beachName, reviews, setDataDetail, dataDetail }) => {
                     color="primary"
                     onClick={() => setReviewFormOpen(true)}
                 >
-                    Add Review
+                    Lisää arvostelu
                 </Button>
             </Grid>
             <ReviewForm

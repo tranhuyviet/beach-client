@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, useReducer } from 'react';
-import axios from 'axios';
+import React, { createContext, useReducer } from 'react';
+
 const DataContext = createContext();
 
 const initialState = {
@@ -28,12 +28,6 @@ const beachReducer = (state, action) => {
                 dataDetail: action.payload,
             };
         }
-        case 'SET_ALGAE_DATA': {
-            return {
-                ...state,
-                algaeData: action.payload,
-            };
-        }
         case 'SET_WEATHER_DATA': {
             return {
                 ...state,
@@ -49,21 +43,7 @@ const beachReducer = (state, action) => {
 const DataProvider = (props) => {
     const [state, dispatch] = useReducer(beachReducer, initialState);
 
-    // const [dataAPI, setDataAPI] = useState([]);
-    // useEffect(() => {
-    //     axios
-    //         .get('https://iot.fvh.fi/opendata/uiras/uiras2_v1.json')
-    //         .then((res) => {
-    //             return res.data.sensors;
-    //         })
-    //         .then((data) => {
-    //             setDataAPI(Object.values(data));
-    //         })
-    //         .catch((error) => console.log('ERROR LOADING DATA FROM SERVER', error));
-    // }, []);
-
     const setBeaches = (beaches) => {
-        console.log('SET_BEACHES', beaches);
         dispatch({
             type: 'SET_BEACHES',
             payload: beaches,
@@ -78,17 +58,9 @@ const DataProvider = (props) => {
     };
 
     const setDataDetail = (beach) => {
-        console.log(beach);
         dispatch({
             type: 'SET_DATA_DETAIL',
             payload: beach,
-        });
-    };
-
-    const setAlgaeData = (algaeData) => {
-        dispatch({
-            type: 'SET_ALGAE_DATA',
-            payload: algaeData,
         });
     };
 
@@ -109,8 +81,6 @@ const DataProvider = (props) => {
                 setBeach,
                 dataDetail: state.dataDetail,
                 setDataDetail,
-                algaeData: state.algaeData,
-                setAlgaeData,
                 weatherData: state.weatherData,
                 setWeatherData,
             }}

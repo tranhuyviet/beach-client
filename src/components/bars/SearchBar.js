@@ -6,8 +6,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import SearchIcon from '@material-ui/icons/Search';
 
-import SearchForm from '../forms/SearchForm';
-import Fade from 'react-reveal/Fade';
 import { DataContext } from '../../context/dataContext';
 
 const SearchBar = ({ handleSearchFormClose }) => {
@@ -46,7 +44,7 @@ const SearchBar = ({ handleSearchFormClose }) => {
                                 {...params}
                                 margin="normal"
                                 variant="outlined"
-                                placeholder="Search by name..."
+                                placeholder="Hae nimellä..."
                                 InputProps={{ ...params.InputProps }}
                             />
                         )}

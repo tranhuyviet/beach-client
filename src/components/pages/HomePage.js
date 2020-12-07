@@ -1,31 +1,34 @@
 import React, { useContext, useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
-// import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { useStyles } from './HomePage.style';
-// import PoolIcon from '@material-ui/icons/Pool';
 
 import { DataContext } from '../../context/dataContext';
 import { UIContext } from '../../context/uiContext';
 
-import SearchBar from '../bars/SearchBar';
 import { useHistory } from 'react-router-dom';
 import { Fab, Avatar, Tooltip } from '@material-ui/core';
 import FilterIcon from '../../assets/images/filter.svg';
-import Footer from '../bars/Footer';
+import RoomIcon from '@material-ui/icons/Room';
+
 import SearchForm from '../forms/SearchForm';
-import { FilterDrama } from '@material-ui/icons';
 
 import { GET_BEACHES_QUERY } from '../../utils/graphql';
-import { useQuery, useLazyQuery } from '@apollo/client';
-import _ from 'lodash';
-import { getAlgaeData } from '../../utils/algaeService';
+import { /*useQuery,*/ useLazyQuery } from '@apollo/client';
 import { getWeatherData } from '../../utils/weatherService';
 
 const HomePage = () => {
     const classes = useStyles();
-    const { data: apiData, setBeaches, beach, setBeachSelected, setBeach, algaeData, setAlgaeData, weatherData, setWeatherData } = useContext(
-        DataContext
-    );
+    const {
+        // data: apiData,
+        setBeaches,
+        beach,
+        // setBeachSelected,
+        setBeach,
+        // algaeData,
+        // setAlgaeData,
+        weatherData,
+        setWeatherData,
+    } = useContext(DataContext);
     const { setIsBack, setSearchBarOpen, isBack } = useContext(UIContext);
     const history = useHistory();
     const [searchFormOpen, setSearchFormOpen] = useState(false);
@@ -40,7 +43,14 @@ const HomePage = () => {
     const [isToilet, setIsToilet] = useState(false);
     const [isRestaurant, setIsRestaurant] = useState(false);
     const [isChildren, setIsChildren] = useState(false);
-    const [isOver18, setIsOver18] = useState(false);
+    const [isChanging, setIsChanging] = useState(false);
+    const [isGuard, setIsGuard] = useState(false);
+    const [isFitness, setIsFitness] = useState(false);
+    const [isSport, setIsSport] = useState(false);
+    const [isKiosk, setIsKiosk] = useState(false);
+    const [isSauna, setIsSauna] = useState(false);
+    const [isTemp, setIsTemp] = useState(false);
+    const [temp, setTemp] = useState(15);
     const [noAlgae, setNoAlgae] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
@@ -55,10 +65,7 @@ const HomePage = () => {
 
     const [getBeachesQuery, { data }] = useLazyQuery(GET_BEACHES_QUERY, {
         onCompleted(data) {
-            console.log('COMPLETED', data);
-            if (!algaeData) {
-                getAlgaeSightings(data.getBeaches);
-            }
+            // If there is no weatherData in state, load it.
             if (!weatherData) {
                 getWeather();
             }
@@ -69,15 +76,11 @@ const HomePage = () => {
         },
     });
 
-    const getAlgaeSightings = async (beaches) => {
-        const data = await getAlgaeData(beaches);
-        setAlgaeData(data);
-    };
-
-    const getWeather = async (a) => {
-        const weatherData = await getWeatherData(a);
+    const getWeather = async () => {
+        const weatherData = await getWeatherData();
+        // console.log('weatherData', weatherData);
         setWeatherData(weatherData);
-    }
+    };
 
     const getUserLocation = () => {
         if (navigator) {
@@ -99,7 +102,7 @@ const HomePage = () => {
             forDogs: '',
             winterSwimming: '',
             isOver18: '',
-            noAlgae: ''
+            noAlgae: '',
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -128,11 +131,30 @@ const HomePage = () => {
         if (isChildren) {
             variables.children = 'true';
         }
-        if (isOver18) {
-            variables.isOver18 = 'true';
+        if (isChanging) {
+            variables.changing = 'true';
         }
-        if(noAlgae) {
-            variables.noAlgae = 'true'
+        if (isGuard) {
+            variables.guard = 'true';
+        }
+        if (isFitness) {
+            variables.fitness = 'true';
+        }
+        if (isSport) {
+            variables.sport = 'true';
+        }
+        if (isKiosk) {
+            variables.kiosk = 'true';
+        }
+        if (isSauna) {
+            variables.sauna = 'true';
+        }
+        if (isTemp) {
+            variables.temp = temp;
+        }
+
+        if (noAlgae) {
+            variables.noAlgae = 'true';
         }
 
         console.log(variables);
@@ -140,23 +162,19 @@ const HomePage = () => {
     };
 
     useEffect(() => {
-        console.log('isback', isBack);
         getBeachesQuery();
         getUserLocation();
-    }, [isBack]);
+    }, [isBack, getBeachesQuery]);
 
     useEffect(() => {
         if (beach) {
             setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon, zoom: 14 });
         }
-    }, [beach]);
+    }, [beach, viewport]);
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
-    }, []);
-
-    // console.log('DATA LOAD FROM SERVER', data, beach);
-    // console.log('DATA LOAD FROM API', apiData);
+    // useEffect(() => {
+    //     navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
+    // }, []);
 
     return (
         <div className={classes.homepage}>
@@ -167,11 +185,6 @@ const HomePage = () => {
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 mapStyle="mapbox://styles/viet-tran/ck80svk49069i1is9zrq5yoae"
                 onViewportChange={(viewport) => {
-                    // if (beach) {
-                    //     setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
-                    // } else {
-                    //     setViewport(viewport);
-                    // }
                     setViewport(viewport);
                 }}
             >
@@ -189,9 +202,7 @@ const HomePage = () => {
                                 alt={beach.name}
                                 className={classes.markerIcon}
                                 onClick={() => {
-                                    console.log(beach.name);
                                     history.push(`/${beach.name}`);
-                                    // setBeachSelected(beach.name);
                                     setBeach(beach);
                                     setIsBack(true);
                                     setSearchBarOpen(false);
@@ -217,9 +228,7 @@ const HomePage = () => {
                                             alt={place.name}
                                             className={classes.markerIcon}
                                             onClick={() => {
-                                                console.log(place.name);
                                                 history.push(`/${place.name}`);
-                                                // setBeachSelected(place.name);
                                                 setBeach(place);
                                                 setIsBack(true);
                                                 setSearchBarOpen(false);
@@ -238,11 +247,7 @@ const HomePage = () => {
                         offsetTop={-36}
                     >
                         <Tooltip title="Your location" placement="top" arrow>
-                            <img
-                                src="/userMarker.svg"
-                                alt="userPosition"
-                                className={classes.markerIcon}
-                            />
+                            <RoomIcon color={'primary'} style={{ fontSize: 36 }}></RoomIcon>
                         </Tooltip>
                     </Marker>
                 )}
@@ -280,8 +285,22 @@ const HomePage = () => {
                 setIsRestaurant={setIsRestaurant}
                 isChildren={isChildren}
                 setIsChildren={setIsChildren}
-                isOver18={isOver18}
-                setIsOver18={setIsOver18}
+                isChanging={isChanging}
+                setIsChanging={setIsChanging}
+                isGuard={isGuard}
+                setIsGuard={setIsGuard}
+                isFitness={isFitness}
+                setIsFitness={setIsFitness}
+                isSport={isSport}
+                setIsSport={setIsSport}
+                isKiosk={isKiosk}
+                setIsKiosk={setIsKiosk}
+                isSauna={isSauna}
+                setIsSauna={setIsSauna}
+                isTemp={isTemp}
+                setIsTemp={setIsTemp}
+                temp={temp}
+                setTemp={setTemp}
                 noAlgae={noAlgae}
                 setNoAlgae={setNoAlgae}
                 filterSubmit={filterSubmit}

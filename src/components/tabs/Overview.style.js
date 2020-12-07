@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     name: {
         fontWeight: 'bold',
         fontSize: '24px',
+        textAlign: 'center'
     },
     serviceContainer: {
         marginTop: 16,
@@ -22,14 +23,11 @@ export const useStyles = makeStyles((theme) => ({
         ...theme.share.serviceIcon,
         color: theme.palette.primary.main,
     },
-    tempContainer: {
-        marginTop: 8,
-    },
     groupContainer: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '8px 16px',
+        padding: '4px 16px',
     },
     tempIcon: {
         fontSize: '24px',
@@ -41,10 +39,7 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: 60,
     },
     tempText: {
-        fontSize: '25px',
-    },
-    tempTextBig: {
-        fontSize: 40,
+        fontSize: '24px',
     },
     buttonGroup: {
         marginTop: 16,
@@ -53,14 +48,40 @@ export const useStyles = makeStyles((theme) => ({
         height: 40,
         margin: '0 16px',
     },
+    algaeContainer: {
+        marginTop: '8px'
+    },
+    algaeHeader: {
+        fontWeight: 'bold'
+    },
     algaePadding: {
         padding: '4px'
     },
-    algaeContainer: {
-        outline: '1px solid',
-        outlineColor: theme.palette.primary.main,
+    algaeText: {
+        fontSize: '18px'
     },
     routingButton: {
         margin: '8px'
+    },
+    weatherSymbol: {
+        width: '64px',
+        height: '64px'
+    },
+    tableWeatherSymbol: {
+        width: '40px',
+        height: '40px',
+        margin: '-8px'
+    },
+    heading: {
+        fontWeight: 'bold',
+    },
+    accordionDetails: {
+        padding: '0'
+    },
+    summary: {
+        flexGrow: '0'
+    },
+    windSpeed: {
+        width: '40px'
     }
 }));

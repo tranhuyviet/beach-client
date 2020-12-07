@@ -10,7 +10,13 @@ export const GET_BEACHES_QUERY = gql`
         $toilet: String
         $restaurant: String
         $children: String
-        $isOver18: String
+        $changing: String
+        $guard: String
+        $fitness: String
+        $sport: String
+        $kiosk: String
+        $sauna: String
+        $temp: Int
         $noAlgae: String
     ) {
         getBeaches(
@@ -21,7 +27,13 @@ export const GET_BEACHES_QUERY = gql`
             toilet: $toilet
             restaurant: $restaurant
             children: $children
-            isOver18: $isOver18
+            changing: $changing
+            guard: $guard
+            fitness: $fitness
+            sport: $sport
+            kiosk: $kiosk
+            sauna: $sauna
+            temp: $temp
             noAlgae: $noAlgae
         ) {
             name
@@ -35,6 +47,13 @@ export const GET_BEACHES_QUERY = gql`
             toilet
             restaurant
             children
+            changing
+            guard
+            fitness
+            sport
+            kiosk
+            sauna
+            temp
             noAlgae
         }
     }
@@ -55,6 +74,13 @@ export const GET_BEACHE_BY_NAME_QUERY = gql`
             toilet
             restaurant
             children
+            changing
+            guard
+            fitness
+            sport
+            kiosk
+            sauna
+            temp
             reviews {
                 name
                 comment

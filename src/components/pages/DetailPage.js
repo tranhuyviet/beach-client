@@ -1,40 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import {
-    Grid,
-    Tab,
-    Tabs,
-    Paper,
-    Typography,
-    Box,
-    Button,
-    Divider,
-    Tooltip,
-    CircularProgress,
-} from '@material-ui/core';
+import { Grid, Tab, Tabs, Paper, Box, CircularProgress } from '@material-ui/core';
 import { useStyles } from './DetailPage.style';
 
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
-import WavesIcon from '@material-ui/icons/Waves';
-import StarIcon from '@material-ui/icons/Star';
-import StarHalfIcon from '@material-ui/icons/StarHalf';
-import UpdateIcon from '@material-ui/icons/Update';
-import AccessibleIcon from '@material-ui/icons/Accessible';
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import WcIcon from '@material-ui/icons/Wc';
-import LocalParkingIcon from '@material-ui/icons/LocalParking';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
-
-import UimarantaImg from '../../assets/images/uimaranta.jpg';
-import GraphImg from '../../assets/images/graph.png';
-
-// import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
-// import HSLLogo from '../../assets/images/hsl-logo.svg';
-import moment from 'moment';
-import ReviewCard from '../shared/ReviewCard';
-
-import ReviewForm from '../forms/ReviewForm';
 import { withStyles } from '@material-ui/core/styles';
 
 import Overview from '../tabs/Overview';
@@ -49,7 +17,7 @@ import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
 import { GET_BEACHE_BY_NAME_QUERY } from '../../utils/graphql';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { /*useLazyQuery,*/ useQuery } from '@apollo/client';
 import { DataContext } from '../../context/dataContext';
 import { getWeatherData } from '../../utils/weatherService';
 
@@ -68,7 +36,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box p={3}>
-                    <Typography>{children}</Typography>
+                    <div>{children}</div>
                 </Box>
             )}
         </div>
@@ -90,25 +58,17 @@ const AntTab = withStyles((theme) => ({
         minWidth: 60,
         fontWeight: theme.typography.fontWeightRegular,
         padding: '0px 4px',
-        // marginRight: theme.spacing(1),
-        // borderRight: '1px solid',
-        // borderBottom: '1px solid',
-        // borderRightColor: theme.palette.grey['400'],
-        // borderBottomLeftRadius: 10,
-        // borderBottomRightRadius: 10,
+
         '&:last-child': {
             borderRight: 'none',
         },
         '&:hover': {
             color: theme.palette.primary.main,
-
-            // opacity: 1,
         },
         '&$selected': {
             color: theme.palette.primary.main,
-            // color: theme.palette.common.white,
+
             fontWeight: 'bold',
-            //  backgroundColor: theme.palette.primary.main,
         },
         // '&:focus': {
         //     color: '#40a9ff',
@@ -121,14 +81,11 @@ const DetailPage = (props) => {
     const classes = useStyles();
 
     const [dataDetail, setDataDetail] = useState(null);
-    // const { dataDetail, setDataDetail } = useContext(DataContext);
-    const { algaeData, setAlgaeData } = useContext(DataContext);
-    const { weatherData, setWeatherData } = useContext(DataContext);
+
     const [tabValue, setTabValue] = useState(0);
-    const [algaeSighting, setAlgaeSighting] = useState('');
+    const { weatherData, setWeatherData } = useContext(DataContext);
     const [weather, setWeather] = useState('');
 
-    useEffect(() => setAlgaeSighting(''), []);
     useEffect(() => setWeather(''), []);
 
     const handleTabValueChange = (event, newValue) => {
@@ -140,12 +97,11 @@ const DetailPage = (props) => {
     const { loading } = useQuery(GET_BEACHE_BY_NAME_QUERY, {
         variables: { name },
         onCompleted(data) {
-            getAlgaes(data.getBeach);
             moi(data.getBeach);
             setDataDetail(data.getBeach);
 
             if (!weatherData) {
-                getWeather();
+                //getWeather();
             }
         },
         onError(error) {
@@ -153,46 +109,30 @@ const DetailPage = (props) => {
         },
     });
 
-    const getAlgaes = (beach) => {
-        if (algaeData) {
-            setAlgaeSighting(findAlgae());
-        } 
-    };
-
     const moi = (beach) => {
         if (weatherData) {
-            filterWeatherData(beach);
+            filterWeatherData(beach, weatherData);
         } else {
-            // Get weather data if refresh
-            console.log('Säädataa ei ollut ja päästiin tähän');
-            getWeatherData().then(weatherData => {
-                setWeather(weatherData);
-                console.log(weatherData, 'tämä on weatherData');
-                filterWeatherData(beach);
+            // Get new weather data if page refresh
+            getWeatherData().then((newWeatherData) => {
+                setWeatherData(newWeatherData);
+                filterWeatherData(beach, newWeatherData);
             });
         }
     };
 
-    const getWeather = async (a) => {
-        const weatherData = await getWeatherData(a);
-        setWeatherData(weatherData);
-    };
-
-    const findAlgae = () => {
-        return algaeData.find((match) => match.beach.name === name);
-    };
-
-    const filterWeatherData = (beach) => {
-        const filteredLocation = weatherLocations.locations.find(location => location.beach === beach.name);
-        console.log('weatherData :>> ', weatherData);
-        const filteredWeatherData = weatherData.locations.find(location => location.info.name === filteredLocation.site);
-        console.log('filteredWeatherData :>> ', filteredWeatherData);
+    const filterWeatherData = (beach, weatherData3) => {
+        // Filter JSON locations which matches the beach name
+        const filteredLocation = weatherLocations.locations.find(
+            (location) => location.beach === beach.name
+        );
+        // Filter weatherData location which matches the filteredLocation
+        const filteredWeatherData = weatherData3.locations.find(
+            (location) => location.info.name === filteredLocation.site
+        );
         setWeather(filteredWeatherData);
-        return
+        return;
     };
-
-
-    // console.log(dataDetail);
 
     return (
         <Paper elevation={0} square className={classes.detailPage}>
@@ -247,7 +187,7 @@ const DetailPage = (props) => {
                     <>
                         {/* OVERVIEW TAB */}
                         <TabPanel value={tabValue} index={0} style={{ backgroundColor: 'white' }}>
-                            <Overview dataDetail={dataDetail} algaeSighting={algaeSighting} weather={weather} />
+                            <Overview dataDetail={dataDetail} weather={weather} />
                         </TabPanel>
 
                         {/* INFOMATION  TAB*/}

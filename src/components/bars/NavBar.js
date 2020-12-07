@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useStyles } from './NavBar.style';
 import { Paper, Grid, Typography, IconButton, Tooltip } from '@material-ui/core';
 
 import PoolIcon from '@material-ui/icons/Pool';
-import MenuIcon from '@material-ui/icons/Menu';
+
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -17,8 +17,7 @@ const NavBar = () => {
     const history = useHistory();
     const { isBack, setIsBack, searchBarOpen, setSearchBarOpen } = useContext(UIContext);
     const { setBeach } = useContext(DataContext);
-    // const [searchBarOpen, setSearchBarOpen] = useState(false);
-    // console.log('ISBACK', isBack);
+
     const handleSearchFormClose = () => {
         setSearchBarOpen(false);
         setBeach(null);
