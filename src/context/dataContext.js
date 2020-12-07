@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
-import { getAlgaeData } from '../utils/algaeService';
-
 const DataContext = createContext();
 
 const initialState = {

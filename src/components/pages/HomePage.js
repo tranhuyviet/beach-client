@@ -36,6 +36,12 @@ const HomePage = () => {
     const [isVantaaSelected, setIsVantaaSelected] = useState(false);
     const [isForDogs, setIsForDogs] = useState(false);
     const [isWinterSwimming, setIsWinterSwimming] = useState(false);
+    const [isShower, setIsShower] = useState(false);
+    const [isToilet, setIsToilet] = useState(false);
+    const [isRestaurant, setIsRestaurant] = useState(false);
+    const [isChildren, setIsChildren] = useState(false);
+    const [isOver18, setIsOver18] = useState(false);
+    const [noAlgae, setNoAlgae] = useState(false);
 
     const [userPosition, setUserPosition] = useState(false);
 
@@ -92,6 +98,8 @@ const HomePage = () => {
             city: [],
             forDogs: '',
             winterSwimming: '',
+            isOver18: '',
+            noAlgae: ''
         };
         if (isHelsinkiSelected) {
             variables.city.push('Helsinki');
@@ -107,10 +115,27 @@ const HomePage = () => {
         }
         if (isWinterSwimming) {
             variables.winterSwimming = 'true';
-        } else {
-            variables.forDogs = '';
+        }
+        if (isShower) {
+            variables.shower = 'true';
+        }
+        if (isToilet) {
+            variables.toilet = 'true';
+        }
+        if (isRestaurant) {
+            variables.restaurant = 'true';
+        }
+        if (isChildren) {
+            variables.children = 'true';
+        }
+        if (isOver18) {
+            variables.isOver18 = 'true';
+        }
+        if(noAlgae) {
+            variables.noAlgae = 'true'
         }
 
+        console.log(variables);
         getBeachesQuery({ variables });
     };
 
@@ -130,7 +155,7 @@ const HomePage = () => {
         navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
     }, []);
 
-    console.log('DATA LOAD FROM SERVER', data, beach);
+    // console.log('DATA LOAD FROM SERVER', data, beach);
     // console.log('DATA LOAD FROM API', apiData);
 
     return (
@@ -140,7 +165,7 @@ const HomePage = () => {
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                mapStyle="mapbox://styles/viet-tran/ck53yt4us8iho1cqlcz1xaaxq"
+                mapStyle="mapbox://styles/viet-tran/ck80svk49069i1is9zrq5yoae"
                 onViewportChange={(viewport) => {
                     // if (beach) {
                     //     setViewport({ ...viewport, latitude: beach.lat, longitude: beach.lon });
@@ -151,7 +176,13 @@ const HomePage = () => {
                 }}
             >
                 {beach ? (
-                    <Marker key={beach.name} latitude={beach.lat} longitude={beach.lon}>
+                    <Marker
+                        key={beach.name}
+                        latitude={beach.lat}
+                        longitude={beach.lon}
+                        offsetLeft={-18}
+                        offsetTop={-36}
+                    >
                         <Tooltip title={beach.name} placement="top" arrow>
                             <img
                                 src="/markerRed.svg"
@@ -173,7 +204,13 @@ const HomePage = () => {
                         {data &&
                             data.getBeaches &&
                             data.getBeaches.map((place) => (
-                                <Marker key={place.name} latitude={place.lat} longitude={place.lon}>
+                                <Marker
+                                    key={place.name}
+                                    latitude={place.lat}
+                                    longitude={place.lon}
+                                    offsetLeft={-18}
+                                    offsetTop={-36}
+                                >
                                     <Tooltip title={place.name} placement="top" arrow>
                                         <img
                                             src="/markerRed.svg"
@@ -194,7 +231,12 @@ const HomePage = () => {
                     </>
                 )}
                 {userPosition && (
-                    <Marker latitude={userPosition.latitude} longitude={userPosition.longitude}>
+                    <Marker
+                        latitude={userPosition.latitude}
+                        longitude={userPosition.longitude}
+                        offsetLeft={-18}
+                        offsetTop={-36}
+                    >
                         <Tooltip title="Your location" placement="top" arrow>
                             <img
                                 src="/userMarker.svg"
@@ -230,6 +272,18 @@ const HomePage = () => {
                 setIsForDogs={setIsForDogs}
                 isWinterSwimming={isWinterSwimming}
                 setIsWinterSwimming={setIsWinterSwimming}
+                isShower={isShower}
+                setIsShower={setIsShower}
+                isToilet={isToilet}
+                setIsToilet={setIsToilet}
+                isRestaurant={isRestaurant}
+                setIsRestaurant={setIsRestaurant}
+                isChildren={isChildren}
+                setIsChildren={setIsChildren}
+                isOver18={isOver18}
+                setIsOver18={setIsOver18}
+                noAlgae={noAlgae}
+                setNoAlgae={setNoAlgae}
                 filterSubmit={filterSubmit}
             />
         </div>

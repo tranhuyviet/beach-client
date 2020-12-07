@@ -16,6 +16,8 @@ import FlagIcon from '@material-ui/icons/Flag';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import InfoIcon from '@material-ui/icons/Info';
+import PetsIcon from '@material-ui/icons/Pets';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 import HSLLogo from '../../assets/images/HSL_logo1.png';
 import GoogleMapLogo from '../../assets/images/64px-Google_Maps_icon.svg.png';
@@ -62,18 +64,19 @@ const Overview = ({ dataDetail, algaeSighting, weather }) => {
                 <AccessTimeIcon style={{ fontSize: 32, marginRight: 8 }} />
                 <Typography component="span">OPEN</Typography>
             </Grid>
-            <Grid
-                item
-                xs={12}
-                container
-                justify="center"
-                className={classes.serviceContainer}
-                component="span"
-            >
-                <AccessibleForwardIcon className={classes.serviceIcon} />
-                <WcIcon className={classes.serviceIcon} />
-                <FastfoodIcon className={classes.serviceIcon} />
-            </Grid>
+            {(dataDetail.forDogs || dataDetail.winterSwimming) && (
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    justify="center"
+                    className={classes.serviceContainer}
+                    component="span"
+                >
+                    {dataDetail.forDogs && <PetsIcon className={classes.serviceIcon} />}
+                    {dataDetail.winterSwimming && <AcUnitIcon className={classes.serviceIcon} />}
+                </Grid>
+            )}
             <Grid
                 item
                 xs={12}
@@ -107,7 +110,7 @@ const Overview = ({ dataDetail, algaeSighting, weather }) => {
                     </Typography>
                 </Box>
             </Grid>
-            {algaeSighting.sighting && (
+            {dataDetail.sighting && (
                 <Grid
                     item
                     xs={12}
@@ -120,13 +123,13 @@ const Overview = ({ dataDetail, algaeSighting, weather }) => {
                         <Typography component="span" className={classes.algaePadding}>
                             <InfoIcon className={classes.tempIcon} />
                             <span className={classes.tempText}>
-                                {algaeSighting.sighting.printouts['Display fi']}
+                                {dataDetail.sighting.text}
                             </span>{' '}
                         </Typography>
                         <Typography component="span" className={classes.algaePadding}>
                             <CalendarTodayIcon className={classes.tempIcon} />
                             <span className={classes.tempText}>
-                                {algaeSighting.date} päivää sitten
+                                {dataDetail.sighting.date} päivää sitten
                             </span>{' '}
                         </Typography>
                     </Grid>
@@ -134,7 +137,7 @@ const Overview = ({ dataDetail, algaeSighting, weather }) => {
                     <Typography component="span">
                         <NearMeIcon className={classes.tempIcon} />
                         <span className={classes.tempText}>
-                            {algaeSighting.distance} metriä rannasta
+                            {dataDetail.sighting.distance} metriä rannasta
                         </span>{' '}
                     </Typography>
                 </Grid>
@@ -152,15 +155,24 @@ const Overview = ({ dataDetail, algaeSighting, weather }) => {
                 justify="center"
                 className={classes.buttonGroup}
             >
-                
-                <Button variant="contained" color="primary" className={classes.routingButton} onClick={() => {
-                        redirect(algaeSighting.hslUrl);
-                    }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.routingButton}
+                    onClick={() => {
+                        redirect(dataDetail.hslUrl);
+                    }}
+                >
                     Avaa reittioppaassa
                 </Button>
-                <Button variant="contained" color="primary" className={classes.routingButton} onClick={() => {
-                        redirect(algaeSighting.mapsUrl);
-                    }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.routingButton}
+                    onClick={() => {
+                        redirect(dataDetail.mapsUrl);
+                    }}
+                >
                     Avaa Google Mapsissa
                 </Button>
             </Grid>

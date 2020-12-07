@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'relative',
     },
     fab: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 20,
         right: 20,
         color: theme.palette.common.white,
@@ -18,8 +18,8 @@ export const useStyles = makeStyles((theme) => ({
     markerIcon: {
         margin: 0,
         padding: 0,
-        width: 35,
-        height: 35,
+        width: 36,
+        height: 36,
         cursor: 'pointer',
         '&:hover': {
             width: 40,

@@ -35,7 +35,19 @@ const SearchForm = ({
     setIsForDogs,
     isWinterSwimming,
     setIsWinterSwimming,
+    isShower,
+    setIsShower,
+    isToilet,
+    setIsToilet,
+    isRestaurant,
+    setIsRestaurant,
+    isChildren,
+    setIsChildren,
+    isOver18,
+    setIsOver18,
     filterSubmit,
+    noAlgae,
+    setNoAlgae,
 }) => {
     const classes = useStyles();
     // const [isHelsinkiSelected, setIsHelsinkiSelected] = useState(false);
@@ -63,7 +75,7 @@ const SearchForm = ({
                     style={{ padding: '0 0 16px 0' }}
                     alignItems="center"
                 >
-                    <Typography className={classes.title}>LOCATION</Typography>
+                    <Typography className={classes.title}>LOCATIONS</Typography>
                     <Grid item xs={12} container justify="center">
                         <Button
                             variant={isHelsinkiSelected ? 'contained' : 'outlined'}
@@ -107,8 +119,8 @@ const SearchForm = ({
                             labelPlacement="bottom"
                         />
                     </Grid> */}
-                    <Typography className={classes.title}>AMENITIES</Typography>
-                    <Grid item xs={12} container justify="center">
+                    <Typography className={classes.title}>SERVICES</Typography>
+                    {/* <Grid item xs={12} container justify="center">
                         <WcIcon className={classes.serviceIcon} />
                         <AccessibleForwardIcon className={classes.serviceIcon} />
                         <FastfoodIcon className={classes.serviceIcon} />
@@ -124,18 +136,73 @@ const SearchForm = ({
                             />
                         </Tooltip>
                         <LocalParkingIcon className={classes.serviceIcon} />
-                    </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        container
-                        style={{ marginTop: 16, paddingLeft: 24 }}
-                        direction="column"
-                    >
-                        <FormControlLabel control={<Checkbox />} label="Suitable for children" />
+                    </Grid> */}
+                    <Grid item xs={12} container style={{ paddingLeft: 24 }} direction="column">
+                        {/* <FormControlLabel control={<Checkbox />} label="Suitable for children" /> */}
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isChildren}
+                                    onChange={(event) => setIsChildren(event.target.checked)}
+                                />
+                            }
+                            label="Suitable for children"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isForDogs}
+                                    onChange={(event) => setIsForDogs(event.target.checked)}
+                                />
+                            }
+                            label="Suitable for dogs"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isShower}
+                                    onChange={(event) => setIsShower(event.target.checked)}
+                                />
+                            }
+                            label="Shower"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isToilet}
+                                    onChange={(event) => setIsToilet(event.target.checked)}
+                                />
+                            }
+                            label="Toilet"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isRestaurant}
+                                    onChange={(event) => setIsRestaurant(event.target.checked)}
+                                />
+                            }
+                            label="Restaurant"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={isOver18}
+                                    onChange={(event) => setIsOver18(event.target.checked)}
+                                />
+                            }
+                            label="Water temperature > 18 &#8451;"
+                        />
 
-                        <FormControlLabel control={<Checkbox />} label="Water temperature > 23" />
-                        <FormControlLabel control={<Checkbox />} label="No algae" />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={noAlgae}
+                                    onChange={(event) => setNoAlgae(event.target.checked)}
+                                />
+                            }
+                            label="No algae"
+                        />
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -145,7 +212,6 @@ const SearchForm = ({
                             }
                             label="Winter swimming"
                         />
-                        <FormControlLabel control={<Checkbox />} label="Show closest to me" />
                     </Grid>
                     <Grid
                         item

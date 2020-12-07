@@ -51,7 +51,6 @@ import RoomOutlinedIcon from '@material-ui/icons/RoomOutlined';
 import { GET_BEACHE_BY_NAME_QUERY } from '../../utils/graphql';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { DataContext } from '../../context/dataContext';
-import { getAlgaeData } from '../../utils/algaeService';
 import { getWeatherData } from '../../utils/weatherService';
 
 const weatherLocations = require('../../utils/weatherLocations.json');
@@ -157,12 +156,7 @@ const DetailPage = (props) => {
     const getAlgaes = (beach) => {
         if (algaeData) {
             setAlgaeSighting(findAlgae());
-        } else {
-            // Get algae data if refresh
-            getAlgaeData([beach]).then((algaeData) => {
-                setAlgaeSighting(algaeData[0]);
-            });
-        }
+        } 
     };
 
     const moi = (beach) => {
