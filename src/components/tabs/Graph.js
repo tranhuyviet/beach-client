@@ -23,6 +23,7 @@ const Graph = ({ data }) => {
     day.setDate(day.getDate() - 2);
 
     if (data) {
+        console.log('data', data)
         data.forEach((dt) => {
             if (timeSelect === '2 weeks') {
                 airTemp.push({
@@ -31,7 +32,7 @@ const Graph = ({ data }) => {
                 });
                 waterTemp.push({
                     label: moment(dt.time).format('DD.MM. HH:mm'),
-                    y: dt.temp_air,
+                    y: dt.temp_water,
                 });
             } else if (timeSelect === '1 week') {
                 if (new Date(dt.time) >= week) {
@@ -41,7 +42,7 @@ const Graph = ({ data }) => {
                     });
                     waterTemp.push({
                         label: moment(dt.time).format('DD.MM. HH:mm'),
-                        y: dt.temp_air,
+                        y: dt.temp_water,
                     });
                 }
             } else if (timeSelect === '48 hours') {
@@ -52,7 +53,7 @@ const Graph = ({ data }) => {
                     });
                     waterTemp.push({
                         label: moment(dt.time).format('DD.MM. HH:mm'),
-                        y: dt.temp_air,
+                        y: dt.temp_water,
                     });
                 }
             }
