@@ -19,17 +19,25 @@ import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
 import PetsIcon from '@material-ui/icons/Pets';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
-import SecurityIcon from '@material-ui/icons/Security';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import WavesIcon from '@material-ui/icons/Waves';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import HotTubIcon from '@material-ui/icons/HotTub';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 
 function RoomIcon(props) {
     return (
         <SvgIcon {...props}>
             <path d="M21.6,18.2L13,11.75v-0.91c1.65-0.49,2.8-2.17,2.43-4.05c-0.26-1.31-1.3-2.4-2.61-2.7C10.54,3.57,8.5,5.3,8.5,7.5h2 C10.5,6.67,11.17,6,12,6s1.5,0.67,1.5,1.5c0,0.84-0.69,1.52-1.53,1.5C11.43,8.99,11,9.45,11,9.99v1.76L2.4,18.2 C1.63,18.78,2.04,20,3,20h9h9C21.96,20,22.37,18.78,21.6,18.2z M6,18l6-4.5l6,4.5H6z" />
+        </SvgIcon>
+    );
+}
+
+function SupportIcon(props) {
+    return (
+        <SvgIcon {...props}>
+            <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z M19.46,9.12l-2.78,1.15 c-0.51-1.36-1.58-2.44-2.95-2.94l1.15-2.78C16.98,5.35,18.65,7.02,19.46,9.12z M12,15c-1.66,0-3-1.34-3-3s1.34-3,3-3s3,1.34,3,3 S13.66,15,12,15z M9.13,4.54l1.17,2.78c-1.38,0.5-2.47,1.59-2.98,2.97L4.54,9.13C5.35,7.02,7.02,5.35,9.13,4.54z M4.54,14.87 l2.78-1.15c0.51,1.38,1.59,2.46,2.97,2.96l-1.17,2.78C7.02,18.65,5.35,16.98,4.54,14.87z M14.88,19.46l-1.15-2.78 c1.37-0.51,2.45-1.59,2.95-2.97l2.78,1.17C18.65,16.98,16.98,18.65,14.88,19.46z" />
         </SvgIcon>
     );
 }
@@ -223,7 +231,7 @@ const SearchForm = ({
                             variant={isGuard ? 'contained' : 'outlined'}
                             color="primary"
                             className={classes.services}
-                            startIcon={<SecurityIcon />}
+                            startIcon={<SupportIcon />}
                             onClick={() => setIsGuard((prev) => !prev)}
                         >
                             Uimavalvonta
@@ -268,6 +276,7 @@ const SearchForm = ({
                             variant={noAlgae ? 'contained' : 'outlined'}
                             color="primary"
                             className={classes.services}
+                            startIcon={<VerifiedUserIcon />}
                             onClick={() => setNoAlgae((prev) => !prev)}
                         >
                             Ei levähavaintoja
