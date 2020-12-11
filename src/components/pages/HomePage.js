@@ -175,6 +175,7 @@ const HomePage = () => {
     // useEffect(() => {
     //     navigator.geolocation.getCurrentPosition((pos) => console.log('GEO', pos));
     // }, []);
+    // console.log(viewport);
 
     return (
         <div className={classes.homepage}>

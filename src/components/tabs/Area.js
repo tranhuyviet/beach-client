@@ -21,7 +21,7 @@ const Area = ({ dataDetail }) => {
 
     const [nearbyServices, setNearbyServices] = useState([]);
 
-    const areaServicesUrl = `http://www.hel.fi/palvelukarttaws/rest/v4/unit/?lat=${dataDetail.lat}&lon=${dataDetail.lon}&distance=250`;
+    const areaServicesUrl = `https://www.hel.fi/palvelukarttaws/rest/v4/unit/?lat=${dataDetail.lat}&lon=${dataDetail.lon}&distance=250`;
 
     const getNearbyServices = useCallback(async () => {
         const response = await Axios.get(areaServicesUrl);
