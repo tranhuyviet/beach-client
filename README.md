@@ -13,6 +13,6 @@ The goal of the app is to try and make beaches more appealing for people, by pro
 This project use Reactjs, Apollo Client, Graphql, MaterialUI, React Map GL(MapBox), CanvasJS(Graph), Formik, Geolib
 
 ## Video: Introduction and Demo project
-[![Watch the video](https://i9.ytimg.com/vi/DNprvgNIFZk/mq1.jpg?sqp=CKjxuYsG&rs=AOn4CLCe12O0x_0B6ZbDl7KCeEkqa0FEOQ)](https://youtu.be/DNprvgNIFZk)
+[![Watch the video](https://i9.ytimg.com/vi/DNprvgNIFZk/mq1.jpg?sqp=CJT6u4sG&rs=AOn4CLCUMlPhHO_cD5d71ura4mXqft_tWQ)](https://youtu.be/DNprvgNIFZk)
 
 
